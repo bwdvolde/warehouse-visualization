@@ -9,8 +9,8 @@
 <script lang="ts">
     import TimeDisplay from '@/components/TimeDisplay.vue'
     import {mapActions, mapState} from "vuex";
-    import {MAX_TIME} from "@/store";
     import Drawer from "@/drawer/Drawer";
+    import {MAX_TIME} from "@/store/modules/timer";
 
     export default {
         components: { TimeDisplay },
@@ -22,7 +22,9 @@
             }
         },
         computed: {
-            ...mapState(["time"])
+            ...mapState({
+                time: state => state.timer.time
+            })
         },
         watch: {
             time(newTime) {

@@ -14,13 +14,14 @@
     import VueSlider from "vue-slider-component";
     import 'vue-slider-component/theme/default.css'
     import {mapMutations} from "vuex";
+    import {RESUME, STOP} from "@/store/modules/timer";
 
     export default {
         components: { VueSlider },
         computed: {
             timeSeconds: {
                 get(): Number {
-                    const timeMilliseconds = this.$store.state.time;
+                    const timeMilliseconds = this.$store.state.timer.time;
                     return Math.round(timeMilliseconds / 1000);
                 },
                 set(newValue: number): void {
@@ -30,7 +31,7 @@
             }
         },
         methods: {
-            ...mapMutations(["stop", "resume"])
+            ...mapMutations([STOP, RESUME])
         }
     }
 </script>
