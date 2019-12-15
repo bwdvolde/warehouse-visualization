@@ -38,7 +38,7 @@ const actions = {
     [START_TIMER]({ state, commit }) {
         state.running = true;
         setInterval(() => {
-            if (state.running) {
+            if (state.running && state.time < MAX_TIME) {
                 commit(INCREMENT, TIME_PER_FRAME);
             }
         }, TIME_PER_FRAME);
