@@ -12,8 +12,9 @@
     import {createNamespacedHelpers} from 'vuex'
     import {MAX_TIME, NAMESPACE_TIMER, START_TIMER, TIME} from "@/store/modules/timer";
     import Circle from "@/model/Circle";
-    import ActionExecutor, {MoveAction} from "@/action/ActionExecutor";
+    import ActionExecutor from "@/action/ActionExecutor";
     import Position from "@/model/Position";
+    import {MoveAction} from "@/action/MoveAction";
 
 
     const { mapState, mapActions } = createNamespacedHelpers(NAMESPACE_TIMER);
@@ -48,8 +49,8 @@
             ];
 
             const actions = [
-                new MoveAction(circle, new Position(50, 50), new Position(40, 50), 5 * 1000),
-                new MoveAction(circle, new Position(40, 50), new Position(80, 50), 10 * 1000)];
+                new MoveAction(5 * 1000, circle, new Position(50, 50), new Position(40, 50)),
+                new MoveAction(10 * 1000, circle, new Position(40, 50), new Position(40, 70))];
             this.executor = new ActionExecutor(actions);
 
         },

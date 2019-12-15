@@ -1,72 +1,71 @@
-import Circle from "@/model/Circle";
-import Position from "@/model/Position";
-import assert from "assert"
-
-interface Action {
-    duration: number;
-
-    setTimeRunning(time: number);
-}
-
-export class MoveAction implements Action {
-
-    constructor(public circle: Circle, public origin: Position, public destination: Position, public duration: number) {
-    }
-
-    setTimeRunning(timeRunning: number) {
-        const duration = this.duration;
-        assert(timeRunning <= duration);
-        const percentFinished = timeRunning / duration;
-
-        const x = this.origin.x + (this.destination.x - this.origin.x) * percentFinished;
-        const y = this.origin.y + (this.destination.y - this.origin.y) * percentFinished;
-        this.circle.position = new Position(x, y);
-    }
-}
+import {Action} from "@/action/Action";
 
 
 export default class ActionExecutor {
 
-    private currentTime: number;
-
     public actions: Action[];
+    private startTimes: Map<Action, number>;
 
     private index: number;
-    private start: number;
+    private currentTime: number;
 
     constructor(actions: Action[]) {
-        this.actions = actions;
         this.currentTime = 0;
         this.index = 0;
-        this.start = 0;
+
+        this.actions = actions;
+        this.buildStartTimes();
+    }
+
+    private buildStartTimes() {
+        this.startTimes = new Map();
+        let startTime = 0;
+        for (let action of this.actions) {
+            this.startTimes.set(action, startTime);
+            startTime += action.duration;
+        }
     }
 
     moveStateTo(time: number) {
-        if (this.currentActionEndedAt(time)) {
-            if (this.isLastAction()) {
-                return;
-            }
-            this.selectNextAction();
+        const isInPast = time < this.currentTime;
+        if (isInPast) {
+            this.rewindTo(time);
         }
 
-        let timeRunning = time - this.start;
-        this.currentAction.setTimeRunning(timeRunning);
+        this.forwardTo(time);
+
+        let currentAction = this.actions[this.index];
+        const isFinished = this.getStartTime(currentAction) + currentAction.duration < time;
+        if (!isFinished) {
+            let timeRunning = time - this.startTimes.get(currentAction);
+            currentAction.setTimeRunning(timeRunning);
+        }
+
+
+        this.currentTime = time;
     }
 
-    currentActionEndedAt(time: number) {
-        return this.start + this.currentAction.duration < time;
+    private forwardTo(time: number) {
+        while (this.index + 1 < this.actions.length && this.isFinshedAt(this.currentAction(), time)) {
+            this.index++;
+        }
     }
 
-    get currentAction() {
+    private rewindTo(time: number) {
+        while (this.getStartTime(this.currentAction()) > time) {
+            this.index--;
+        }
+    }
+
+    private currentAction() {
         return this.actions[this.index];
     }
 
-    selectNextAction() {
-        this.start += this.currentAction.duration;
-        this.index++;
+    private isFinshedAt(action: Action, time: number) {
+        return this.startTimes.get(action) + action.duration < time;
     }
 
-    isLastAction() {
-        return this.actions.length - 1 == this.index;
+    private getStartTime(currentAction: Action) {
+        return this.startTimes.get(currentAction);
     }
 }
