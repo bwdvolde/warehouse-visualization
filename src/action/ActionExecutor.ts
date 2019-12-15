@@ -35,8 +35,7 @@ export default class ActionExecutor {
         this.forwardTo(time);
 
         let currentAction = this.actions[this.index];
-        const isFinished = this.getStartTime(currentAction) + currentAction.duration < time;
-        if (!isFinished) {
+        if (!currentAction.isFinishedAt(time)) {
             let timeRunning = time - this.startTimes.get(currentAction);
             currentAction.setTimeRunning(timeRunning);
         }
@@ -46,26 +45,19 @@ export default class ActionExecutor {
     }
 
     private forwardTo(time: number) {
-        while (this.index + 1 < this.actions.length && this.isFinshedAt(this.currentAction(), time)) {
+        while (this.index + 1 < this.actions.length && this.currentAction.isFinishedAt(time)) {
             this.index++;
         }
     }
 
     private rewindTo(time: number) {
-        while (this.getStartTime(this.currentAction()) > time) {
+        while (this.currentAction.startTime > time) {
             this.index--;
         }
     }
 
-    private currentAction() {
+
+    private get currentAction() {
         return this.actions[this.index];
-    }
-
-    private isFinshedAt(action: Action, time: number) {
-        return this.startTimes.get(action) + action.duration < time;
-    }
-
-    private getStartTime(currentAction: Action) {
-        return this.startTimes.get(currentAction);
     }
 }

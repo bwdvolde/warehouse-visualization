@@ -3,19 +3,17 @@ import Circle from "@/model/Circle";
 import Position from "@/model/Position";
 import assert from "assert";
 
-export class MoveAction implements Action {
-
-    public duration: number;
+export class MoveAction extends Action {
 
     private circle: Circle;
     private origin: Position;
     private destination: Position;
 
-    constructor(duration: number,
+    constructor(startTime: number,
+                duration: number,
                 circle: Circle,
-                origin: Position,
-                destination: Position) {
-        this.duration = duration;
+                origin: Position, destination: Position) {
+        super(startTime, duration);
         this.destination = destination;
         this.origin = origin;
         this.circle = circle;

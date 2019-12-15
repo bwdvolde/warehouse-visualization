@@ -49,8 +49,10 @@
             ];
 
             const actions = [
-                new MoveAction(5 * 1000, circle, new Position(50, 50), new Position(40, 50)),
-                new MoveAction(10 * 1000, circle, new Position(40, 50), new Position(40, 70))];
+                new MoveAction(0, 5 * 1000, circle, new Position(50, 50), new Position(40, 50)),
+                new MoveAction(5 * 1000, 10 * 1000, circle, new Position(40, 50), new Position(40, 70)),
+                new MoveAction(15 * 1000, 10 * 1000, circle, new Position(40, 70), new Position(10, 10))
+            ];
             this.executor = new ActionExecutor(actions);
 
         },
