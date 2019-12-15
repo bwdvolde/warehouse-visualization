@@ -1,14 +1,11 @@
-
+import Position from "@/model/Position";
 
 export default class Circle {
-    x: number;
-    y: number;
+    position: Position;
     selected: boolean;
 
-
-    constructor(x: number, y: number, selected: boolean) {
-        this.x = x;
-        this.y = y;
+    constructor(position: Position, selected: boolean) {
+        this.position = position;
         this.selected = selected;
     }
 }

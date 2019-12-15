@@ -1,4 +1,5 @@
 import Circle from "@/model/Circle";
+import Position from "@/model/Position";
 import assert from "assert"
 
 interface Action {
@@ -9,14 +10,17 @@ interface Action {
 
 export class MoveAction implements Action {
 
-    constructor(public circle: Circle, public origin: number, public destination: number, public duration: number) {
+    constructor(public circle: Circle, public origin: Position, public destination: Position, public duration: number) {
     }
 
     setTimeRunning(timeRunning: number) {
         const duration = this.duration;
         assert(timeRunning <= duration);
         const percentFinished = timeRunning / duration;
-        this.circle.x = this.origin + (this.destination - this.origin) * percentFinished;
+
+        const x = this.origin.x + (this.destination.x - this.origin.x) * percentFinished;
+        const y = this.origin.y + (this.destination.y - this.origin.y) * percentFinished;
+        this.circle.position = new Position(x, y);
     }
 }
 

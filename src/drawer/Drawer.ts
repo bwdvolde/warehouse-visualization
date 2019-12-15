@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import {HEIGHT, mapX, mapY, WIDTH} from "@/drawer/util";
+import Circle from "@/model/Circle";
 
 
 export default class Drawer {
@@ -18,7 +19,7 @@ export default class Drawer {
             .style("border", "solid");
     }
 
-    draw(model: any) {
+    draw(model: Circle[]) {
         this.circles = this.container
             .selectAll("circle")
             .data(model);
@@ -28,8 +29,8 @@ export default class Drawer {
             .append("circle");
 
         this.circles
-            .attr("cx", d => mapX(d.x))
-            .attr("cy", d => mapY(d.y))
+            .attr("cx", d => mapX(d.position.x))
+            .attr("cy", d => mapY(d.position.y))
             .attr("r", 5)
             .style("fill", "green");
     }

@@ -13,6 +13,7 @@
     import {MAX_TIME, NAMESPACE_TIMER, START_TIMER, TIME} from "@/store/modules/timer";
     import Circle from "@/model/Circle";
     import ActionExecutor, {MoveAction} from "@/action/ActionExecutor";
+    import Position from "@/model/Position";
 
 
     const { mapState, mapActions } = createNamespacedHelpers(NAMESPACE_TIMER);
@@ -41,14 +42,14 @@
             this.startTimer();
             this.drawer = new Drawer("#svg");
 
-            const circle = new Circle(50, 50, false);
+            const circle = new Circle(new Position(50, 50), false);
             this.model = [
                 circle
             ];
 
             const actions = [
-                new MoveAction(circle, 50, 40, 1 * 1000),
-                new MoveAction(circle, 40, 80, 2 * 1000)];
+                new MoveAction(circle, new Position(50, 50), new Position(40, 50), 5 * 1000),
+                new MoveAction(circle, new Position(40, 50), new Position(80, 50), 10 * 1000)];
             this.executor = new ActionExecutor(actions);
 
         },
