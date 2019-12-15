@@ -30,7 +30,7 @@ export default class Drawer {
         this.circles
             .attr("cx", d => mapX(d.x))
             .attr("cy", d => mapY(d.y))
-            .attr("r", 10)
+            .attr("r", 5)
             .style("fill", "green");
     }
 }

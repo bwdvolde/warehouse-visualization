@@ -11,6 +11,8 @@
 
     import {createNamespacedHelpers} from 'vuex'
     import {MAX_TIME, NAMESPACE_TIMER, START_TIMER, TIME} from "@/store/modules/timer";
+    import Circle from "@/model/Circle";
+    import ActionExecutor, {MoveAction} from "@/action/ActionExecutor";
 
 
     const { mapState, mapActions } = createNamespacedHelpers(NAMESPACE_TIMER);
@@ -21,6 +23,7 @@
             return {
                 timeMilliseconds: 0,
                 model: null,
+                executor: null,
                 drawer: null
             }
         },
@@ -29,9 +32,7 @@
         },
         watch: {
             time(newTime) {
-                for (let circle of this.model) {
-                    circle.x = 100 * (newTime / MAX_TIME);
-                }
+                this.executor.moveStateTo(newTime);
                 this.drawer.draw(this.model)
 
             }
@@ -40,11 +41,16 @@
             this.startTimer();
             this.drawer = new Drawer("#svg");
 
+            const circle = new Circle(50, 50, false);
             this.model = [
-                { x: 10, y: 30, },
-                { x: 20, y: 60, },
-                { x: 30, y: 90 }
+                circle
             ];
+
+            const actions = [
+                new MoveAction(circle, 50, 40, 1 * 1000),
+                new MoveAction(circle, 40, 80, 2 * 1000)];
+            this.executor = new ActionExecutor(actions);
+
         },
         methods: {
             ...mapActions([START_TIMER]),
