@@ -10,7 +10,7 @@
     import Drawer from "@/drawer/Drawer";
 
     import {createNamespacedHelpers} from 'vuex'
-    import {MAX_TIME, NAMESPACE_TIMER, TIME} from "@/store/modules/timer";
+    import {MAX_TIME, NAMESPACE_TIMER, START_TIMER, TIME} from "@/store/modules/timer";
 
 
     const { mapState, mapActions } = createNamespacedHelpers(NAMESPACE_TIMER);
@@ -47,10 +47,7 @@
             ];
         },
         methods: {
-            ...mapActions(['startTimer']),
+            ...mapActions([START_TIMER]),
         }
     }
 </script>
-
-<style scoped lang="scss">
-</style>

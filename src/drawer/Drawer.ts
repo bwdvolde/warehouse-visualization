@@ -1,18 +1,9 @@
 import * as d3 from "d3";
+import {HEIGHT, mapX, mapY, WIDTH} from "@/drawer/util";
 
-const WIDTH = 800;
-const HEIGHT = 400;
-
-function mapX(x: number) {
-    return x * (WIDTH / 100)
-}
-
-function mapY(y: number) {
-    return y * (HEIGHT / 100)
-}
 
 export default class Drawer {
-    container: any;
+    private container: any;
     private circles: any;
 
     constructor(svgId) {
