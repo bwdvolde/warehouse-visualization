@@ -1,6 +1,5 @@
 <template>
     <div class="hello" style="padding: 10px">
-        <h1>Warehouse</h1>
         <svg id="svg"/>
         <TimeDisplay/>
     </div>
