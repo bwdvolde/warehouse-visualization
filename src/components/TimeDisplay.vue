@@ -13,25 +13,29 @@
 <script lang="ts">
     import VueSlider from "vue-slider-component";
     import 'vue-slider-component/theme/default.css'
-    import {mapMutations} from "vuex";
-    import {RESUME, STOP} from "@/store/modules/timer";
+
+    import {createNamespacedHelpers} from 'vuex'
+    import {NAMESPACE_TIMER, RESUME, PAUSE, SET_TIME, TIME} from "@/store/modules/timer";
+
+    const { mapMutations, mapState } = createNamespacedHelpers(NAMESPACE_TIMER);
 
     export default {
         components: { VueSlider },
         computed: {
+            ...mapState([TIME]),
             timeSeconds: {
                 get(): Number {
-                    const timeMilliseconds = this.$store.state.timer.time;
+                    const timeMilliseconds = this.time;
                     return Math.round(timeMilliseconds / 1000);
                 },
                 set(newValue: number): void {
                     const timeMilliseconds = newValue * 1000;
-                    this.$store.commit("setTime", timeMilliseconds)
+                    this.setTime(timeMilliseconds);
                 }
             }
         },
         methods: {
-            ...mapMutations([STOP, RESUME])
+            ...mapMutations([PAUSE, RESUME, SET_TIME])
         }
     }
 </script>

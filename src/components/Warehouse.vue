@@ -8,9 +8,13 @@
 
 <script lang="ts">
     import TimeDisplay from '@/components/TimeDisplay.vue'
-    import {mapActions, mapState} from "vuex";
     import Drawer from "@/drawer/Drawer";
-    import {MAX_TIME} from "@/store/modules/timer";
+
+    import {createNamespacedHelpers} from 'vuex'
+    import {MAX_TIME, NAMESPACE_TIMER, TIME} from "@/store/modules/timer";
+
+
+    const { mapState, mapActions } = createNamespacedHelpers(NAMESPACE_TIMER);
 
     export default {
         components: { TimeDisplay },
@@ -22,14 +26,12 @@
             }
         },
         computed: {
-            ...mapState({
-                time: state => state.timer.time
-            })
+            ...mapState([TIME])
         },
         watch: {
             time(newTime) {
                 for (let circle of this.model) {
-                    circle.x = 400 * (newTime / MAX_TIME);
+                    circle.x = 100 * (newTime / MAX_TIME);
                 }
                 this.drawer.draw(this.model)
 
@@ -40,9 +42,9 @@
             this.drawer = new Drawer("#svg");
 
             this.model = [
-                { x: 30, y: 30, },
-                { x: 70, y: 70, },
-                { x: 110, y: 100 }
+                { x: 10, y: 30, },
+                { x: 20, y: 60, },
+                { x: 30, y: 90 }
             ];
         },
         methods: {
