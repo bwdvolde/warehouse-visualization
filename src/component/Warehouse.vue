@@ -9,15 +9,12 @@
     import TimeDisplay from "@/component/TimeDisplay.vue";
     import Drawer from "@/drawer/Drawer";
 
-    import { createNamespacedHelpers } from "vuex";
     import { NAMESPACE_TIMER, START_TIMER, TIME } from "@/store/modules/timer";
     import Circle from "@/model/Circle";
     import ActionExecutor from "@/action/ActionExecutor";
     import Position from "@/model/Position";
     import { MoveAction } from "@/action/MoveAction";
-
-
-    const { mapState, mapActions } = createNamespacedHelpers(NAMESPACE_TIMER);
+    import { mapActions, mapState } from "vuex";
 
     export default {
         components: { TimeDisplay },
@@ -30,7 +27,7 @@
             };
         },
         computed: {
-            ...mapState([TIME])
+            ...mapState(NAMESPACE_TIMER, [TIME])
         },
         watch: {
             time(newTime) {
@@ -57,7 +54,7 @@
 
         },
         methods: {
-            ...mapActions([START_TIMER]),
+            ...mapActions(NAMESPACE_TIMER, [START_TIMER]),
         }
     };
 </script>
