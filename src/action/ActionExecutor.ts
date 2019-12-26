@@ -39,8 +39,7 @@ export default class ActionExecutor {
             let timeRunning = time - this.startTimes.get(currentAction);
             currentAction.setTimeRunning(timeRunning);
         }
-
-
+        
         this.currentTime = time;
     }
 

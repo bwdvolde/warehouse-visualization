@@ -19,10 +19,10 @@ export const RESUME = "resume";
 
 const mutations = {
     [SET_TIME](state: any, time: Number) {
-        state.time = time
+        state.time = time;
     },
     [INCREMENT](state: any, dt: Number) {
-        state.time += dt
+        state.time += dt;
     },
     [PAUSE](state: any) {
         state.running = false;
@@ -50,4 +50,4 @@ export default {
     state,
     mutations,
     actions
-}
+};

@@ -5,16 +5,16 @@
     </div>
 </template>
 
-<script lang="ts">
-    import TimeDisplay from '@/components/TimeDisplay.vue'
+<script>
+    import TimeDisplay from "@/component/TimeDisplay.vue";
     import Drawer from "@/drawer/Drawer";
 
-    import {createNamespacedHelpers} from 'vuex'
-    import {MAX_TIME, NAMESPACE_TIMER, START_TIMER, TIME} from "@/store/modules/timer";
+    import { createNamespacedHelpers } from "vuex";
+    import { NAMESPACE_TIMER, START_TIMER, TIME } from "@/store/modules/timer";
     import Circle from "@/model/Circle";
     import ActionExecutor from "@/action/ActionExecutor";
     import Position from "@/model/Position";
-    import {MoveAction} from "@/action/MoveAction";
+    import { MoveAction } from "@/action/MoveAction";
 
 
     const { mapState, mapActions } = createNamespacedHelpers(NAMESPACE_TIMER);
@@ -27,7 +27,7 @@
                 model: null,
                 executor: null,
                 drawer: null
-            }
+            };
         },
         computed: {
             ...mapState([TIME])
@@ -35,11 +35,11 @@
         watch: {
             time(newTime) {
                 this.executor.moveStateTo(newTime);
-                this.drawer.draw(this.model)
+                this.drawer.draw(this.model);
 
             }
         },
-        mounted(): void {
+        mounted() {
             this.startTimer();
             this.drawer = new Drawer("#svg");
 
@@ -59,5 +59,5 @@
         methods: {
             ...mapActions([START_TIMER]),
         }
-    }
+    };
 </script>

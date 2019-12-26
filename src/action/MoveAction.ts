@@ -10,9 +10,9 @@ export class MoveAction extends Action {
     private destination: Position;
 
     constructor(startTime: number,
-                duration: number,
-                circle: Circle,
-                origin: Position, destination: Position) {
+        duration: number,
+        circle: Circle,
+        origin: Position, destination: Position) {
         super(startTime, duration);
         this.destination = destination;
         this.origin = origin;
