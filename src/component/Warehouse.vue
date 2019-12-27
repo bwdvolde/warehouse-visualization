@@ -13,9 +13,9 @@
     import Drone from "@/model/Drone";
     import ActionExecutor from "@/action/ActionExecutor";
     import Position from "@/model/Position";
-    import { MoveAction } from "@/action/MoveAction";
     import { mapActions, mapState } from "vuex";
-    import { DIRECTION_EAST, DIRECTION_NORTH, DIRECTION_WEST } from "@/model/Direction";
+    import { generateActions } from "@/action/generateActions";
+    import { Model } from "@/model/Model";
 
     export default {
         components: { TimeDisplay },
@@ -23,7 +23,7 @@
             return {
                 timeMilliseconds: 0,
                 model: null,
-                executor: null,
+                executors: null,
                 drawer: null
             };
         },
@@ -32,7 +32,7 @@
         },
         watch: {
             time(newTime) {
-                this.executor.moveStateTo(newTime);
+                this.executors.forEach(executor => executor.moveStateTo(newTime));
                 this.drawer.draw(this.model, newTime);
             }
         },
@@ -40,18 +40,17 @@
             this.startTimer();
             this.drawer = new Drawer("#svg");
 
-            const circle = new Drone(new Position(5, 5));
-            this.model = [
-                circle
-            ];
 
-            const actions = [
-                new MoveAction(0, 1 * 1000, circle, DIRECTION_EAST),
-                new MoveAction(1 * 1000, 1 * 1000, circle, DIRECTION_NORTH),
-                new MoveAction(2 * 1000, 1 * 1000, circle, DIRECTION_WEST)
+            const drones = [
+                (new Drone(new Position(5, 5), 0.1)),
+                (new Drone(new Position(2, 2), 0.2)),
+                (new Drone(new Position(7, 7), 0.3))
             ];
-            this.executor = new ActionExecutor(actions);
+            this.model = new Model(drones, []);
 
+            this.executors = drones
+                .map(generateActions)
+                .map(actions => new ActionExecutor(actions));
         },
         methods: {
             ...mapActions(NAMESPACE_TIMER, [START_TIMER]),

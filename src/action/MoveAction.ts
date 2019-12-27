@@ -10,8 +10,8 @@ export class MoveAction extends Action {
     private previousDirection: Direction;
     private previousTimeOnArrivalAtOrigin: number;
 
-    constructor(startTime: number, duration: number, drone: Drone, direction: Direction) {
-        super(startTime, duration);
+    constructor(startTime: number, drone: Drone, direction: Direction) {
+        super(startTime, 1000 / drone.speed);
         this.direction = direction;
         this.drone = drone;
     }
