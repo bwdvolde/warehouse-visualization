@@ -17,33 +17,31 @@ export class MoveAction extends Action {
     }
 
     start() {
-        console.log("onStart", this.direction.dx, this.direction.dy);
-        this.previousDirection = this.drone.direction;
+        this.saveCurrentDroneState();
 
-        this.previousTimeOnArrivalAtOrigin = this.drone.timeOnArrivalAtOrigin;
         this.drone.direction = this.direction;
-
         this.drone.timeOnArrivalAtOrigin = this.startTime;
 
         super.start();
     }
 
+    private saveCurrentDroneState() {
+        this.previousDirection = this.drone.direction;
+        this.previousTimeOnArrivalAtOrigin = this.drone.timeOnArrivalAtOrigin;
+    }
+
     finish() {
-        console.log("onFinish", this.direction.dx, this.direction.dy);
         this.drone.origin = this.drone.origin.plus(this.direction);
         this.drone.direction = DIRECTION_NONE;
         super.finish();
     }
 
     undo() {
-        console.log("undo", this.direction.dx, this.direction.dy);
         this.drone.direction = this.previousDirection;
         this.drone.timeOnArrivalAtOrigin = this.previousTimeOnArrivalAtOrigin;
         if (this.isFinished()) {
-
             this.drone.origin = this.drone.origin.minus(this.direction);
         }
-
         super.undo();
     }
 }

@@ -4,7 +4,6 @@ import {Action} from "@/action/Action";
 export default class ActionExecutor {
 
     public actions: Action[];
-    private startTimes: Map<Action, number>;
 
     private index: number;
     private currentTime: number;
@@ -14,16 +13,6 @@ export default class ActionExecutor {
         this.index = 0;
 
         this.actions = actions;
-        this.buildStartTimes();
-    }
-
-    private buildStartTimes() {
-        this.startTimes = new Map();
-        let startTime = 0;
-        for (let action of this.actions) {
-            this.startTimes.set(action, startTime);
-            startTime += action.duration;
-        }
     }
 
     moveStateTo(time: number) {
@@ -46,9 +35,9 @@ export default class ActionExecutor {
             this.currentAction.start();
         }
 
-        const isLastActionAndNeedsToBeFinished = !this.hasNextAction() && this.currentAction.shouldBeFinishedAt(time)
-            && !this.currentAction.isFinished();
-        if (isLastActionAndNeedsToBeFinished) {
+        const isLastAction = !this.hasNextAction();
+        const shouldFinish = this.currentAction.shouldBeFinishedAt(time) && !this.currentAction.isFinished();
+        if (isLastAction && shouldFinish) {
             this.currentAction.finish();
         }
     }
@@ -58,11 +47,27 @@ export default class ActionExecutor {
             this.currentAction.undo();
 
             if (!this.hasPreviousAction() || this.previousAction.shouldBeFinishedAt(time)) {
-                return;
+                break;
             }
 
             this.selectPreviousAction();
         }
+    }
+
+    private get currentAction() {
+        return this.actions[this.index];
+    }
+
+    private get previousAction(): Action {
+        return this.actions[this.index - 1];
+    }
+
+    private selectNextAction() {
+        this.index++;
+    }
+
+    private selectPreviousAction() {
+        this.index--;
     }
 
     private hasNextAction(): boolean {
@@ -71,21 +76,5 @@ export default class ActionExecutor {
 
     private hasPreviousAction(): boolean {
         return this.index > 0;
-    }
-
-    private selectNextAction() {
-        this.index++;
-    }
-
-    private get previousAction(): Action {
-        return this.actions[this.index - 1];
-    }
-
-    private selectPreviousAction() {
-        this.index--;
-    }
-
-    private get currentAction() {
-        return this.actions[this.index];
     }
 }
