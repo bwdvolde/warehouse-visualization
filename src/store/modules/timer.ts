@@ -1,7 +1,8 @@
 export const MAX_TIME = 100 * 1000;
 
-const FRAMES_PER_SECOND = 100;
+const FRAMES_PER_SECOND = 60;
 const TIME_PER_FRAME = 1000 / FRAMES_PER_SECOND;
+const SPEEDUP = 0.5;
 
 export const NAMESPACE_TIMER = "timer";
 
@@ -39,7 +40,7 @@ const actions = {
         state.running = true;
         setInterval(() => {
             if (state.running && state.time < MAX_TIME) {
-                commit(INCREMENT, TIME_PER_FRAME);
+                commit(INCREMENT, TIME_PER_FRAME * SPEEDUP);
             }
         }, TIME_PER_FRAME);
     }

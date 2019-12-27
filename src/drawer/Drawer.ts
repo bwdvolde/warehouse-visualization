@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import {HEIGHT, mapX, mapY, WIDTH} from "@/drawer/util";
-import Circle from "@/model/Circle";
+import Drone from "@/model/Drone";
 
 
 export default class Drawer {
@@ -19,7 +19,7 @@ export default class Drawer {
             .style("border", "solid");
     }
 
-    draw(model: Circle[]) {
+    draw(model: Drone[], time: number) {
         this.circles = this.container
             .selectAll("circle")
             .data(model);
@@ -29,8 +29,8 @@ export default class Drawer {
             .append("circle");
 
         this.circles
-            .attr("cx", d => mapX(d.position.x))
-            .attr("cy", d => mapY(d.position.y))
+            .attr("cx", d => mapX(d.positionAt(time).x))
+            .attr("cy", d => mapY(d.positionAt(time).y))
             .attr("r", 5)
             .style("fill", "green");
     }

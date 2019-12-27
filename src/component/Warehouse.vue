@@ -10,11 +10,12 @@
     import Drawer from "@/drawer/Drawer";
 
     import { NAMESPACE_TIMER, START_TIMER, TIME } from "@/store/modules/timer";
-    import Circle from "@/model/Circle";
+    import Drone from "@/model/Drone";
     import ActionExecutor from "@/action/ActionExecutor";
     import Position from "@/model/Position";
     import { MoveAction } from "@/action/MoveAction";
     import { mapActions, mapState } from "vuex";
+    import { DIRECTION_EAST, DIRECTION_NORTH, DIRECTION_WEST } from "@/model/Direction";
 
     export default {
         components: { TimeDisplay },
@@ -32,23 +33,22 @@
         watch: {
             time(newTime) {
                 this.executor.moveStateTo(newTime);
-                this.drawer.draw(this.model);
-
+                this.drawer.draw(this.model, newTime);
             }
         },
         mounted() {
             this.startTimer();
             this.drawer = new Drawer("#svg");
 
-            const circle = new Circle(new Position(50, 50), false);
+            const circle = new Drone(new Position(5, 5));
             this.model = [
                 circle
             ];
 
             const actions = [
-                new MoveAction(0, 5 * 1000, circle, new Position(50, 50), new Position(40, 50)),
-                new MoveAction(5 * 1000, 10 * 1000, circle, new Position(40, 50), new Position(40, 70)),
-                new MoveAction(15 * 1000, 10 * 1000, circle, new Position(40, 70), new Position(10, 10))
+                new MoveAction(0, 1 * 1000, circle, DIRECTION_EAST),
+                new MoveAction(1 * 1000, 1 * 1000, circle, DIRECTION_NORTH),
+                new MoveAction(2 * 1000, 1 * 1000, circle, DIRECTION_WEST)
             ];
             this.executor = new ActionExecutor(actions);
 

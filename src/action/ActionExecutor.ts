@@ -31,30 +31,59 @@ export default class ActionExecutor {
         if (isInPast) {
             this.rewindTo(time);
         }
-
         this.forwardTo(time);
-
-        let currentAction = this.actions[this.index];
-        if (!currentAction.isFinishedAt(time)) {
-            let timeRunning = time - this.startTimes.get(currentAction);
-            currentAction.setTimeRunning(timeRunning);
-        }
-        
         this.currentTime = time;
     }
 
     private forwardTo(time: number) {
-        while (this.index + 1 < this.actions.length && this.currentAction.isFinishedAt(time)) {
-            this.index++;
+        if (this.currentAction.shouldHaveStartedAt(time) && !this.currentAction.hasStarted()) {
+            this.currentAction.start();
+        }
+
+        while (this.hasNextAction() && this.currentAction.shouldBeFinishedAt(time) && !this.currentAction.isFinished()) {
+            this.currentAction.finish();
+            this.selectNextAction();
+            this.currentAction.start();
+        }
+
+        const isLastActionAndNeedsToBeFinished = !this.hasNextAction() && this.currentAction.shouldBeFinishedAt(time)
+            && !this.currentAction.isFinished();
+        if (isLastActionAndNeedsToBeFinished) {
+            this.currentAction.finish();
         }
     }
 
     private rewindTo(time: number) {
-        while (this.currentAction.startTime > time) {
-            this.index--;
+        while (!this.currentAction.shouldBeFinishedAt(time)) {
+            this.currentAction.undo();
+
+            if (!this.hasPreviousAction() || this.previousAction.shouldBeFinishedAt(time)) {
+                return;
+            }
+
+            this.selectPreviousAction();
         }
     }
 
+    private hasNextAction(): boolean {
+        return this.index + 1 < this.actions.length;
+    }
+
+    private hasPreviousAction(): boolean {
+        return this.index > 0;
+    }
+
+    private selectNextAction() {
+        this.index++;
+    }
+
+    private get previousAction(): Action {
+        return this.actions[this.index - 1];
+    }
+
+    private selectPreviousAction() {
+        this.index--;
+    }
 
     private get currentAction() {
         return this.actions[this.index];

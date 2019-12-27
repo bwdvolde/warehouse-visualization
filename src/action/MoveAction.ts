@@ -1,37 +1,49 @@
 import {Action} from "@/action/Action";
-import Circle from "@/model/Circle";
-import Position from "@/model/Position";
-import assert from "assert";
+import Drone from "@/model/Drone";
+import {Direction, DIRECTION_NONE} from "@/model/Direction";
 
 export class MoveAction extends Action {
 
-    private circle: Circle;
-    private origin: Position;
-    private destination: Position;
+    private drone: Drone;
+    private direction: Direction;
 
-    constructor(startTime: number,
-        duration: number,
-        circle: Circle,
-        origin: Position, destination: Position) {
+    private previousDirection: Direction;
+    private previousTimeOnArrivalAtOrigin: number;
+
+    constructor(startTime: number, duration: number, drone: Drone, direction: Direction) {
         super(startTime, duration);
-        this.destination = destination;
-        this.origin = origin;
-        this.circle = circle;
+        this.direction = direction;
+        this.drone = drone;
     }
 
-    setTimeRunning(timeRunning: number) {
-        assert(timeRunning <= this.duration);
+    start() {
+        console.log("onStart", this.direction.dx, this.direction.dy);
+        this.previousDirection = this.drone.direction;
 
-        const percentFinished = timeRunning / this.duration;
-        const x = this.origin.x + (this.destination.x - this.origin.x) * percentFinished;
-        const y = this.origin.y + (this.destination.y - this.origin.y) * percentFinished;
+        this.previousTimeOnArrivalAtOrigin = this.drone.timeOnArrivalAtOrigin;
+        this.drone.direction = this.direction;
 
-        this.circle.position = new Position(x, y);
+        this.drone.timeOnArrivalAtOrigin = this.startTime;
+
+        super.start();
+    }
+
+    finish() {
+        console.log("onFinish", this.direction.dx, this.direction.dy);
+        this.drone.origin = this.drone.origin.plus(this.direction);
+        this.drone.direction = DIRECTION_NONE;
+        super.finish();
     }
 
     undo() {
-        this.circle.position = this.origin;
+        console.log("undo", this.direction.dx, this.direction.dy);
+        this.drone.direction = this.previousDirection;
+        this.drone.timeOnArrivalAtOrigin = this.previousTimeOnArrivalAtOrigin;
+        if (this.isFinished()) {
+
+            this.drone.origin = this.drone.origin.minus(this.direction);
+        }
+
+        super.undo();
     }
-
-
 }
