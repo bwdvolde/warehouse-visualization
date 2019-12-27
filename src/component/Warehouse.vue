@@ -38,8 +38,6 @@
         },
         mounted() {
             this.startTimer();
-            this.drawer = new Drawer("#svg");
-
 
             const drones = [
                 (new Drone(new Position(5, 5), 0.1)),
@@ -51,6 +49,8 @@
             this.executors = drones
                 .map(generateActions)
                 .map(actions => new ActionExecutor(actions));
+
+            this.drawer = new Drawer("#svg");
         },
         methods: {
             ...mapActions(NAMESPACE_TIMER, [START_TIMER]),
