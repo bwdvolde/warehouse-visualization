@@ -1,8 +1,7 @@
 import * as d3 from "d3";
-import {HEIGHT, mapX, mapY, WIDTH} from "@/drawer/util";
+import {HEIGHT, WIDTH} from "@/drawer/util";
 import Drone from "@/model/Drone";
 import {Model} from "@/model/Model";
-import {StorageCell} from "@/model/StorageCell";
 import {PositionMapper} from "@/drawer/PositionMapper";
 
 
@@ -23,7 +22,8 @@ export default class Drawer {
             .selectAll(svgId)
             .attr("width", WIDTH)
             .attr("height", HEIGHT)
-            .style("border", "solid");
+            .style("border", "solid")
+            .style("padding", "5px");
     }
 
     draw(model: Model, time: number) {
@@ -58,17 +58,18 @@ export default class Drawer {
             .enter()
             .append("rect");
 
-        const offset = 5;
-        const width = (WIDTH - offset) / (4 * (model.nAisles));
-        const height = (HEIGHT - offset) / (23);
+        const width = WIDTH / (3 * model.nAisles);
+        const height = HEIGHT / 23;
 
         this.storageCells
             .attr("x", cell => {
-                return offset + (width + 1) * (4 * cell.aisle + (cell.col % 2));
+                return width * (3 * cell.aisle + (cell.col % 2 ? 2 : 0));
             })
-            .attr("y", cell => offset + (height + 1) * cell.row)
+            .attr("y", cell => height * cell.row)
             .attr("width", width)
             .attr("height", height)
-            .style("fill", `rgb(${255 - time / 50}, 0, 0)`);
+            .style("fill", `rgb(${255 - time / 1000}, 0, 0)`)
+            .style("stroke-width", "0.5px")
+            .style("stroke", "black");
     }
 }

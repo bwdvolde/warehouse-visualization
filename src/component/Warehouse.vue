@@ -49,7 +49,7 @@
             let storageCells = [];
             for (let row = 1; row < 20; row === 10 ? row += 2 : row++) {
                 let currentRow = [];
-                for (let col = 0; col < 20; col++) {
+                for (let col = 0; col < 16; col++) {
                     currentRow.push(new StorageCell(row, col));
                 }
                 storageCells.push(currentRow);
