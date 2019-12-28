@@ -9,4 +9,12 @@ export class Model {
         this.storageCells = storageCells;
         this.drones = drones;
     }
+
+    get nAisles() {
+        return Math.ceil(this.storageCells[0].length / 2);
+    }
+
+    get nRows() {
+        return this.storageCells.length;
+    }
 }
