@@ -42,14 +42,7 @@ export default class Drawer {
     }
 
     private drawDrones(drones: Drone[], time: number) {
-        const elements = this.container
-            .selectAll(".drone")
-            .data(drones);
-
-        elements
-            .enter()
-            .append("circle")
-            .classed("drone", true);
+        const elements = this.selectElements("drone", "circle", drones);
 
         elements
             .attr("cx", d => this.calculateXNode((d.positionAt(time).x)))
@@ -59,14 +52,7 @@ export default class Drawer {
     }
 
     private drawEdges(edges: Edge[], time: number) {
-        const elements = this.container
-            .selectAll(".edge")
-            .data(edges);
-
-        elements
-            .enter()
-            .append("line")
-            .classed("edge", true);
+        const elements = this.selectElements("edge", "line", edges);
 
         elements
             .attr("x1", edge => this.calculateXNode(edge.a.x))
@@ -86,13 +72,7 @@ export default class Drawer {
     }
 
     private drawStorageCells(storageCells: Cell[], time: number) {
-        const elements = this.container
-            .selectAll("rect")
-            .data(storageCells);
-
-        elements
-            .enter()
-            .append("rect");
+        const elements = this.selectElements("cell", "rect", storageCells);
 
         elements
             .attr("x", cell => this.calculateXCell(cell.col))
@@ -105,20 +85,25 @@ export default class Drawer {
     }
 
     private drawCellNodes(cells: Cell[], time: number) {
-        const elements = this.container
-            .selectAll(".cell-node")
-            .data(cells);
-
-        elements
-            .enter()
-            .append("circle")
-            .classed("cell-node", true);
+        const elements = this.selectElements("cell-node", "circle", cells);
 
         elements
             .attr("cx", cell => this.calculateXNode(cell.col))
             .attr("cy", cell => this.calculateYNode(cell.row))
             .attr("r", this.sizes.cellHeight / 4)
             .style("fill", `rgb(${255 - time / 1000}, 0, 0)`);
+    }
+
+    private selectElements(classToSelect: string, elementToAppend: string, data: any[]) {
+        const elements = this.container
+            .selectAll(`.${classToSelect}`)
+            .data(data);
+
+        elements
+            .enter()
+            .append(elementToAppend)
+            .classed(classToSelect, true);
+        return elements;
     }
 
     calculateXCell(x: number): number {
