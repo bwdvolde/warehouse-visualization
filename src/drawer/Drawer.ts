@@ -4,6 +4,7 @@ import Drone from "@/model/Drone";
 import {Model} from "@/model/Model";
 import {Cell} from "@/model/Cell";
 import {getAisle} from "@/model/util";
+import {Edge} from "@/model/Edge";
 
 interface Sizes {
     cellWidth: number;
@@ -29,7 +30,8 @@ export default class Drawer {
 
     draw(model: Model, time: number) {
         this.updateSizes(model);
-        this.drawGrid(model.grid, time);
+        this.drawEdges(model.edges, time);
+        this.drawCells(model.cells, time);
         this.drawDrones(model.drones, time);
     }
 
@@ -41,13 +43,13 @@ export default class Drawer {
 
     private drawDrones(drones: Drone[], time: number) {
         const elements = this.container
-            .selectAll(".drones")
+            .selectAll(".drone")
             .data(drones);
 
         elements
             .enter()
             .append("circle")
-            .classed("drones", true);
+            .classed("drone", true);
 
         elements
             .attr("cx", d => this.calculateXNode((d.positionAt(time).x)))
@@ -56,12 +58,31 @@ export default class Drawer {
             .style("fill", "green");
     }
 
-    private drawGrid(cells: Cell[][], time: number) {
+    private drawEdges(edges: Edge[], time: number) {
+        const elements = this.container
+            .selectAll(".edge")
+            .data(edges);
+
+        elements
+            .enter()
+            .append("line")
+            .classed("edge", true);
+
+        elements
+            .attr("x1", edge => this.calculateXNode(edge.a.x))
+            .attr("y1", edge => this.calculateYNode(edge.a.y))
+            .attr("x2", edge => this.calculateXNode(edge.b.x))
+            .attr("y2", edge => this.calculateYNode(edge.b.y))
+            .attr("stroke", "#999")
+            .attr("stroke-opacity", 1.0);
+    }
+
+    private drawCells(cells: Cell[][], time: number) {
         const flattenedCells = cells.flat();
         const storageCells = flattenedCells.filter(cell => cell.isStorage);
 
         this.drawStorageCells(storageCells, time);
-        this.drawNodes(flattenedCells, time);
+        this.drawCellNodes(flattenedCells, time);
     }
 
     private drawStorageCells(storageCells: Cell[], time: number) {
@@ -83,15 +104,15 @@ export default class Drawer {
             .style("stroke", "black");
     }
 
-    private drawNodes(cells: Cell[], time: number) {
+    private drawCellNodes(cells: Cell[], time: number) {
         const elements = this.container
-            .selectAll(".cell-nodes")
+            .selectAll(".cell-node")
             .data(cells);
 
         elements
             .enter()
             .append("circle")
-            .classed("cell-nodes", true);
+            .classed("cell-node", true);
 
         elements
             .attr("cx", cell => this.calculateXNode(cell.col))

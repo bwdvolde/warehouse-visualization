@@ -1,3 +1,5 @@
+import Position from "@/model/Position";
+
 export class Cell {
     row: number;
     col: number;
@@ -8,5 +10,9 @@ export class Cell {
         this.row = row;
         this.col = col;
         this.isStorage = isStorage;
+    }
+
+    get position(): Position {
+        return new Position(this.col, this.row);
     }
 }
