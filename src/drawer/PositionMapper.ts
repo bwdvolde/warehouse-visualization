@@ -8,7 +8,7 @@ export class PositionMapper {
 
 
     constructor(model: Model) {
-        const nRows = Math.max(...model.storageCells.flat().map(cell => cell.row));
+        const nRows = Math.max(...model.grid.flat().map(cell => cell.row));
         this.maxX = model.nAisles * 4;
         this.maxY = nRows;
     }

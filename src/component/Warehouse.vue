@@ -16,7 +16,7 @@
     import { mapActions, mapState } from "vuex";
     import { generateActions } from "@/action/generateActions";
     import { Model } from "@/model/Model";
-    import { StorageCell } from "@/model/StorageCell";
+    import { Cell } from "@/model/Cell";
 
     export default {
         components: { TimeDisplay },
@@ -41,16 +41,17 @@
             this.startTimer();
 
             const drones = [
-                (new Drone(new Position(5, 5), 0.1)),
-                (new Drone(new Position(2, 2), 0.2)),
-                (new Drone(new Position(7, 7), 0.3))
+                (new Drone(new Position(1, 0), 0.1)),
+                (new Drone(new Position(1, 10), 0.2)),
+                (new Drone(new Position(1, 20), 0.3))
             ];
 
             let storageCells = [];
-            for (let row = 1; row < 20; row === 10 ? row += 2 : row++) {
+            for (let row = 0; row < 41; row++) {
                 let currentRow = [];
                 for (let col = 0; col < 16; col++) {
-                    currentRow.push(new StorageCell(row, col));
+                    const isStorage = row % 10 !== 0;
+                    currentRow.push(new Cell(row, col, isStorage));
                 }
                 storageCells.push(currentRow);
             }
