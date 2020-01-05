@@ -22,7 +22,6 @@
         components: { TimeDisplay },
         data: function () {
             return {
-                timeMilliseconds: 0,
                 model: null,
                 executors: null,
                 drawer: null
