@@ -41,9 +41,9 @@
             this.startTimer();
 
             const drones = [
-                (new Drone(new Position(1, 0), 0.1)),
-                (new Drone(new Position(1, 10), 0.2)),
-                (new Drone(new Position(1, 20), 0.3))
+                (new Drone(new Position(0, 0), 0.5)),
+                (new Drone(new Position(0, 10), 0.5)),
+                (new Drone(new Position(0, 20), 0.5)),
             ];
 
             let storageCells = [];
@@ -62,7 +62,7 @@
                 .map(generateActions)
                 .map(actions => new ActionExecutor(actions));
 
-            this.drawer = new Drawer("#svg", this.model);
+            this.drawer = new Drawer("#svg");
         },
         methods: {
             ...mapActions(NAMESPACE_TIMER, [START_TIMER]),

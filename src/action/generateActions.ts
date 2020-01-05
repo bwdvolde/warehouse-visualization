@@ -4,7 +4,7 @@ import Drone from "@/model/Drone";
 import {Action} from "@/action/Action";
 
 export function generateActions(drone: Drone): Action[] {
-    const directions = [DIRECTION_EAST, DIRECTION_NORTH, DIRECTION_WEST, DIRECTION_SOUTH, DIRECTION_SOUTH];
+    const directions = [DIRECTION_EAST, DIRECTION_EAST, DIRECTION_EAST, DIRECTION_EAST, DIRECTION_EAST];
     let actions = [];
     let startTime = 0;
     for (let direction of directions) {
