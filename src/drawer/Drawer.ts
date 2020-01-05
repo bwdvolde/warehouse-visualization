@@ -54,10 +54,14 @@ export default class Drawer {
     }
 
     private drawGrid(cells: Cell[][], time: number) {
-        let storageCells = cells
-            .flat()
-            .filter(cell => cell.isStorage);
+        const flattenedCells = cells.flat();
+        const storageCells = flattenedCells.filter(cell => cell.isStorage);
 
+        this.drawStorageCells(storageCells, time);
+        this.drawNodes(flattenedCells, time);
+    }
+
+    private drawStorageCells(storageCells: Cell[], time: number) {
         const elements = this.container
             .selectAll("rect")
             .data(storageCells);
@@ -67,8 +71,8 @@ export default class Drawer {
             .append("rect");
 
         elements
-            .attr("x", cell => this.calculateXCell(cell.col, this.cellWidth))
-            .attr("y", cell => this.calculateYCell(cell.row, this.cellHeight))
+            .attr("x", cell => this.calculateXCell(cell.col))
+            .attr("y", cell => this.calculateYCell(cell.row))
             .attr("width", this.cellWidth)
             .attr("height", this.cellHeight)
             .style("fill", `rgb(${255 - time / 1000}, 0, 0)`)
@@ -76,13 +80,44 @@ export default class Drawer {
             .style("stroke", "black");
     }
 
-    calculateXCell(x: number, cellWidth: number): number {
+    calculateXCell(x: number): number {
         const aisle = getAisle(x);
         const aisleOffset = x % 2 ? 2 : 0;
-        return cellWidth * (3 * aisle + aisleOffset);
+        return this.cellWidth * (3 * aisle + aisleOffset);
     }
 
-    calculateYCell(y: number, cellHeight: number): number {
-        return y * cellHeight;
+    calculateYCell(y: number): number {
+        return y * this.cellHeight;
+    }
+
+    private drawNodes(cells: Cell[], time: number) {
+        const elements = this.container
+            .selectAll(".cell-nodes")
+            .data(cells);
+
+        elements
+            .enter()
+            .append("circle")
+            .classed("cell-nodes", true);
+
+        elements
+            .attr("cx", cell => this.calculateXNode(cell.col))
+            .attr("cy", cell => this.calculateYNode(cell.row))
+            .attr("r", this.cellHeight / 4)
+            .style("fill", `rgb(${255 - time / 1000}, 0, 0)`);
+    }
+
+    calculateXNode(row: number): number {
+        const xCell = this.calculateXCell(row);
+        if (row % 2 < 1) {
+            return xCell + this.cellWidth + this.cellWidth / 4;
+        } else {
+            return xCell - this.cellWidth / 4;
+        }
+    }
+
+    calculateYNode(col: number): number {
+        const yCell = this.calculateYCell(col);
+        return yCell + this.cellHeight / 2;
     }
 }

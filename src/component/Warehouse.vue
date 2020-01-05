@@ -47,9 +47,9 @@
             ];
 
             let storageCells = [];
-            for (let row = 0; row < 41; row++) {
+            for (let row = 0; row < 21; row++) {
                 let currentRow = [];
-                for (let col = 0; col < 16; col++) {
+                for (let col = 0; col < 8; col++) {
                     const isStorage = row % 10 !== 0;
                     currentRow.push(new Cell(row, col, isStorage));
                 }
