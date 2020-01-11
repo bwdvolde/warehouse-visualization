@@ -42,17 +42,17 @@ export default class Drawer {
     }
 
     private drawDrones(drones: Drone[], time: number) {
-        const elements = this.selectElements("drone", "circle", drones);
+        const elements = this.selectOrCreateElements("drone", "circle", drones);
 
         elements
             .attr("cx", d => this.calculateXNode((d.positionAt(time).x)))
             .attr("cy", d => this.calculateYNode((d.positionAt(time).y)))
             .attr("r", this.sizes.cellHeight / 4)
-            .style("fill", "green");
+            .style("fill", "gray");
     }
 
     private drawEdges(edges: Edge[], time: number) {
-        const elements = this.selectElements("edge", "line", edges);
+        const elements = this.selectOrCreateElements("edge", "line", edges);
 
         elements
             .attr("x1", edge => this.calculateXNode(edge.a.x))
@@ -72,33 +72,39 @@ export default class Drawer {
     }
 
     private drawStorageCells(storageCells: Cell[], time: number) {
-        const elements = this.selectElements("cell", "rect", storageCells);
+        const elements = this.selectOrCreateElements("cell", "rect", storageCells);
 
         elements
             .attr("x", cell => this.calculateXCell(cell.col))
             .attr("y", cell => this.calculateYCell(cell.row))
             .attr("width", this.sizes.cellWidth)
             .attr("height", this.sizes.cellHeight)
-            .style("fill", cell => this.determineCellFill(cell, time))
+            .style("fill", cell => this.determineCellColor(cell, time))
             .style("stroke-width", "0.5px")
             .style("stroke", "black");
     }
 
     private drawCellNodes(cells: Cell[], time: number) {
-        const elements = this.selectElements("cell-node", "circle", cells);
+        const elements = this.selectOrCreateElements("cell-node", "circle", cells);
 
         elements
             .attr("cx", cell => this.calculateXNode(cell.col))
             .attr("cy", cell => this.calculateYNode(cell.row))
             .attr("r", this.sizes.cellHeight / 4)
-            .style("fill", cell => this.determineCellFill(cell, time));
+            .style("fill", cell => this.determineCellColor(cell, time));
     }
 
-    private determineCellFill(cell, time: number) {
-        return `rgb(${255 - cell.timeSinceLastScanAt(time) / 1000}, 0, 0)`;
+    private determineCellColor(cell, time: number) {
+        let maxValue = 25000;
+
+        const color = d3.scaleLinear()
+            .domain([0, maxValue/ 2, maxValue])
+            .range(["green", "yellow", "red"]);
+
+        return color(cell.timeSinceLastScanAt(time));
     }
 
-    private selectElements(classToSelect: string, elementToAppend: string, data: any[]) {
+    private selectOrCreateElements(classToSelect: string, elementToAppend: string, data: any[]) {
         const elements = this.container
             .selectAll(`.${classToSelect}`)
             .data(data);
