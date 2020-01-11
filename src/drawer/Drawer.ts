@@ -98,7 +98,8 @@ export default class Drawer {
         let maxValue = 25000;
 
         const color = d3.scaleLinear()
-            .domain([0, maxValue/ 2, maxValue])
+            .domain([0, maxValue / 2, maxValue])
+            // @ts-ignore
             .range(["green", "yellow", "red"]);
 
         return color(cell.timeSinceLastScanAt(time));

@@ -1,6 +1,11 @@
 <template>
     <div style="display: flex">
-        <button @click="togglePause">{{running ? "Pause" : "Resume"}}</button>
+        <button
+                class="btn btn-primary"
+                @click="togglePause"
+        >
+            <Icon icon="pause" />
+        </button>
         <span>{{timeSeconds}}</span>
         <VueSlider
                 style="padding-left: 1rem; width:100%"
