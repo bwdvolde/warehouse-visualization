@@ -1,12 +1,12 @@
 <template>
     <div style="display: flex">
+        <button @click="togglePause">{{running ? "Pause" : "Resume"}}</button>
         <span>{{timeSeconds}}</span>
         <VueSlider
                 style="padding-left: 1rem; width:100%"
                 v-model="timeSeconds" :max="100"
-                @drag-start="stop()" @drag-end="resume()"
+                @drag-start="onDragStart" @drag-end="onDragEnd"
         />
-
     </div>
 </template>
 
@@ -15,12 +15,17 @@
     import "vue-slider-component/theme/default.css";
 
     import {mapMutations, mapState} from "vuex";
-    import {NAMESPACE_TIMER, RESUME, PAUSE, SET_TIME, TIME} from "@/store/modules/timer";
+    import {NAMESPACE_TIMER, RESUME, STOP, SET_TIME, TIME, RUNNING} from "@/store/modules/timer";
 
     export default {
         components: { VueSlider },
+        data() {
+            return {
+                wasRunningBeforeDrag: true
+            };
+        },
         computed: {
-            ...mapState(NAMESPACE_TIMER, [TIME]),
+            ...mapState(NAMESPACE_TIMER, [TIME, RUNNING]),
             timeSeconds: {
                 get(): Number {
                     const timeMilliseconds = this.time;
@@ -33,7 +38,23 @@
             }
         },
         methods: {
-            ...mapMutations(NAMESPACE_TIMER, [PAUSE, RESUME, SET_TIME])
+            ...mapMutations(NAMESPACE_TIMER, [STOP, RESUME, SET_TIME]),
+            togglePause() {
+                if (this.running) {
+                    this.stop();
+                } else {
+                    this.resume();
+                }
+            },
+            onDragStart() {
+                this.wasRunningBeforeDrag = this.running;
+                this.stop();
+            },
+            onDragEnd() {
+                if (this.wasRunningBeforeDrag) {
+                    this.resume();
+                }
+            }
         }
     };
 </script>

@@ -7,6 +7,7 @@ const SPEEDUP = 0.5;
 export const NAMESPACE_TIMER = "timer";
 
 export const TIME = "time";
+export const RUNNING = "running";
 
 const state = {
     time: 0,
@@ -15,7 +16,7 @@ const state = {
 
 export const SET_TIME = "setTime";
 export const INCREMENT = "increment";
-export const PAUSE = "stop";
+export const STOP = "stop";
 export const RESUME = "resume";
 
 const mutations = {
@@ -25,7 +26,7 @@ const mutations = {
     [INCREMENT](state: any, dt: Number) {
         state.time += dt;
     },
-    [PAUSE](state: any) {
+    [STOP](state: any) {
         state.running = false;
     },
     [RESUME](state: any) {

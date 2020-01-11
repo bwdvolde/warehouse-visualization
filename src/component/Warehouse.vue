@@ -20,7 +20,7 @@
 
     export default {
         components: { TimeDisplay },
-        data: function () {
+        data() {
             return {
                 model: null,
                 executors: null,
