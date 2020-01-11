@@ -1,11 +1,11 @@
 <template>
     <div id="app" class="wrapper">
         <div class="row">
-            <div class="col-9">
+            <div class="col-12 col-sm-9">
                 <Warehouse/>
                 <TimeDisplay/>
             </div>
-            <div class="col-3">
+            <div class="col-12 col-sm-3">
                 <h1>Information about selection</h1>
             </div>
         </div>
@@ -28,7 +28,6 @@
 
 <style>
     .wrapper {
-        margin-left: 2rem;
-        margin-top: 2rem;
+        margin: 2rem;
     }
 </style>

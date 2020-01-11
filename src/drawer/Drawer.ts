@@ -10,6 +10,7 @@ import * as $ from "jquery";
 interface Sizes {
     cellWidth: number;
     cellHeight: number;
+    nodeR: number
 }
 
 export default class Drawer {
@@ -40,7 +41,8 @@ export default class Drawer {
         const width = $(this.svgId).width();
         const cellWidth = width / (3 * model.nAisles);
         const cellHeight = HEIGHT / model.nRows;
-        this.sizes = { cellWidth, cellHeight };
+        const nodeR = Math.min(cellHeight / 4, cellWidth / 8);
+        this.sizes = { cellWidth, cellHeight, nodeR };
     }
 
     private drawDrones(drones: Drone[], time: number) {
@@ -49,7 +51,7 @@ export default class Drawer {
         elements
             .attr("cx", d => this.calculateXNode((d.positionAt(time).x)))
             .attr("cy", d => this.calculateYNode((d.positionAt(time).y)))
-            .attr("r", this.sizes.cellHeight / 4)
+            .attr("r", this.sizes.nodeR)
             .style("fill", "gray");
     }
 
@@ -92,7 +94,7 @@ export default class Drawer {
         elements
             .attr("cx", cell => this.calculateXNode(cell.col))
             .attr("cy", cell => this.calculateYNode(cell.row))
-            .attr("r", this.sizes.cellHeight / 4)
+            .attr("r", this.sizes.nodeR)
             .style("fill", cell => this.determineCellColor(cell, time));
     }
 
