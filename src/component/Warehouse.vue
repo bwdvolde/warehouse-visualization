@@ -1,8 +1,5 @@
 <template>
-    <div class="hello" style="padding: 10px">
-        <svg id="svg"/>
-        <TimeDisplay/>
-    </div>
+    <svg id="svg" style="width: 100%"/>
 </template>
 
 <script>
@@ -47,7 +44,7 @@
             let cells = [];
             for (let row = 0; row < 31; row++) {
                 let currentRow = [];
-                for (let col = 0; col < 8; col++) {
+                for (let col = 0; col < 12; col++) {
                     const isStorage = row % 10 !== 0;
                     currentRow.push(new Cell(row, col, isStorage));
                 }

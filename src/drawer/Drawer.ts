@@ -1,10 +1,11 @@
 import * as d3 from "d3";
-import {HEIGHT, WIDTH} from "@/drawer/constants";
+import {HEIGHT} from "@/drawer/constants";
 import Drone from "@/model/Drone";
 import {Model} from "@/model/Model";
 import {Cell} from "@/model/Cell";
 import {getAisle} from "@/model/util";
 import {Edge} from "@/model/Edge";
+import * as $ from "jquery";
 
 interface Sizes {
     cellWidth: number;
@@ -14,17 +15,17 @@ interface Sizes {
 export default class Drawer {
     private container: any;
     private sizes: Sizes;
+    private svgId: number;
 
     constructor(svgId) {
+        this.svgId = svgId;
         this.initContainer(svgId);
     }
 
     private initContainer(svgId) {
         this.container = d3
             .selectAll(svgId)
-            .attr("width", WIDTH)
-            .attr("height", HEIGHT)
-            .style("padding", "5px");
+            .attr("height", HEIGHT);
     }
 
     draw(model: Model, time: number) {
@@ -36,7 +37,8 @@ export default class Drawer {
     }
 
     private updateSizes(model: Model) {
-        const cellWidth = WIDTH / (3 * model.nAisles);
+        const width = $(this.svgId).width();
+        const cellWidth = width / (3 * model.nAisles);
         const cellHeight = HEIGHT / model.nRows;
         this.sizes = { cellWidth, cellHeight };
     }

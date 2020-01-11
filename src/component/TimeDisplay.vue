@@ -1,10 +1,10 @@
 <template>
-    <div style="display: flex">
+    <div class="time-display">
         <button
-                class="btn btn-primary"
+                class="time-display__toggle-button btn btn-primary btn-sm"
                 @click="togglePause"
         >
-            <Icon icon="pause" />
+            <Icon :icon="running ? 'pause' : 'play'"/>
         </button>
         <span>{{timeSeconds}}</span>
         <VueSlider
@@ -63,3 +63,16 @@
         }
     };
 </script>
+
+<style scoped>
+    .time-display {
+        display: flex;
+        align-items: center;
+
+        padding-top: 1.5rem;
+    }
+
+    .time-display__toggle-button {
+        margin-right: 0.5rem;
+    }
+</style>
