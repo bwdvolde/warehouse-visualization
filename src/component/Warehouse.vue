@@ -41,24 +41,23 @@
 
             const drones = [
                 (new Drone(new Position(0, 0), 0.5)),
-                (new Drone(new Position(0, 10), 0.5)),
-                (new Drone(new Position(0, 20), 0.5)),
+                (new Drone(new Position(2, 11), 1.0)),
             ];
 
-            let storageCells = [];
+            let cells = [];
             for (let row = 0; row < 31; row++) {
                 let currentRow = [];
                 for (let col = 0; col < 8; col++) {
                     const isStorage = row % 10 !== 0;
                     currentRow.push(new Cell(row, col, isStorage));
                 }
-                storageCells.push(currentRow);
+                cells.push(currentRow);
             }
 
-            this.model = new Model(drones, storageCells);
+            this.model = new Model(drones, cells);
 
             this.executors = drones
-                .map(generateActions)
+                .map(drone => generateActions(drone, cells))
                 .map(actions => new ActionExecutor(actions));
 
             this.drawer = new Drawer("#svg");

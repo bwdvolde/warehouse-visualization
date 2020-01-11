@@ -79,7 +79,7 @@ export default class Drawer {
             .attr("y", cell => this.calculateYCell(cell.row))
             .attr("width", this.sizes.cellWidth)
             .attr("height", this.sizes.cellHeight)
-            .style("fill", `rgb(${255 - time / 1000}, 0, 0)`)
+            .style("fill", cell => this.determineCellFill(cell, time))
             .style("stroke-width", "0.5px")
             .style("stroke", "black");
     }
@@ -91,7 +91,11 @@ export default class Drawer {
             .attr("cx", cell => this.calculateXNode(cell.col))
             .attr("cy", cell => this.calculateYNode(cell.row))
             .attr("r", this.sizes.cellHeight / 4)
-            .style("fill", `rgb(${255 - time / 1000}, 0, 0)`);
+            .style("fill", cell => this.determineCellFill(cell, time));
+    }
+
+    private determineCellFill(cell, time: number) {
+        return `rgb(${255 - cell.timeSinceLastScanAt(time) / 1000}, 0, 0)`;
     }
 
     private selectElements(classToSelect: string, elementToAppend: string, data: any[]) {
