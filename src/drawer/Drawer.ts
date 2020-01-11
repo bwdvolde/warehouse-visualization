@@ -24,12 +24,12 @@ export default class Drawer {
             .selectAll(svgId)
             .attr("width", WIDTH)
             .attr("height", HEIGHT)
-            .style("border", "solid")
             .style("padding", "5px");
     }
 
     draw(model: Model, time: number) {
         this.updateSizes(model);
+        // Ordering is important here because draw order represents stacking order
         this.drawEdges(model.edges, time);
         this.drawCells(model.cells, time);
         this.drawDrones(model.drones, time);

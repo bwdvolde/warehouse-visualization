@@ -46,7 +46,7 @@
             ];
 
             let storageCells = [];
-            for (let row = 0; row < 21; row++) {
+            for (let row = 0; row < 31; row++) {
                 let currentRow = [];
                 for (let col = 0; col < 8; col++) {
                     const isStorage = row % 10 !== 0;
