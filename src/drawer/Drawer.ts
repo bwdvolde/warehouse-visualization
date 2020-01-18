@@ -3,19 +3,13 @@ import {HEIGHT} from "@/drawer/constants";
 import Drone from "@/model/Drone";
 import {Model} from "@/model/Model";
 import {Cell} from "@/model/Cell";
-import {getAisle} from "@/model/util";
 import {Edge} from "@/model/Edge";
 import * as $ from "jquery";
-
-interface Sizes {
-    cellWidth: number;
-    cellHeight: number;
-    nodeR: number
-}
+import {PositionMapper} from "@/drawer/PositionMapper";
 
 export default class Drawer {
     private container: any;
-    private sizes: Sizes;
+    private mapper: PositionMapper;
     private svgId: number;
 
     constructor(svgId) {
@@ -30,39 +24,37 @@ export default class Drawer {
     }
 
     draw(model: Model, time: number) {
-        this.updateSizes(model);
+        this.createPositionMapper(model);
+
         // Ordering is important here because draw order represents stacking order
-        this.drawEdges(model.edges, time);
+        this.drawEdges(model.edges);
         this.drawCells(model.cells, time);
         this.drawDrones(model.drones, time);
     }
 
-    private updateSizes(model: Model) {
-        const width = $(this.svgId).width();
-        const cellWidth = width / (3 * model.nAisles);
-        const cellHeight = HEIGHT / model.nRows;
-        const nodeR = Math.min(cellHeight / 4, cellWidth / 8);
-        this.sizes = { cellWidth, cellHeight, nodeR };
+    private createPositionMapper(model: Model) {
+        const containerWidth = $(this.svgId).width();
+        this.mapper = new PositionMapper(model, containerWidth);
     }
 
     private drawDrones(drones: Drone[], time: number) {
         const elements = this.selectOrCreateElements("drone", "circle", drones);
 
         elements
-            .attr("cx", d => this.calculateXNode((d.positionAt(time).x)))
-            .attr("cy", d => this.calculateYNode((d.positionAt(time).y)))
-            .attr("r", this.sizes.nodeR)
+            .attr("cx", d => this.mapper.calculateXNode((d.positionAt(time).x)))
+            .attr("cy", d => this.mapper.calculateYNode((d.positionAt(time).y)))
+            .attr("r", this.mapper.nodeR)
             .style("fill", "gray");
     }
 
-    private drawEdges(edges: Edge[], time: number) {
+    private drawEdges(edges: Edge[]) {
         const elements = this.selectOrCreateElements("edge", "line", edges);
 
         elements
-            .attr("x1", edge => this.calculateXNode(edge.a.x))
-            .attr("y1", edge => this.calculateYNode(edge.a.y))
-            .attr("x2", edge => this.calculateXNode(edge.b.x))
-            .attr("y2", edge => this.calculateYNode(edge.b.y))
+            .attr("x1", edge => this.mapper.calculateXNode(edge.a.x))
+            .attr("y1", edge => this.mapper.calculateYNode(edge.a.y))
+            .attr("x2", edge => this.mapper.calculateXNode(edge.b.x))
+            .attr("y2", edge => this.mapper.calculateYNode(edge.b.y))
             .attr("stroke", "#999")
             .attr("stroke-opacity", 1.0);
     }
@@ -79,11 +71,11 @@ export default class Drawer {
         const elements = this.selectOrCreateElements("cell", "rect", storageCells);
 
         elements
-            .attr("x", cell => this.calculateXCell(cell.col))
-            .attr("y", cell => this.calculateYCell(cell.row))
-            .attr("width", this.sizes.cellWidth)
-            .attr("height", this.sizes.cellHeight)
-            .style("fill", cell => this.determineCellColor(cell, time))
+            .attr("x", cell => this.mapper.calculateXCell(cell.col))
+            .attr("y", cell => this.mapper.calculateYCell(cell.row))
+            .attr("width", this.mapper.cellWidth)
+            .attr("height", this.mapper.cellHeight)
+            .style("fill", cell => this.calculateCellColor(cell, time))
             .style("stroke-width", "0.5px")
             .style("stroke", "black");
     }
@@ -92,13 +84,13 @@ export default class Drawer {
         const elements = this.selectOrCreateElements("cell-node", "circle", cells);
 
         elements
-            .attr("cx", cell => this.calculateXNode(cell.col))
-            .attr("cy", cell => this.calculateYNode(cell.row))
-            .attr("r", this.sizes.nodeR)
-            .style("fill", cell => this.determineCellColor(cell, time));
+            .attr("cx", cell => this.mapper.calculateXNode(cell.col))
+            .attr("cy", cell => this.mapper.calculateYNode(cell.row))
+            .attr("r", this.mapper.nodeR)
+            .style("fill", cell => this.calculateCellColor(cell, time));
     }
 
-    private determineCellColor(cell, time: number) {
+    private calculateCellColor(cell, time: number) {
         let maxValue = 25000;
 
         const color = d3.scaleLinear()
@@ -119,33 +111,5 @@ export default class Drawer {
             .append(elementToAppend)
             .classed(classToSelect, true);
         return elements;
-    }
-
-    calculateXCell(x: number): number {
-        const aisle = getAisle(x);
-        const aisleOffset = x % 2 >= 1 ? 2 : 0;
-        return this.sizes.cellWidth * (3 * aisle + aisleOffset);
-    }
-
-    calculateYCell(y: number): number {
-        return y * this.sizes.cellHeight;
-    }
-
-    calculateXNode(row: number): number {
-        const xCell = this.calculateXCell(row);
-        if (row % 2 < 1) {
-            const distanceBetweenCellAndCellNode = this.sizes.cellWidth + this.sizes.cellWidth / 4;
-            const distanceBetweenCellNodeAndNode = this.sizes.cellWidth / 2 * (row % 1);
-            return xCell + distanceBetweenCellAndCellNode + distanceBetweenCellNodeAndNode;
-        } else {
-            const distanceBetweenCellAndCellNode = this.sizes.cellWidth / 4;
-            const distanceBetweenCellNodeAndNode = this.sizes.cellWidth * 5 / 2 * (row % 1);
-            return xCell - distanceBetweenCellAndCellNode + distanceBetweenCellNodeAndNode;
-        }
-    }
-
-    calculateYNode(col: number): number {
-        const yCell = this.calculateYCell(col);
-        return yCell + this.sizes.cellHeight / 2;
     }
 }

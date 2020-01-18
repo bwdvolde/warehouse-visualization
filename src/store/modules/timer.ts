@@ -1,6 +1,6 @@
 export const MAX_TIME = 100 * 1000;
 
-const FRAMES_PER_SECOND = 60;
+const FRAMES_PER_SECOND = 30;
 const TIME_PER_FRAME = 1000 / FRAMES_PER_SECOND;
 const SPEEDUP = 0.5;
 
