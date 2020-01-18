@@ -20,8 +20,8 @@ function createModel({ settings, drones, cells }): Model {
 function createGrid(settings, cells): Cell[][] {
     const nRows = settings.blocks * settings.cellsPerBlock;
     const nCols = settings.aisles * 2;
+
     const grid = [...Array(nRows)].map(() => new Array(nCols));
-    console.log(grid);
     cells.forEach(cell => {
         grid[cell.row][cell.col] = createCell(cell);
     });
