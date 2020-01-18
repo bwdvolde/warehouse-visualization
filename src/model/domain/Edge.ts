@@ -1,4 +1,4 @@
-import Position from "@/model/Position";
+import Position from "@/model/domain/Position";
 
 export class Edge {
     a: Position;

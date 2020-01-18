@@ -1,4 +1,4 @@
-import {Action} from "@/action/Action";
+import {Action} from "@/model/action/Action";
 
 
 export default class ActionExecutor {

@@ -1,4 +1,4 @@
-import {Direction} from "@/model/Direction";
+import {Direction} from "@/model/domain/Direction";
 
 export default class Position {
     x: number;

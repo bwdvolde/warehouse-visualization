@@ -1,9 +1,9 @@
-import {Direction, DIRECTION_EAST, DIRECTION_NORTH, DIRECTION_SOUTH, DIRECTION_WEST} from "@/model/Direction";
-import {MoveAction} from "@/action/MoveAction";
-import Drone from "@/model/Drone";
-import {Action} from "@/action/Action";
-import {Cell} from "@/model/Cell";
-import {ScanAction} from "@/action/ScanAction";
+import {Direction, DIRECTION_EAST, DIRECTION_NORTH, DIRECTION_SOUTH, DIRECTION_WEST} from "@/model/domain/Direction";
+import {MoveAction} from "@/model/action/MoveAction";
+import Drone from "@/model/domain/Drone";
+import {Action} from "@/model/action/Action";
+import {Cell} from "@/model/domain/Cell";
+import {ScanAction} from "@/model/action/ScanAction";
 
 export function generateActions(drone: Drone, cells: Cell[][]): Action[] {
     const directions = [DIRECTION_SOUTH, DIRECTION_SOUTH, DIRECTION_SOUTH, DIRECTION_EAST, DIRECTION_SOUTH, DIRECTION_SOUTH, DIRECTION_SOUTH];

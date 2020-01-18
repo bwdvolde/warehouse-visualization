@@ -1,4 +1,4 @@
-import {ActionState} from "@/action/ActionState";
+import {ActionState} from "@/model/action/ActionState";
 
 export abstract class Action {
     state: ActionState;

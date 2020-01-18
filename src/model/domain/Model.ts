@@ -1,7 +1,7 @@
-import {Cell} from "@/model/Cell";
-import Drone from "@/model/Drone";
-import {Edge} from "@/model/Edge";
-import Position from "@/model/Position";
+import {Cell} from "@/model/domain/Cell";
+import Drone from "@/model/domain/Drone";
+import {Edge} from "@/model/domain/Edge";
+import Position from "@/model/domain/Position";
 
 export class Model {
     drones: Drone[];

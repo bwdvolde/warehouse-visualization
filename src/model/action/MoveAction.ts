@@ -1,6 +1,6 @@
-import {Action} from "@/action/Action";
-import Drone from "@/model/Drone";
-import {Direction, DIRECTION_NONE} from "@/model/Direction";
+import {Action} from "@/model/action/Action";
+import Drone from "@/model/domain/Drone";
+import {Direction, DIRECTION_NONE} from "@/model/domain/Direction";
 
 export class MoveAction extends Action {
 

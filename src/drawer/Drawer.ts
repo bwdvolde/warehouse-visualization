@@ -1,9 +1,9 @@
 import * as d3 from "d3";
 import {HEIGHT} from "@/drawer/constants";
-import Drone from "@/model/Drone";
-import {Model} from "@/model/Model";
-import {Cell} from "@/model/Cell";
-import {Edge} from "@/model/Edge";
+import Drone from "@/model/domain/Drone";
+import {Model} from "@/model/domain/Model";
+import {Cell} from "@/model/domain/Cell";
+import {Edge} from "@/model/domain/Edge";
 import * as $ from "jquery";
 import {PositionMapper} from "@/drawer/PositionMapper";
 

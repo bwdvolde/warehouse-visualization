@@ -1,5 +1,5 @@
-import {Action} from "@/action/Action";
-import {Cell} from "@/model/Cell";
+import {Action} from "@/model/action/Action";
+import {Cell} from "@/model/domain/Cell";
 
 export class ScanAction extends Action {
 

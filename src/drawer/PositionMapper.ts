@@ -1,6 +1,6 @@
-import {Model} from "@/model/Model";
+import {Model} from "@/model/domain/Model";
 import {HEIGHT} from "@/drawer/constants";
-import {getAisle} from "@/model/util";
+import {getAisle} from "@/model/domain/util";
 
 export class PositionMapper {
     cellWidth: number;

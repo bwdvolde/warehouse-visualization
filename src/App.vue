@@ -17,13 +17,13 @@
     import Drawer from "@/drawer/Drawer";
 
     import { NAMESPACE_TIMER, START_TIMER, TIME } from "@/store/modules/timer";
-    import Drone from "@/model/Drone";
-    import ActionExecutor from "@/action/ActionExecutor";
-    import Position from "@/model/Position";
+    import Drone from "@/model/domain/Drone";
+    import ActionExecutor from "@/model/action/ActionExecutor";
+    import Position from "@/model/domain/Position";
     import { mapActions, mapState } from "vuex";
-    import { generateActions } from "@/action/generateActions";
-    import { Model } from "@/model/Model";
-    import { Cell } from "@/model/Cell";
+    import { generateActions } from "@/model/action/generateActions";
+    import { Model } from "@/model/domain/Model";
+    import { Cell } from "@/model/domain/Cell";
 
     export default {
         components: { TimeDisplay },

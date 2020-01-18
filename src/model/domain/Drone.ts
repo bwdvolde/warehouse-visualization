@@ -1,5 +1,5 @@
-import Position from "@/model/Position";
-import {Direction, DIRECTION_NONE} from "@/model/Direction";
+import Position from "@/model/domain/Position";
+import {Direction, DIRECTION_NONE} from "@/model/domain/Direction";
 
 export default class Drone {
     timeOnArrivalAtOrigin: number;
