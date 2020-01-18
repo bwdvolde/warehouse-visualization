@@ -9,8 +9,8 @@ export class Model {
     edges: Edge[];
 
 
-    constructor(drones: Drone[], storageCells: Cell[][]) {
-        this.cells = storageCells;
+    constructor(drones: Drone[], cells: Cell[][]) {
+        this.cells = cells;
         this.drones = drones;
         this.buildEdges(this.cells);
     }

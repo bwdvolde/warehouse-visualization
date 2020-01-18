@@ -1,22 +1,14 @@
-import Position from "@/model/domain/Position";
-
 export class Cell {
     row: number;
     col: number;
-    isStorage: boolean;
-
+    isActive: boolean;
     timeAtLastScan: number;
 
-
-    constructor(row: number, col: number, isStorage: boolean) {
+    constructor(row: number, col: number, isActive: boolean, timeAtLastScan: number) {
         this.row = row;
         this.col = col;
-        this.isStorage = isStorage;
-        this.timeAtLastScan = -50000;
-    }
-
-    get position(): Position {
-        return new Position(this.col, this.row);
+        this.isActive = isActive;
+        this.timeAtLastScan = timeAtLastScan;
     }
 
     timeSinceLastScanAt(time: number): number {

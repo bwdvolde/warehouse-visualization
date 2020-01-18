@@ -10,10 +10,14 @@ export default class Position {
     }
 
     plus(direction: Direction): Position {
-        return new Position(this.x + direction.dx,  this.y + direction.dy);
+        return new Position(this.x + direction.dx, this.y + direction.dy);
     }
 
     minus(direction: Direction): Position {
         return new Position(this.x - direction.dx, this.y - direction.dy);
+    }
+
+    static fromJson({ x, y }) {
+        return new Position(x, y);
     }
 }

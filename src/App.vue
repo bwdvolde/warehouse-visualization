@@ -24,6 +24,7 @@
     import { generateActions } from "@/model/action/generateActions";
     import { Model } from "@/model/domain/Model";
     import { Cell } from "@/model/domain/Cell";
+    import { createModel, defaultSetup } from "@/service/modelService";
 
     export default {
         components: { TimeDisplay },
@@ -47,16 +48,16 @@
             this.startTimer();
 
             const drones = [
-                (new Drone(new Position(0, 0), 0.5)),
-                (new Drone(new Position(2, 11), 1.0)),
+                (new Drone(1, new Position(0, 0), 0.5)),
+                (new Drone(1, new Position(2, 11), 1.0)),
             ];
 
             let cells = [];
             for (let row = 0; row < 31; row++) {
                 let currentRow = [];
                 for (let col = 0; col < 12; col++) {
-                    const isStorage = row % 10 !== 0;
-                    currentRow.push(new Cell(row, col, isStorage));
+                    const isActive = row % 10 !== 0;
+                    currentRow.push(new Cell(row, col, isActive, -50000));
                 }
                 cells.push(currentRow);
             }
@@ -68,6 +69,8 @@
                 .map(actions => new ActionExecutor(actions));
 
             this.drawer = new Drawer("#svg");
+
+            console.log(createModel(defaultSetup));
         },
         methods: {
             ...mapActions(NAMESPACE_TIMER, [START_TIMER]),

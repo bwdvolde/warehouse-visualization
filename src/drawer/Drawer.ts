@@ -61,7 +61,7 @@ export default class Drawer {
 
     private drawCells(cells: Cell[][], time: number) {
         const flattenedCells = cells.flat();
-        const storageCells = flattenedCells.filter(cell => cell.isStorage);
+        const storageCells = flattenedCells.filter(cell => cell.isActive);
 
         this.drawStorageCells(storageCells, time);
         this.drawCellNodes(flattenedCells, time);

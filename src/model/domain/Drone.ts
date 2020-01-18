@@ -4,11 +4,13 @@ import {Direction, DIRECTION_NONE} from "@/model/domain/Direction";
 export default class Drone {
     timeOnArrivalAtOrigin: number;
 
+    id: string;
     origin: Position;
     direction: Direction;
     speed: number;
 
-    constructor(startPosition: Position, speed: number) {
+    constructor(id: string = "1", startPosition: Position, speed: number) {
+        this.id = id;
         this.timeOnArrivalAtOrigin = 0;
         this.origin = startPosition;
         this.direction = DIRECTION_NONE;
