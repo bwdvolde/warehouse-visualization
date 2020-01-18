@@ -6,7 +6,7 @@ import {Cell} from "@/model/domain/Cell";
 import {ScanAction} from "@/model/action/ScanAction";
 
 export function generateActions(drone: Drone, cells: Cell[][]): Action[] {
-    const directions = [DIRECTION_SOUTH, DIRECTION_SOUTH, DIRECTION_SOUTH, DIRECTION_EAST, DIRECTION_SOUTH, DIRECTION_SOUTH, DIRECTION_SOUTH];
+    const directions = [DIRECTION_SOUTH];
     let actions = [];
     let startTime = 0;
     let position = drone.origin;

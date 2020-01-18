@@ -2,52 +2,15 @@ import {Cell} from "@/model/domain/Cell";
 import Position from "@/model/domain/Position";
 import Drone from "@/model/domain/Drone";
 import {Model} from "@/model/domain/Model";
+import axios from "axios";
 
-export const defaultSetup = {
-    settings: {
-        aisles: 1,
-        blocks: 1,
-        cellsPerBlock: 2
-    },
-    drones: [
-        {
-            id: "Normal speed",
-            startPosition: {
-                x: 0,
-                y: 0
-            },
-            speed: 1
-        }
-    ],
-    cells: [
-        {
-            row: 0,
-            col: 0,
-            isActive: true,
-            timeAtLastScan: -50000
-        },
-        {
-            row: 0,
-            col: 1,
-            isActive: true,
-            timeAtLastScan: -50000
-        },
-        {
-            row: 1,
-            col: 0,
-            isActive: true,
-            timeAtLastScan: -50000
-        },
-        {
-            row: 1,
-            col: 1,
-            isActive: true,
-            timeAtLastScan: -50000
-        }
-    ]
-};
+export async function get(name: string) {
+    return axios.get(`/configurations/${name}.json`)
+        .then(response => response.data)
+        .then(createModel);
+}
 
-export function createModel({ settings, drones, cells }): Model {
+function createModel({ settings, drones, cells }): Model {
     const grid = createGrid(settings, cells);
     const parsedDrones = drones.map(drone => createDrone(drone));
 
