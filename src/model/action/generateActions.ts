@@ -48,6 +48,8 @@ export function generateActions(drone: Drone, cells: Cell[][]): Action[] {
             case Operation.SCAN:
                 pushScanAction();
                 break;
+            default:
+                throw Error(`Could not generate action for: '${operation}'`);
         }
     }
     return actions;

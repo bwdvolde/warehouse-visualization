@@ -26,11 +26,11 @@ export class Model {
     }
 
     private pushEdgeRightIfExists(x: number, y: number) {
-        const current = new Position(x, y);
-        const right = new Position(x + 1, y);
-        const edgeRight = new Edge(current, right);
+        const currentPosition = new Position(x, y);
+        const rightPosition = new Position(x + 1, y);
+        const edgeRight = new Edge(currentPosition, rightPosition);
 
-        const hasRightNeighbor = x % 2 == 0 || y % 10 == 0;
+        const hasRightNeighbor = x < this.nCols - 1 && (x % 2 == 0 || !this.cells[y][x + 1].isActive);
         if (hasRightNeighbor) {
             this.edges.push(edgeRight);
         }
@@ -45,6 +45,10 @@ export class Model {
 
     get nAisles() {
         return Math.ceil(this.cells[0].length / 2);
+    }
+
+    get nCols() {
+        return 2 * this.nAisles;
     }
 
     get nRows() {

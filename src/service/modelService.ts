@@ -18,7 +18,7 @@ function parseJsonModel({ settings, drones, cells }): Model {
 }
 
 function parseJsonGrid(settings, cells): Cell[][] {
-    const nRows = settings.blocks * settings.cellsPerBlock;
+    const nRows = settings.blocks * (settings.cellsPerBlock + 1) + 1;
     const nCols = settings.aisles * 2;
 
     const grid = [...Array(nRows)].map(() => new Array(nCols));
@@ -38,6 +38,6 @@ function parseJsonDrone({ id, startPosition, speed, operations }): Drone {
 }
 
 
-function parseJsonPosition({ x, y }) {
-    return new Position(x, y);
+function parseJsonPosition({ row, col }) {
+    return new Position(row, col);
 }
