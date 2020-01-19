@@ -1,12 +1,18 @@
-import {Direction, DIRECTION_EAST, DIRECTION_NORTH, DIRECTION_SOUTH, DIRECTION_WEST} from "@/model/domain/Direction";
+import {
+    Direction,
+    DIRECTION_EAST,
+    DIRECTION_NORTH,
+    DIRECTION_SOUTH,
+    DIRECTION_WEST
+} from "@/model/domain/Direction";
 import {MoveAction} from "@/model/action/MoveAction";
 import Drone from "@/model/domain/Drone";
 import {Action} from "@/model/action/Action";
 import {Cell} from "@/model/domain/Cell";
 import {ScanAction} from "@/model/action/ScanAction";
+import {Operation} from "@/model/domain/Operation";
 
 export function generateActions(drone: Drone, cells: Cell[][]): Action[] {
-    const directions = [DIRECTION_SOUTH];
     let actions = [];
     let startTime = 0;
     let position = drone.origin;
@@ -25,9 +31,24 @@ export function generateActions(drone: Drone, cells: Cell[][]): Action[] {
         startTime += scanAction.duration;
     }
 
-    for (let direction of directions) {
-        pushMoveAction(direction);
-        pushScanAction();
+    for (let operation of drone.operations) {
+        switch (operation) {
+            case Operation.NORTH:
+                pushMoveAction(DIRECTION_NORTH);
+                break;
+            case Operation.SOUTH:
+                pushMoveAction(DIRECTION_SOUTH);
+                break;
+            case Operation.WEST:
+                pushMoveAction(DIRECTION_WEST);
+                break;
+            case Operation.EAST:
+                pushMoveAction(DIRECTION_EAST);
+                break;
+            case Operation.SCAN:
+                pushScanAction();
+                break;
+        }
     }
     return actions;
 }

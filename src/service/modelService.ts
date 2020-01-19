@@ -4,35 +4,40 @@ import Drone from "@/model/domain/Drone";
 import {Model} from "@/model/domain/Model";
 import axios from "axios";
 
-export async function get(name: string) {
+export async function getModel(name: string) {
     return axios.get(`/configurations/${name}.json`)
         .then(response => response.data)
-        .then(createModel);
+        .then(parseJsonModel);
 }
 
-function createModel({ settings, drones, cells }): Model {
-    const grid = createGrid(settings, cells);
-    const parsedDrones = drones.map(drone => createDrone(drone));
+function parseJsonModel({ settings, drones, cells }): Model {
+    const grid = parseJsonGrid(settings, cells);
+    const parsedDrones = drones.map(drone => parseJsonDrone(drone));
 
     return new Model(parsedDrones, grid);
 }
 
-function createGrid(settings, cells): Cell[][] {
+function parseJsonGrid(settings, cells): Cell[][] {
     const nRows = settings.blocks * settings.cellsPerBlock;
     const nCols = settings.aisles * 2;
 
     const grid = [...Array(nRows)].map(() => new Array(nCols));
     cells.forEach(cell => {
-        grid[cell.row][cell.col] = createCell(cell);
+        grid[cell.row][cell.col] = parseJsonCell(cell);
     });
 
     return grid;
 }
 
-function createCell({ row, col, isActive, timeAtLastScan }) {
+function parseJsonCell({ row, col, isActive, timeAtLastScan }) {
     return new Cell(row, col, isActive, timeAtLastScan);
 }
 
-function createDrone({ id, startPosition, speed }): Drone {
-    return new Drone(id, Position.fromJson(startPosition), speed);
+function parseJsonDrone({ id, startPosition, speed, operations }): Drone {
+    return new Drone(id, parseJsonPosition(startPosition), speed, operations);
+}
+
+
+function parseJsonPosition({ x, y }) {
+    return new Position(x, y);
 }

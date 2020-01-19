@@ -1,20 +1,23 @@
 import Position from "@/model/domain/Position";
 import {Direction, DIRECTION_NONE} from "@/model/domain/Direction";
+import {Operation} from "@/model/domain/Operation";
 
 export default class Drone {
     timeOnArrivalAtOrigin: number;
-
-    id: string;
     origin: Position;
     direction: Direction;
-    speed: number;
 
-    constructor(id: string = "1", startPosition: Position, speed: number) {
+    id: string;
+    speed: number;
+    operations: Operation[];
+
+    constructor(id: string, startPosition: Position, speed: number, operations: Operation[]) {
         this.id = id;
         this.timeOnArrivalAtOrigin = 0;
         this.origin = startPosition;
         this.direction = DIRECTION_NONE;
         this.speed = speed;
+        this.operations = operations;
     }
 
     public positionAt(time: number): Position {

@@ -16,8 +16,4 @@ export default class Position {
     minus(direction: Direction): Position {
         return new Position(this.x - direction.dx, this.y - direction.dy);
     }
-
-    static fromJson({ x, y }) {
-        return new Position(x, y);
-    }
 }

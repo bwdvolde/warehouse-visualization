@@ -17,14 +17,10 @@
     import Drawer from "@/drawer/Drawer";
 
     import { NAMESPACE_TIMER, START_TIMER, TIME } from "@/store/modules/timer";
-    import Drone from "@/model/domain/Drone";
     import ActionExecutor from "@/model/action/ActionExecutor";
-    import Position from "@/model/domain/Position";
     import { mapActions, mapState } from "vuex";
     import { generateActions } from "@/model/action/generateActions";
-    import { Model } from "@/model/domain/Model";
-    import { Cell } from "@/model/domain/Cell";
-    import { createModel, defaultSetup, get } from "@/service/modelService";
+    import { getModel } from "@/service/modelService";
 
     export default {
         components: { TimeDisplay },
@@ -45,7 +41,7 @@
             }
         },
         async mounted() {
-            this.model = await get("default");
+            this.model = await getModel("default");
             this.createExecutors();
             this.drawer = new Drawer("#svg");
 
