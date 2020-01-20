@@ -18,11 +18,13 @@ export class MoveAction extends Action {
 
     start() {
         this.saveCurrentDroneState();
+        this.setNewStateOfDrone();
+        super.start();
+    }
 
+    private setNewStateOfDrone() {
         this.drone.direction = this.direction;
         this.drone.timeOnArrivalAtOrigin = this.startTime;
-
-        super.start();
     }
 
     private saveCurrentDroneState() {

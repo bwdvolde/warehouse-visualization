@@ -29,11 +29,11 @@ class Settings:
 
 class Drone:
 
-    def __init__(self, id, row, col, speed, operations):
+    def __init__(self, id, x, y, speed, operations):
         self.id = id
         self.startPosition = {
-            "row": row,
-            "col": col
+            "x": x,
+            "y": y
         }
         self.speed = speed
         self.operations = operations
@@ -44,9 +44,9 @@ class Drone:
 
 class Cell:
 
-    def __init__(self, row, col, isActive, timeAtLastScan):
-        self.row = row
-        self.col = col
+    def __init__(self, x, y, isActive, timeAtLastScan):
+        self.x = x
+        self.y = y
         self.isActive = isActive
         self.timeAtLastScan = timeAtLastScan
 

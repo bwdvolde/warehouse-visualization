@@ -6,1010 +6,1010 @@
   },
   "cells": [
     {
-      "row": 0,
-      "col": 0,
+      "x": 0,
+      "y": 0,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 0,
-      "col": 1,
+      "x": 1,
+      "y": 0,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 0,
-      "col": 2,
+      "x": 2,
+      "y": 0,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 0,
-      "col": 3,
+      "x": 3,
+      "y": 0,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 0,
-      "col": 4,
+      "x": 4,
+      "y": 0,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 0,
-      "col": 5,
+      "x": 5,
+      "y": 0,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 0,
-      "col": 6,
+      "x": 6,
+      "y": 0,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 0,
-      "col": 7,
+      "x": 7,
+      "y": 0,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 1,
-      "col": 0,
+      "x": 0,
+      "y": 1,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 1,
-      "col": 1,
+      "x": 1,
+      "y": 1,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 1,
-      "col": 2,
+      "x": 2,
+      "y": 1,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 1,
-      "col": 3,
+      "x": 3,
+      "y": 1,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 1,
-      "col": 4,
+      "x": 4,
+      "y": 1,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 1,
-      "col": 5,
+      "x": 5,
+      "y": 1,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 1,
-      "col": 6,
+      "x": 6,
+      "y": 1,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 1,
-      "col": 7,
+      "x": 7,
+      "y": 1,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 2,
-      "col": 0,
+      "x": 0,
+      "y": 2,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 2,
-      "col": 1,
+      "x": 1,
+      "y": 2,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 2,
-      "col": 2,
+      "x": 2,
+      "y": 2,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 2,
-      "col": 3,
+      "x": 3,
+      "y": 2,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 2,
-      "col": 4,
+      "x": 4,
+      "y": 2,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 2,
-      "col": 5,
+      "x": 5,
+      "y": 2,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 2,
-      "col": 6,
+      "x": 6,
+      "y": 2,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 2,
-      "col": 7,
+      "x": 7,
+      "y": 2,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 3,
-      "col": 0,
+      "x": 0,
+      "y": 3,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 3,
-      "col": 1,
+      "x": 1,
+      "y": 3,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 3,
-      "col": 2,
+      "x": 2,
+      "y": 3,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 3,
-      "col": 3,
+      "x": 3,
+      "y": 3,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 3,
-      "col": 4,
+      "x": 4,
+      "y": 3,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 3,
-      "col": 5,
+      "x": 5,
+      "y": 3,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 3,
-      "col": 6,
+      "x": 6,
+      "y": 3,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 3,
-      "col": 7,
+      "x": 7,
+      "y": 3,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 4,
-      "col": 0,
+      "x": 0,
+      "y": 4,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 4,
-      "col": 1,
+      "x": 1,
+      "y": 4,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 4,
-      "col": 2,
+      "x": 2,
+      "y": 4,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 4,
-      "col": 3,
+      "x": 3,
+      "y": 4,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 4,
-      "col": 4,
+      "x": 4,
+      "y": 4,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 4,
-      "col": 5,
+      "x": 5,
+      "y": 4,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 4,
-      "col": 6,
+      "x": 6,
+      "y": 4,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 4,
-      "col": 7,
+      "x": 7,
+      "y": 4,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 5,
-      "col": 0,
+      "x": 0,
+      "y": 5,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 5,
-      "col": 1,
+      "x": 1,
+      "y": 5,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 5,
-      "col": 2,
+      "x": 2,
+      "y": 5,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 5,
-      "col": 3,
+      "x": 3,
+      "y": 5,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 5,
-      "col": 4,
+      "x": 4,
+      "y": 5,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 5,
-      "col": 5,
+      "x": 5,
+      "y": 5,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 5,
-      "col": 6,
+      "x": 6,
+      "y": 5,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 5,
-      "col": 7,
+      "x": 7,
+      "y": 5,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 6,
-      "col": 0,
+      "x": 0,
+      "y": 6,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 6,
-      "col": 1,
+      "x": 1,
+      "y": 6,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 6,
-      "col": 2,
+      "x": 2,
+      "y": 6,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 6,
-      "col": 3,
+      "x": 3,
+      "y": 6,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 6,
-      "col": 4,
+      "x": 4,
+      "y": 6,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 6,
-      "col": 5,
+      "x": 5,
+      "y": 6,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 6,
-      "col": 6,
+      "x": 6,
+      "y": 6,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 6,
-      "col": 7,
+      "x": 7,
+      "y": 6,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 7,
-      "col": 0,
+      "x": 0,
+      "y": 7,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 7,
-      "col": 1,
+      "x": 1,
+      "y": 7,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 7,
-      "col": 2,
+      "x": 2,
+      "y": 7,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 7,
-      "col": 3,
+      "x": 3,
+      "y": 7,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 7,
-      "col": 4,
+      "x": 4,
+      "y": 7,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 7,
-      "col": 5,
+      "x": 5,
+      "y": 7,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 7,
-      "col": 6,
+      "x": 6,
+      "y": 7,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 7,
-      "col": 7,
+      "x": 7,
+      "y": 7,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 8,
-      "col": 0,
+      "x": 0,
+      "y": 8,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 8,
-      "col": 1,
+      "x": 1,
+      "y": 8,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 8,
-      "col": 2,
+      "x": 2,
+      "y": 8,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 8,
-      "col": 3,
+      "x": 3,
+      "y": 8,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 8,
-      "col": 4,
+      "x": 4,
+      "y": 8,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 8,
-      "col": 5,
+      "x": 5,
+      "y": 8,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 8,
-      "col": 6,
+      "x": 6,
+      "y": 8,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 8,
-      "col": 7,
+      "x": 7,
+      "y": 8,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 9,
-      "col": 0,
+      "x": 0,
+      "y": 9,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 9,
-      "col": 1,
+      "x": 1,
+      "y": 9,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 9,
-      "col": 2,
+      "x": 2,
+      "y": 9,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 9,
-      "col": 3,
+      "x": 3,
+      "y": 9,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 9,
-      "col": 4,
+      "x": 4,
+      "y": 9,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 9,
-      "col": 5,
+      "x": 5,
+      "y": 9,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 9,
-      "col": 6,
+      "x": 6,
+      "y": 9,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 9,
-      "col": 7,
+      "x": 7,
+      "y": 9,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 10,
-      "col": 0,
+      "x": 0,
+      "y": 10,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 10,
-      "col": 1,
+      "x": 1,
+      "y": 10,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 10,
-      "col": 2,
+      "x": 2,
+      "y": 10,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 10,
-      "col": 3,
+      "x": 3,
+      "y": 10,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 10,
-      "col": 4,
+      "x": 4,
+      "y": 10,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 10,
-      "col": 5,
+      "x": 5,
+      "y": 10,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 10,
-      "col": 6,
+      "x": 6,
+      "y": 10,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 10,
-      "col": 7,
+      "x": 7,
+      "y": 10,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 11,
-      "col": 0,
+      "x": 0,
+      "y": 11,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 11,
-      "col": 1,
+      "x": 1,
+      "y": 11,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 11,
-      "col": 2,
+      "x": 2,
+      "y": 11,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 11,
-      "col": 3,
+      "x": 3,
+      "y": 11,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 11,
-      "col": 4,
+      "x": 4,
+      "y": 11,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 11,
-      "col": 5,
+      "x": 5,
+      "y": 11,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 11,
-      "col": 6,
+      "x": 6,
+      "y": 11,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 11,
-      "col": 7,
+      "x": 7,
+      "y": 11,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 12,
-      "col": 0,
+      "x": 0,
+      "y": 12,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 12,
-      "col": 1,
+      "x": 1,
+      "y": 12,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 12,
-      "col": 2,
+      "x": 2,
+      "y": 12,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 12,
-      "col": 3,
+      "x": 3,
+      "y": 12,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 12,
-      "col": 4,
+      "x": 4,
+      "y": 12,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 12,
-      "col": 5,
+      "x": 5,
+      "y": 12,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 12,
-      "col": 6,
+      "x": 6,
+      "y": 12,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 12,
-      "col": 7,
+      "x": 7,
+      "y": 12,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 13,
-      "col": 0,
+      "x": 0,
+      "y": 13,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 13,
-      "col": 1,
+      "x": 1,
+      "y": 13,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 13,
-      "col": 2,
+      "x": 2,
+      "y": 13,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 13,
-      "col": 3,
+      "x": 3,
+      "y": 13,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 13,
-      "col": 4,
+      "x": 4,
+      "y": 13,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 13,
-      "col": 5,
+      "x": 5,
+      "y": 13,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 13,
-      "col": 6,
+      "x": 6,
+      "y": 13,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 13,
-      "col": 7,
+      "x": 7,
+      "y": 13,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 14,
-      "col": 0,
+      "x": 0,
+      "y": 14,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 14,
-      "col": 1,
+      "x": 1,
+      "y": 14,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 14,
-      "col": 2,
+      "x": 2,
+      "y": 14,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 14,
-      "col": 3,
+      "x": 3,
+      "y": 14,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 14,
-      "col": 4,
+      "x": 4,
+      "y": 14,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 14,
-      "col": 5,
+      "x": 5,
+      "y": 14,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 14,
-      "col": 6,
+      "x": 6,
+      "y": 14,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 14,
-      "col": 7,
+      "x": 7,
+      "y": 14,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 15,
-      "col": 0,
+      "x": 0,
+      "y": 15,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 15,
-      "col": 1,
+      "x": 1,
+      "y": 15,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 15,
-      "col": 2,
+      "x": 2,
+      "y": 15,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 15,
-      "col": 3,
+      "x": 3,
+      "y": 15,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 15,
-      "col": 4,
+      "x": 4,
+      "y": 15,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 15,
-      "col": 5,
+      "x": 5,
+      "y": 15,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 15,
-      "col": 6,
+      "x": 6,
+      "y": 15,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 15,
-      "col": 7,
+      "x": 7,
+      "y": 15,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 16,
-      "col": 0,
+      "x": 0,
+      "y": 16,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 16,
-      "col": 1,
+      "x": 1,
+      "y": 16,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 16,
-      "col": 2,
+      "x": 2,
+      "y": 16,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 16,
-      "col": 3,
+      "x": 3,
+      "y": 16,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 16,
-      "col": 4,
+      "x": 4,
+      "y": 16,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 16,
-      "col": 5,
+      "x": 5,
+      "y": 16,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 16,
-      "col": 6,
+      "x": 6,
+      "y": 16,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 16,
-      "col": 7,
+      "x": 7,
+      "y": 16,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 17,
-      "col": 0,
+      "x": 0,
+      "y": 17,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 17,
-      "col": 1,
+      "x": 1,
+      "y": 17,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 17,
-      "col": 2,
+      "x": 2,
+      "y": 17,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 17,
-      "col": 3,
+      "x": 3,
+      "y": 17,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 17,
-      "col": 4,
+      "x": 4,
+      "y": 17,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 17,
-      "col": 5,
+      "x": 5,
+      "y": 17,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 17,
-      "col": 6,
+      "x": 6,
+      "y": 17,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 17,
-      "col": 7,
+      "x": 7,
+      "y": 17,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 18,
-      "col": 0,
+      "x": 0,
+      "y": 18,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 18,
-      "col": 1,
+      "x": 1,
+      "y": 18,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 18,
-      "col": 2,
+      "x": 2,
+      "y": 18,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 18,
-      "col": 3,
+      "x": 3,
+      "y": 18,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 18,
-      "col": 4,
+      "x": 4,
+      "y": 18,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 18,
-      "col": 5,
+      "x": 5,
+      "y": 18,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 18,
-      "col": 6,
+      "x": 6,
+      "y": 18,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 18,
-      "col": 7,
+      "x": 7,
+      "y": 18,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 19,
-      "col": 0,
+      "x": 0,
+      "y": 19,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 19,
-      "col": 1,
+      "x": 1,
+      "y": 19,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 19,
-      "col": 2,
+      "x": 2,
+      "y": 19,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 19,
-      "col": 3,
+      "x": 3,
+      "y": 19,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 19,
-      "col": 4,
+      "x": 4,
+      "y": 19,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 19,
-      "col": 5,
+      "x": 5,
+      "y": 19,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 19,
-      "col": 6,
+      "x": 6,
+      "y": 19,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 19,
-      "col": 7,
+      "x": 7,
+      "y": 19,
       "isActive": true,
       "timeAtLastScan": -50000
     },
     {
-      "row": 20,
-      "col": 0,
+      "x": 0,
+      "y": 20,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 20,
-      "col": 1,
+      "x": 1,
+      "y": 20,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 20,
-      "col": 2,
+      "x": 2,
+      "y": 20,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 20,
-      "col": 3,
+      "x": 3,
+      "y": 20,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 20,
-      "col": 4,
+      "x": 4,
+      "y": 20,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 20,
-      "col": 5,
+      "x": 5,
+      "y": 20,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 20,
-      "col": 6,
+      "x": 6,
+      "y": 20,
       "isActive": false,
       "timeAtLastScan": -50000
     },
     {
-      "row": 20,
-      "col": 7,
+      "x": 7,
+      "y": 20,
       "isActive": false,
       "timeAtLastScan": -50000
     }
@@ -1018,19 +1018,15 @@
     {
       "id": "Drone 1",
       "startPosition": {
-        "row": 0,
-        "col": 0
+        "x": 0,
+        "y": 0
       },
       "speed": 1,
       "operations": [
         "SOUTH",
         "SCAN",
         "SOUTH",
-        "SCAN",
-        "SOUTH",
-        "SOUTH",
-        "SOUTH",
-        "SOUTH"
+        "SCAN"
       ]
     }
   ]

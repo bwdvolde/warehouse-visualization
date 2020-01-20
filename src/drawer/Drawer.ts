@@ -71,8 +71,8 @@ export default class Drawer {
         const elements = this.selectOrCreateElements("cell", "rect", storageCells);
 
         elements
-            .attr("x", cell => this.mapper.calculateXCell(cell.col))
-            .attr("y", cell => this.mapper.calculateYCell(cell.row))
+            .attr("x", cell => this.mapper.calculateXCell(cell.x))
+            .attr("y", cell => this.mapper.calculateYCell(cell.y))
             .attr("width", this.mapper.cellWidth)
             .attr("height", this.mapper.cellHeight)
             .style("fill", cell => this.calculateCellColor(cell, time))
@@ -84,8 +84,8 @@ export default class Drawer {
         const elements = this.selectOrCreateElements("cell-node", "circle", cells);
 
         elements
-            .attr("cx", cell => this.mapper.calculateXNode(cell.col))
-            .attr("cy", cell => this.mapper.calculateYNode(cell.row))
+            .attr("cx", cell => this.mapper.calculateXNode(cell.x))
+            .attr("cy", cell => this.mapper.calculateYNode(cell.y))
             .attr("r", this.mapper.nodeR)
             .style("fill", cell => this.calculateCellColor(cell, time));
     }

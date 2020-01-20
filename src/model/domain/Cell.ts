@@ -1,12 +1,13 @@
 export class Cell {
-    row: number;
-    col: number;
+    x: number;
+    y: number;
     isActive: boolean;
     timeAtLastScan: number;
 
-    constructor(row: number, col: number, isActive: boolean, timeAtLastScan: number) {
-        this.row = row;
-        this.col = col;
+
+    constructor(x: number, y: number, isActive: boolean, timeAtLastScan: number) {
+        this.x = x;
+        this.y = y;
         this.isActive = isActive;
         this.timeAtLastScan = timeAtLastScan;
     }

@@ -8,10 +8,10 @@ rows = blocks * (cells_per_block + 1) + 1
 cols = aisles * 2
 
 settings = Settings(aisles, blocks, cells_per_block)
-cells = [Cell(row, col, row % (cells_per_block + 1) != 0, -50000) for row in range(rows) for col in range(cols)]
+cells = [Cell(x, y, y % (cells_per_block + 1) != 0, -50000) for y in range(rows) for x in range(cols)]
 
 drones = [
-    Drone(id="Drone 1", row=0, col=0, speed=1, operations=["SOUTH", "SOUTH", "SOUTH", "SOUTH", "SOUTH", "SOUTH"])
+    Drone(id="Drone 1", x=0, y=0, speed=1, operations=["SOUTH", "SCAN", "SOUTH", "SCAN"])
 ]
 
 model = Model(settings, cells, drones)

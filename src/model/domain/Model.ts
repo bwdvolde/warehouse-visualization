@@ -17,23 +17,36 @@ export class Model {
 
     private buildEdges(grid: Cell[][]) {
         this.edges = [];
-        for (let y = 0; y < grid.length - 1; y++) {
+        for (let y = 0; y < grid.length; y++) {
             for (let x = 0; x < grid[y].length; x++) {
-                this.pushEdgeDown(x, y);
+                this.pushEdgeDownIfExists(x, y);
                 this.pushEdgeRightIfExists(x, y);
             }
         }
     }
 
     private pushEdgeRightIfExists(x: number, y: number) {
+        const hasRightNeighbor = x < this.nCols - 1 && (x % 2 == 0 || !this.cells[y][x + 1].isActive);
+        if (!hasRightNeighbor) {
+            return;
+        }
+
+        this.pushEdgeRight(x, y);
+    }
+
+    private pushEdgeRight(x: number, y: number) {
         const currentPosition = new Position(x, y);
         const rightPosition = new Position(x + 1, y);
         const edgeRight = new Edge(currentPosition, rightPosition);
+        this.edges.push(edgeRight);
+    }
 
-        const hasRightNeighbor = x < this.nCols - 1 && (x % 2 == 0 || !this.cells[y][x + 1].isActive);
-        if (hasRightNeighbor) {
-            this.edges.push(edgeRight);
+    private pushEdgeDownIfExists(x: number, y: number) {
+        if (y >= this.nRows - 1) {
+            return;
         }
+
+        this.pushEdgeDown(x, y);
     }
 
     private pushEdgeDown(x: number, y: number) {
