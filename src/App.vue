@@ -16,9 +16,9 @@
     import TimeDisplay from "@/component/TimeDisplay.vue";
     import Drawer from "@/drawer/Drawer";
 
-    import { NAMESPACE_TIMER, START_TIMER, TIME } from "@/store/modules/timer";
+    import { NAMESPACE_TIMER, SET_MAX_TIME, START_TIMER, TIME } from "@/store/modules/timer";
     import ActionExecutor from "@/model/action/ActionExecutor";
-    import { mapActions, mapState } from "vuex";
+    import { mapActions, mapMutations, mapState } from "vuex";
     import { generateActions } from "@/model/action/generateActions";
     import { getModel } from "@/service/modelService";
 
@@ -45,9 +45,12 @@
             this.createExecutors();
             this.drawer = new Drawer("#svg");
 
+            const maxTime = this.model.calculateExecutionTime();
+            this.setMaxTime(maxTime);
             this.startTimer();
         },
         methods: {
+            ...mapMutations(NAMESPACE_TIMER, [SET_MAX_TIME]),
             ...mapActions(NAMESPACE_TIMER, [START_TIMER]),
             createExecutors: function () {
                 this.executors = this.model.drones

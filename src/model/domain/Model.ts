@@ -56,6 +56,11 @@ export class Model {
         this.edges.push(edgeDown);
     }
 
+    calculateExecutionTime() {
+        const maxNumberOfOperations = Math.max(...this.drones.map(drone => drone.operations.length));
+        return 1000 * maxNumberOfOperations;
+    }
+
     get nAisles() {
         return Math.ceil(this.cells[0].length / 2);
     }

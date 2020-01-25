@@ -9,7 +9,7 @@
         <span>{{timeSeconds}}</span>
         <VueSlider
                 style="padding-left: 1rem; width:100%"
-                v-model="timeSeconds" :max="100"
+                v-model="timeSeconds" :max="maxTimeSeconds"
                 @drag-start="onDragStart" @drag-end="onDragEnd"
         />
     </div>
@@ -20,7 +20,7 @@
     import "vue-slider-component/theme/default.css";
 
     import {mapMutations, mapState} from "vuex";
-    import {NAMESPACE_TIMER, RESUME, STOP, SET_TIME, TIME, RUNNING} from "@/store/modules/timer";
+    import {NAMESPACE_TIMER, RESUME, STOP, SET_TIME, TIME, RUNNING, MAX_TIME} from "@/store/modules/timer";
 
     export default {
         components: { VueSlider },
@@ -30,7 +30,7 @@
             };
         },
         computed: {
-            ...mapState(NAMESPACE_TIMER, [TIME, RUNNING]),
+            ...mapState(NAMESPACE_TIMER, [TIME, MAX_TIME, RUNNING]),
             timeSeconds: {
                 get(): Number {
                     const timeMilliseconds = this.time;
@@ -40,6 +40,9 @@
                     const timeMilliseconds = newValue * 1000;
                     this.setTime(timeMilliseconds);
                 }
+            },
+            maxTimeSeconds() {
+                return this.maxTime / 1000;
             }
         },
         methods: {
