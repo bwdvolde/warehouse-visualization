@@ -11,4 +11,8 @@ export class ModelSelection {
     clearSelection() {
         this.cell = null;
     }
+
+    hasSelection() {
+        return this.cell === null;
+    }
 }

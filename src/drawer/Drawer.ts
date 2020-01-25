@@ -47,8 +47,8 @@ export default class Drawer {
         const elements = this.selectOrCreateElements("drone", "circle", drones);
 
         elements
-            .attr("cx", d => this.mapper.calculateXNode((d.positionAt(this.time).x)))
-            .attr("cy", d => this.mapper.calculateYNode((d.positionAt(this.time).y)))
+            .attr("cx", (drone: Drone) => this.mapper.calculateXNode((drone.positionAt(this.time).x)))
+            .attr("cy", (drone: Drone) => this.mapper.calculateYNode((drone.positionAt(this.time).y)))
             .attr("r", this.mapper.nodeR);
     }
 
@@ -57,10 +57,10 @@ export default class Drawer {
         const elements = this.selectOrCreateElements("edge", "line", edges);
 
         elements
-            .attr("x1", edge => this.mapper.calculateXNode(edge.a.x))
-            .attr("y1", edge => this.mapper.calculateYNode(edge.a.y))
-            .attr("x2", edge => this.mapper.calculateXNode(edge.b.x))
-            .attr("y2", edge => this.mapper.calculateYNode(edge.b.y));
+            .attr("x1", (edge: Edge) => this.mapper.calculateXNode(edge.a.x))
+            .attr("y1", (edge: Edge) => this.mapper.calculateYNode(edge.a.y))
+            .attr("x2", (edge: Edge) => this.mapper.calculateXNode(edge.b.x))
+            .attr("y2", (edge: Edge) => this.mapper.calculateYNode(edge.b.y));
     }
 
     private drawCells() {
