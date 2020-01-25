@@ -82,7 +82,8 @@ export default class Drawer {
             .attr("y", (cell: Cell) => this.mapper.calculateYCell(cell.y))
             .attr("width", this.mapper.cellWidth)
             .attr("height", this.mapper.cellHeight)
-            .style("fill", cell => this.calculateCellColor(cell))
+            .style("fill", (cell: Cell) => this.calculateCellColor(cell))
+            .classed("cell--selected", (cell: Cell) => this.model.selection.cell === cell)
             .on("mouseover", (cell: Cell) => selection.cell = cell)
             .on("mouseleave", () => selection.clearSelection());
     }

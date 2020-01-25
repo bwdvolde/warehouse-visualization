@@ -13,6 +13,6 @@ export class ModelSelection {
     }
 
     hasSelection() {
-        return this.cell === null;
+        return this.cell !== null;
     }
 }

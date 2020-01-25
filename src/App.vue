@@ -2,7 +2,10 @@
     <div id="app" class="wrapper">
         <div class="row">
             <div class="col-12 col-sm-9">
-                <svg id="svg" class="warehouse"/>
+                <svg
+                        id="svg"
+                        class="warehouse"
+                        :class="{'warehouse--selection': model && model.selection.hasSelection()}"/>
                 <TimeDisplay/>
             </div>
             <div class="col-12 col-sm-3">
@@ -71,13 +74,17 @@
         width: 100%;
     }
 
-    .warehouse--selection-mode * {
-        opacity: 0.5;
+    .warehouse--selection * {
+        opacity: 0.7;
     }
 
     .cell {
         stroke-width: 0.5px;
         stroke: black;
+    }
+
+    .cell--selected {
+        opacity: 1;
     }
 
     .drone {
