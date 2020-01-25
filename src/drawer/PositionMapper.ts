@@ -1,5 +1,4 @@
 import {Model} from "@/model/domain/Model";
-import {HEIGHT} from "@/drawer/constants";
 import {getAisle} from "@/model/domain/util";
 
 export class PositionMapper {
@@ -7,9 +6,9 @@ export class PositionMapper {
     cellHeight: number;
     nodeR: number;
 
-    constructor(model: Model, containerWidth: number) {
+    constructor(model: Model, containerHeight: number, containerWidth: number) {
         this.cellWidth = containerWidth / (3 * model.nAisles);
-        this.cellHeight = HEIGHT / model.nRows;
+        this.cellHeight = containerHeight / model.nRows;
         this.nodeR = Math.min(this.cellHeight / 4, this.cellWidth / 8);
     }
 

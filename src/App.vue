@@ -2,7 +2,7 @@
     <div id="app" class="wrapper">
         <div class="row">
             <div class="col-12 col-sm-9">
-                <svg id="svg" style="width: 100%"/>
+                <svg id="svg" class="warehouse"/>
                 <TimeDisplay/>
             </div>
             <div class="col-12 col-sm-3">
@@ -64,5 +64,29 @@
 <style>
     .wrapper {
         margin: 2rem;
+    }
+
+    .warehouse {
+        height: 600px;
+        width: 100%;
+    }
+
+    .warehouse--selection-mode * {
+        opacity: 0.5;
+    }
+
+    .cell {
+        stroke-width: 0.5px;
+        stroke: black;
+    }
+
+    .drone {
+        fill: white;
+        stroke: black;
+    }
+
+    .edge {
+        stroke: #999;
+        stroke-opacity: 1.0;
     }
 </style>

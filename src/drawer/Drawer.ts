@@ -1,5 +1,4 @@
 import * as d3 from "d3";
-import {HEIGHT} from "@/drawer/constants";
 import Drone from "@/model/domain/Drone";
 import {Model} from "@/model/domain/Model";
 import {Cell} from "@/model/domain/Cell";
@@ -19,8 +18,7 @@ export default class Drawer {
 
     private initContainer(svgId) {
         this.container = d3
-            .selectAll(svgId)
-            .attr("height", HEIGHT);
+            .selectAll(svgId);
     }
 
     draw(model: Model, time: number) {
@@ -34,7 +32,8 @@ export default class Drawer {
 
     private createPositionMapper(model: Model) {
         const containerWidth = $(this.svgId).width();
-        this.mapper = new PositionMapper(model, containerWidth);
+        const containerHeight = $(this.svgId).height();
+        this.mapper = new PositionMapper(model, containerHeight, containerWidth);
     }
 
     private drawDrones(drones: Drone[], time: number) {
@@ -43,8 +42,7 @@ export default class Drawer {
         elements
             .attr("cx", d => this.mapper.calculateXNode((d.positionAt(time).x)))
             .attr("cy", d => this.mapper.calculateYNode((d.positionAt(time).y)))
-            .attr("r", this.mapper.nodeR)
-            .style("fill", "gray");
+            .attr("r", this.mapper.nodeR);
     }
 
     private drawEdges(edges: Edge[]) {
@@ -54,9 +52,7 @@ export default class Drawer {
             .attr("x1", edge => this.mapper.calculateXNode(edge.a.x))
             .attr("y1", edge => this.mapper.calculateYNode(edge.a.y))
             .attr("x2", edge => this.mapper.calculateXNode(edge.b.x))
-            .attr("y2", edge => this.mapper.calculateYNode(edge.b.y))
-            .attr("stroke", "#999")
-            .attr("stroke-opacity", 1.0);
+            .attr("y2", edge => this.mapper.calculateYNode(edge.b.y));
     }
 
     private drawCells(cells: Cell[][], time: number) {
@@ -75,9 +71,7 @@ export default class Drawer {
             .attr("y", cell => this.mapper.calculateYCell(cell.y))
             .attr("width", this.mapper.cellWidth)
             .attr("height", this.mapper.cellHeight)
-            .style("fill", cell => this.calculateCellColor(cell, time))
-            .style("stroke-width", "0.5px")
-            .style("stroke", "black");
+            .style("fill", cell => this.calculateCellColor(cell, time));
     }
 
     private drawCellNodes(cells: Cell[], time: number) {
@@ -91,8 +85,11 @@ export default class Drawer {
     }
 
     private calculateCellColor(cell, time: number) {
-        let maxValue = 25000;
+        if (!cell.isActive) {
+            return "gray";
+        }
 
+        let maxValue = 25000;
         const color = d3.scaleLinear()
             .domain([0, maxValue / 2, maxValue])
             // @ts-ignore
