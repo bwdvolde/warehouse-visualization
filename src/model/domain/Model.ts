@@ -2,17 +2,21 @@ import {Cell} from "@/model/domain/Cell";
 import Drone from "@/model/domain/Drone";
 import {Edge} from "@/model/domain/Edge";
 import Position from "@/model/domain/Position";
+import {ModelSelection} from "@/model/domain/ModelSelection";
 
 export class Model {
     drones: Drone[];
     cells: Cell[][];
     edges: Edge[];
 
+    selection: ModelSelection;
+
 
     constructor(drones: Drone[], cells: Cell[][]) {
         this.cells = cells;
         this.drones = drones;
         this.buildEdges(this.cells);
+        this.selection = new ModelSelection();
     }
 
     private buildEdges(grid: Cell[][]) {

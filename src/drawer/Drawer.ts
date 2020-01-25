@@ -11,6 +11,9 @@ export default class Drawer {
     private mapper: PositionMapper;
     private svgId: number;
 
+    private model: Model;
+    private time: number;
+
     constructor(svgId) {
         this.svgId = svgId;
         this.initContainer(svgId);
@@ -22,30 +25,35 @@ export default class Drawer {
     }
 
     draw(model: Model, time: number) {
-        this.createPositionMapper(model);
+        this.model = model;
+        this.time = time;
+
+        this.createPositionMapper();
 
         // Ordering is important here because draw order represents stacking order
-        this.drawEdges(model.edges);
-        this.drawCells(model.cells, time);
-        this.drawDrones(model.drones, time);
+        this.drawEdges();
+        this.drawCells();
+        this.drawDrones();
     }
 
-    private createPositionMapper(model: Model) {
+    private createPositionMapper() {
         const containerWidth = $(this.svgId).width();
         const containerHeight = $(this.svgId).height();
-        this.mapper = new PositionMapper(model, containerHeight, containerWidth);
+        this.mapper = new PositionMapper(this.model, containerHeight, containerWidth);
     }
 
-    private drawDrones(drones: Drone[], time: number) {
+    private drawDrones() {
+        const drones = this.model.drones;
         const elements = this.selectOrCreateElements("drone", "circle", drones);
 
         elements
-            .attr("cx", d => this.mapper.calculateXNode((d.positionAt(time).x)))
-            .attr("cy", d => this.mapper.calculateYNode((d.positionAt(time).y)))
+            .attr("cx", d => this.mapper.calculateXNode((d.positionAt(this.time).x)))
+            .attr("cy", d => this.mapper.calculateYNode((d.positionAt(this.time).y)))
             .attr("r", this.mapper.nodeR);
     }
 
-    private drawEdges(edges: Edge[]) {
+    private drawEdges() {
+        const edges = this.model.edges;
         const elements = this.selectOrCreateElements("edge", "line", edges);
 
         elements
@@ -55,36 +63,41 @@ export default class Drawer {
             .attr("y2", edge => this.mapper.calculateYNode(edge.b.y));
     }
 
-    private drawCells(cells: Cell[][], time: number) {
+    private drawCells() {
+        const cells = this.model.cells;
         const flattenedCells = cells.flat();
         const storageCells = flattenedCells.filter(cell => cell.isActive);
 
-        this.drawStorageCells(storageCells, time);
-        this.drawCellNodes(flattenedCells, time);
+        this.drawStorageCells(storageCells);
+        this.drawCellNodes(flattenedCells);
     }
 
-    private drawStorageCells(storageCells: Cell[], time: number) {
+    private drawStorageCells(storageCells: Cell[]) {
         const elements = this.selectOrCreateElements("cell", "rect", storageCells);
 
+        const selection = this.model.selection;
+
         elements
-            .attr("x", cell => this.mapper.calculateXCell(cell.x))
-            .attr("y", cell => this.mapper.calculateYCell(cell.y))
+            .attr("x", (cell: Cell) => this.mapper.calculateXCell(cell.x))
+            .attr("y", (cell: Cell) => this.mapper.calculateYCell(cell.y))
             .attr("width", this.mapper.cellWidth)
             .attr("height", this.mapper.cellHeight)
-            .style("fill", cell => this.calculateCellColor(cell, time));
+            .style("fill", cell => this.calculateCellColor(cell))
+            .on("mouseover", (cell: Cell) => selection.cell = cell)
+            .on("mouseleave", () => selection.clearSelection());
     }
 
-    private drawCellNodes(cells: Cell[], time: number) {
+    private drawCellNodes(cells: Cell[]) {
         const elements = this.selectOrCreateElements("cell-node", "circle", cells);
 
         elements
-            .attr("cx", cell => this.mapper.calculateXNode(cell.x))
-            .attr("cy", cell => this.mapper.calculateYNode(cell.y))
+            .attr("cx", (cell: Cell) => this.mapper.calculateXNode(cell.x))
+            .attr("cy", (cell: Cell) => this.mapper.calculateYNode(cell.y))
             .attr("r", this.mapper.nodeR)
-            .style("fill", cell => this.calculateCellColor(cell, time));
+            .style("fill", (cell: Cell) => this.calculateCellColor(cell));
     }
 
-    private calculateCellColor(cell, time: number) {
+    private calculateCellColor(cell) {
         if (!cell.isActive) {
             return "gray";
         }
@@ -95,7 +108,7 @@ export default class Drawer {
             // @ts-ignore
             .range(["green", "yellow", "red"]);
 
-        return color(cell.timeSinceLastScanAt(time));
+        return color(cell.timeSinceLastScanAt(this.time));
     }
 
     private selectOrCreateElements(classToSelect: string, elementToAppend: string, data: any[]) {
