@@ -52,3 +52,10 @@ class Cell:
 
     def json(self):
         return self.__dict__
+
+
+NORTH = "NORTH"
+SOUTH = "SOUTH"
+WEST = "WEST"
+EAST = "EAST"
+SCAN = "SCAN"
