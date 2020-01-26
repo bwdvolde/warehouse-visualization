@@ -1,5 +1,9 @@
 import {Cell} from "@/model/domain/Cell";
 
+export enum SelectionMode {
+    NONE, CELL
+}
+
 export class ModelSelection {
 
     cell: Cell;
@@ -14,5 +18,12 @@ export class ModelSelection {
 
     hasSelection() {
         return this.cell !== null;
+    }
+
+    get mode() {
+        if (this.cell) {
+            return SelectionMode.CELL;
+        }
+        return SelectionMode.NONE;
     }
 }
