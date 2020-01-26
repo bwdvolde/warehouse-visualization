@@ -1,14 +1,15 @@
 <template>
     <div id="app" class="wrapper">
         <div class="row">
-            <div class="col-12 col-sm-9">
+            <div class="col-12 col-sm-9 mb-2">
                 <svg
                         id="svg"
-                        class="warehouse"/>
+                        class="warehouse"
+                />
                 <TimeDisplay/>
             </div>
             <div class="col-12 col-sm-3">
-                <h1>Drone 1</h1>
+                <Detail/>
             </div>
         </div>
     </div>
@@ -16,6 +17,7 @@
 
 <script>
     import TimeDisplay from "@/component/TimeDisplay.vue";
+    import Detail from "@/component/Detail.vue";
     import Drawer from "@/drawer/Drawer";
 
     import { NAMESPACE_TIMER, SET_MAX_TIME, START_TIMER, TIME } from "@/store/modules/timer";
@@ -25,7 +27,7 @@
     import { getModel } from "@/service/modelService";
 
     export default {
-        components: { TimeDisplay },
+        components: { TimeDisplay, Detail },
         data() {
             return {
                 model: null,
@@ -69,8 +71,14 @@
     }
 
     .warehouse {
-        height: 600px;
+        height: 200px;
         width: 100%;
+    }
+
+    @media screen and (min-width: 576px) {
+        .warehouse {
+            height: 600px;
+        }
     }
 
     .cell {
