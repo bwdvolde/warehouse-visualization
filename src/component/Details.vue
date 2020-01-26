@@ -26,7 +26,12 @@
             </template>
 
             <template v-if="activeTab === TAB_DETAIL">
-                <h5 class="text-center">Storage cell</h5>
+                <template v-if="!selectedCell">
+                    <p>Click on a storage cell to see more information about that cell.</p>
+                </template>
+                <template v-else>
+                    <CellDetails :cell="selectedCell"/>
+                </template>
             </template>
         </div>
     </div>
@@ -35,12 +40,13 @@
 <script>
     import { Model } from "@/model/domain/Model";
     import GeneralDetails from "@/component/GeneralDetails";
+    import CellDetails from "@/component/CellDetails";
 
     const TAB_GENERAL = "TAB_GENERAL";
     const TAB_DETAIL = "TAB_DETAIL";
 
     export default {
-        components: { GeneralDetails },
+        components: { CellDetails, GeneralDetails },
         props: {
             model: {
                 type: Model,
@@ -54,8 +60,18 @@
             };
         },
         computed: {
-            selectionMode() {
-                return this.model.selection.mode;
+            selection() {
+                return this.model.selection;
+            },
+            selectedCell() {
+                return this.selection.cell;
+            }
+        },
+        watch: {
+            selectedCell(newCell) {
+                if (newCell) {
+                    this.activeTab = TAB_DETAIL;
+                }
             }
         }
     };

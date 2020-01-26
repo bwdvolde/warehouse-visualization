@@ -84,25 +84,22 @@ export default class Drawer {
             .attr("width", this.mapper.cellWidth)
             .attr("height", this.mapper.cellHeight)
             .style("fill", (cell: Cell) => this.calculateCellColor(cell))
-            .on("mouseover", this.makeOnMouseOverFunction(selection))
-            .on("mouseleave", this.makeOnMouseLeaveFunction(selection));
+            .on("mouseover", this.makeOnMouseOverFunction())
+            .on("mouseleave", this.makeOnMouseLeaveFunction())
+            .on("click", (cell: Cell) => selection.cell = cell);
     }
 
-    private makeOnMouseOverFunction(selection: ModelSelection) {
+    private makeOnMouseOverFunction() {
         // We have to return a function here instead of doing the stuff ourselves because of this scoping rules
-        return function (cell: Cell) {
-            selection.cell = cell;
-
+        return function () {
             d3.select(this)
                 .classed("cell--hover", true);
         };
     }
 
-    private makeOnMouseLeaveFunction(selection: ModelSelection) {
+    private makeOnMouseLeaveFunction() {
         // We have to return a function here instead of doing the stuff ourselves because of this scoping rules
         return function () {
-            selection.clearSelection();
-
             d3.select(this)
                 .classed("cell--hover", false);
         };
