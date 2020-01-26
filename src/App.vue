@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="wrapper">
+    <div v-if="model !== null" id="app" class="wrapper">
         <div class="row">
             <div class="col-12 col-sm-9 mb-2">
                 <svg
@@ -9,15 +9,17 @@
                 <TimeDisplay/>
             </div>
             <div class="col-12 col-sm-3">
-                <Detail/>
+                <Details :model="model"/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import Vue from "vue";
+
     import TimeDisplay from "@/component/TimeDisplay.vue";
-    import Detail from "@/component/Detail.vue";
+    import Details from "@/component/Details.vue";
     import Drawer from "@/drawer/Drawer";
 
     import { NAMESPACE_TIMER, SET_MAX_TIME, START_TIMER, TIME } from "@/store/modules/timer";
@@ -27,7 +29,7 @@
     import { getModel } from "@/service/modelService";
 
     export default {
-        components: { TimeDisplay, Detail },
+        components: { TimeDisplay, Details },
         data() {
             return {
                 model: null,
@@ -46,12 +48,16 @@
         },
         async mounted() {
             this.model = await getModel("default");
-            this.createExecutors();
-            this.drawer = new Drawer("#svg");
 
-            const maxTime = this.model.calculateExecutionTime();
-            this.setMaxTime(maxTime);
-            this.startTimer();
+            // Drawer has to be created in next tick because svg element has not been created in the dom yet
+            Vue.nextTick(() => {
+                this.createExecutors();
+                this.drawer = new Drawer("#svg");
+
+                const maxTime = this.model.calculateExecutionTime();
+                this.setMaxTime(maxTime);
+                this.startTimer();
+            });
         },
         methods: {
             ...mapMutations(NAMESPACE_TIMER, [SET_MAX_TIME]),
