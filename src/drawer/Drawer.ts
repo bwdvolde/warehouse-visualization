@@ -5,6 +5,7 @@ import {Cell} from "@/model/domain/Cell";
 import {Edge} from "@/model/domain/Edge";
 import * as $ from "jquery";
 import {PositionMapper} from "@/drawer/PositionMapper";
+import {ModelSelection} from "@/model/domain/ModelSelection";
 
 export default class Drawer {
     private container: any;
@@ -83,9 +84,28 @@ export default class Drawer {
             .attr("width", this.mapper.cellWidth)
             .attr("height", this.mapper.cellHeight)
             .style("fill", (cell: Cell) => this.calculateCellColor(cell))
-            .classed("cell--selected", (cell: Cell) => this.model.selection.cell === cell)
-            .on("mouseover", (cell: Cell) => selection.cell = cell)
-            .on("mouseleave", () => selection.clearSelection());
+            .on("mouseover", this.makeOnMouseOverFunction(selection))
+            .on("mouseleave", this.makeOnMouseLeaveFunction(selection));
+    }
+
+    private makeOnMouseOverFunction(selection: ModelSelection) {
+        // We have to return a function here instead of doing the stuff ourselves because of this scoping rules
+        return function (cell: Cell) {
+            selection.cell = cell;
+
+            d3.select(this)
+                .classed("cell--hover", true);
+        };
+    }
+
+    private makeOnMouseLeaveFunction(selection: ModelSelection) {
+        // We have to return a function here instead of doing the stuff ourselves because of this scoping rules
+        return function () {
+            selection.clearSelection();
+
+            d3.select(this)
+                .classed("cell--hover", false);
+        };
     }
 
     private drawCellNodes(cells: Cell[]) {

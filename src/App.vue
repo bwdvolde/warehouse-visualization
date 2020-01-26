@@ -4,8 +4,7 @@
             <div class="col-12 col-sm-9">
                 <svg
                         id="svg"
-                        class="warehouse"
-                        :class="{'warehouse--selection': model && model.selection.hasSelection()}"/>
+                        class="warehouse"/>
                 <TimeDisplay/>
             </div>
             <div class="col-12 col-sm-3">
@@ -40,7 +39,7 @@
         watch: {
             time(newTime) {
                 this.executors.forEach(executor => executor.moveStateTo(newTime));
-                this.drawer.draw(this.model, newTime);
+                this.drawer.draw(this.model, this.time);
             }
         },
         async mounted() {
@@ -74,17 +73,13 @@
         width: 100%;
     }
 
-    .warehouse--selection * {
-        opacity: 0.7;
-    }
-
     .cell {
         stroke-width: 0.5px;
         stroke: black;
     }
 
-    .cell--selected {
-        opacity: 1;
+    .cell--hover {
+        opacity: 0.75;
     }
 
     .drone {
