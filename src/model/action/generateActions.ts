@@ -26,7 +26,7 @@ export function generateActions(drone: Drone, cells: Cell[][]): Action[] {
 
     function pushScanAction() {
         const cell = cells[position.y][position.x];
-        const scanAction = new ScanAction(startTime, cell);
+        const scanAction = new ScanAction(startTime, cell, drone);
         actions.push(scanAction);
         startTime += scanAction.duration;
     }

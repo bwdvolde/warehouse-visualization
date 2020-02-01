@@ -5,7 +5,6 @@ import {Cell} from "@/model/domain/Cell";
 import {Edge} from "@/model/domain/Edge";
 import * as $ from "jquery";
 import {PositionMapper} from "@/drawer/PositionMapper";
-import {ModelSelection} from "@/model/domain/ModelSelection";
 
 export default class Drawer {
     private container: any;

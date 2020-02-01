@@ -8,8 +8,25 @@
                 <td>{{"(" + cell.x + ", " + cell.y + ")"}}</td>
             </tr>
             <tr>
-                <td>Seconds since last scan</td>
-                <td>{{lastTimeScannedSeconds + 's'}}</td>
+                <td>Time since last scan</td>
+                <td>{{lastTimeScannedSeconds}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table mt-4">
+            <thead>
+            <tr>
+                <th>Drone</th>
+                <th>On</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+                    v-for="visit in cell.visits"
+                    :key="visit.on"
+            >
+                <td>{{visit.by.id}}</td>
+                <td>{{visit.on / 1000}}</td>
             </tr>
             </tbody>
         </table>
