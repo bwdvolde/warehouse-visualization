@@ -49,7 +49,7 @@
                 this.setupAndStartTimer();
 
                 this.drawer = new Drawer("#svg");
-                this.startDrawing();
+                this.startRenderLoop();
             });
         },
         methods: {
@@ -65,7 +65,7 @@
                 this.setMaxTime(maxTime);
                 this.startTimer();
             },
-            startDrawing() {
+            startRenderLoop() {
                 setInterval(() => {
                     this.executors.forEach(executor => executor.moveStateTo(this.time));
                     this.drawer.draw(this.model, this.time);
@@ -98,6 +98,10 @@
 
     .cell--hover {
         opacity: 0.75;
+    }
+
+    .cell--selected {
+        opacity: 0.60;
     }
 
     .drone {
