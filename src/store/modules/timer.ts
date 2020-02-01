@@ -1,5 +1,5 @@
 const FRAMES_PER_SECOND = 30;
-const TIME_PER_FRAME = 1000 / FRAMES_PER_SECOND;
+export const TIME_PER_FRAME = 1000 / FRAMES_PER_SECOND;
 const SPEEDUP = 3.0;
 
 export const NAMESPACE_TIMER = "timer";

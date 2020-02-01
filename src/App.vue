@@ -22,7 +22,7 @@
     import Details from "@/component/Details.vue";
     import Drawer from "@/drawer/Drawer";
 
-    import { NAMESPACE_TIMER, SET_MAX_TIME, START_TIMER, TIME } from "@/store/modules/timer";
+    import { NAMESPACE_TIMER, SET_MAX_TIME, START_TIMER, TIME, TIME_PER_FRAME } from "@/store/modules/timer";
     import ActionExecutor from "@/model/action/ActionExecutor";
     import { mapActions, mapMutations, mapState } from "vuex";
     import { generateActions } from "@/model/action/generateActions";
@@ -40,21 +40,16 @@
         computed: {
             ...mapState(NAMESPACE_TIMER, [TIME])
         },
-        watch: {
-            time(newTime) {
-                this.executors.forEach(executor => executor.moveStateTo(newTime));
-                this.drawer.draw(this.model, this.time);
-            }
-        },
         async mounted() {
             this.model = await getModel("default");
 
             // Drawer has to be created in next tick because svg element has not been created in the dom yet
             Vue.nextTick(() => {
                 this.createExecutors();
-                this.drawer = new Drawer("#svg");
-
                 this.setupAndStartTimer();
+
+                this.drawer = new Drawer("#svg");
+                this.startDrawing();
             });
         },
         methods: {
@@ -69,6 +64,12 @@
                 const maxTime = this.model.calculateExecutionTime();
                 this.setMaxTime(maxTime);
                 this.startTimer();
+            },
+            startDrawing() {
+                setInterval(() => {
+                    this.executors.forEach(executor => executor.moveStateTo(this.time));
+                    this.drawer.draw(this.model, this.time);
+                }, TIME_PER_FRAME);
             }
         }
     };
