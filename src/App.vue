@@ -1,5 +1,5 @@
 <template>
-    <div v-if="model !== null" id="app" class="wrapper">
+    <div v-if="model" id="app" class="wrapper">
         <div class="row">
             <div class="col-12 col-sm-9 mb-2">
                 <svg
@@ -54,9 +54,7 @@
                 this.createExecutors();
                 this.drawer = new Drawer("#svg");
 
-                const maxTime = this.model.calculateExecutionTime();
-                this.setMaxTime(maxTime);
-                this.startTimer();
+                this.setupAndStartTimer();
             });
         },
         methods: {
@@ -66,6 +64,11 @@
                 this.executors = this.model.drones
                     .map(drone => generateActions(drone, this.model.cells))
                     .map(actions => new ActionExecutor(actions));
+            },
+            setupAndStartTimer() {
+                const maxTime = this.model.calculateExecutionTime();
+                this.setMaxTime(maxTime);
+                this.startTimer();
             }
         }
     };

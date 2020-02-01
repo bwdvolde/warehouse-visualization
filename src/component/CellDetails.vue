@@ -1,7 +1,7 @@
 <template>
     <div>
         <h5 class="text-center">Storage cell</h5>
-        <table style="width: 100%">
+        <table class="w-100">
             <tbody>
             <tr>
                 <td>Position</td>

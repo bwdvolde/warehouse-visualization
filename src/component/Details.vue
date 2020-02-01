@@ -1,5 +1,5 @@
 <template>
-    <div class="card" style="height: 100%">
+    <div class="card h-100">
         <div class="card-header">
             <ul class="nav nav-pills card-header-pills">
                 <li class="nav-item">
@@ -7,7 +7,9 @@
                             class="nav-link"
                             :class="{'active': activeTab === TAB_GENERAL}"
                             href="#"
-                            @click="activeTab = TAB_GENERAL">General
+                            @click="activeTab = TAB_GENERAL"
+                    >
+                        General
                     </a>
                 </li>
                 <li class="nav-item">
@@ -15,7 +17,9 @@
                             class="nav-link"
                             :class="{'active': activeTab === TAB_DETAIL}"
                             href="#"
-                            @click="activeTab = TAB_DETAIL">Selection
+                            @click="activeTab = TAB_DETAIL"
+                    >
+                        Selection
                     </a>
                 </li>
             </ul>
