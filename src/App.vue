@@ -95,11 +95,11 @@
         stroke-width: 0.5px;
         stroke: black;
 
-        &--hovered {
+        &--hover {
             opacity: 0.75;
         }
 
-        &--selected {
+        &--selection {
             opacity: 0.60;
         }
     }

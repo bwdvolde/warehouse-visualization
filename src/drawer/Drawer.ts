@@ -100,8 +100,8 @@ export default class Drawer {
         return elements
             .style("fill", (cell: Cell) => this.calculateCellColor(cell))
             .filter((cell: Cell) => cell.isActive)
-            .classed("cell--selected", (cell: Cell) => cell === selection.selected)
-            .classed("cell--hovered", (cell: Cell) => cell === selection.hovered)
+            .classed("cell--selection", (cell: Cell) => cell === selection.selected)
+            .classed("cell--hover", (cell: Cell) => cell === selection.hovered)
             .on("mouseover", (cell: Cell) => selection.hovered = cell)
             .on("mouseleave", () => selection.hovered = null)
             .on("click", (cell: Cell) => selection.selected = cell);
