@@ -1,7 +1,7 @@
 <template>
     <div v-if="model" id="app" class="wrapper">
         <div class="row">
-            <div class="col-12 col-sm-9 mb-2">
+            <div class="col-12 col-md-9 mb-2">
                 <svg
                         id="svg"
                         class="warehouse"
@@ -85,7 +85,7 @@
         width: 100%;
     }
 
-    @media screen and (min-width: 576px) {
+    @media screen and (min-width: 992px) {
         .warehouse {
             height: 600px;
         }

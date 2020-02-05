@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h5 class="card-title text-center">General Details</h5>
+        <h4 class="card-title text-center">Default configuration</h4>
         <table style="width: 100%">
             <tbody>
             <tr>

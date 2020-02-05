@@ -9,7 +9,7 @@
                             href="#"
                             @click="activeTab = TAB_GENERAL"
                     >
-                        General
+                        Configuration
                     </a>
                 </li>
                 <li class="nav-item">

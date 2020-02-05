@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h5 class="text-center">Storage cell</h5>
+        <h4 class="text-center">Storage cell</h4>
+
+        <h6>General information</h6>
         <table class="w-100">
             <tbody>
             <tr>
@@ -13,23 +15,27 @@
             </tr>
             </tbody>
         </table>
-        <table class="table mt-4">
-            <thead>
-            <tr>
-                <th>Drone</th>
-                <th>On</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr
-                    v-for="visit in cell.visits"
-                    :key="visit.on"
-            >
-                <td>{{visit.by.id}}</td>
-                <td>{{visit.on / 1000}}</td>
-            </tr>
-            </tbody>
-        </table>
+
+        <h6 class="mt-4">Visited by</h6>
+        <div class="cell-details__visit-table-wrapper">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Drone</th>
+                    <th>On</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                        v-for="visit in cell.visits"
+                        :key="visit.on"
+                >
+                    <td>{{visit.by.id}}</td>
+                    <td>{{visit.on / 1000}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -56,5 +62,8 @@
 </script>
 
 <style scoped>
-
+    .cell-details__visit-table-wrapper {
+        overflow: auto;
+        max-height: 300px;
+    }
 </style>
