@@ -1,14 +1,14 @@
 <template>
     <div v-if="model" id="app" class="wrapper">
         <div class="row">
-            <div class="col-12 col-md-9 mb-2">
+            <div class="col-12 col-md-8 col-lg-9 mb-2">
                 <svg
                         id="svg"
                         class="warehouse"
                 />
                 <TimeDisplay/>
             </div>
-            <div class="col-12 col-sm-3">
+            <div class="col-12 col-md-4 col-lg-3">
                 <Details :model="model"/>
             </div>
         </div>
@@ -75,7 +75,9 @@
     };
 </script>
 
-<style>
+<style lang="scss" scoped>
+    @import '../node_modules/bootstrap/scss/bootstrap.scss';
+
     .wrapper {
         margin: 2rem;
     }
@@ -83,10 +85,8 @@
     .warehouse {
         height: 200px;
         width: 100%;
-    }
 
-    @media screen and (min-width: 992px) {
-        .warehouse {
+        @include media-breakpoint-up(md) {
             height: 600px;
         }
     }
@@ -94,14 +94,14 @@
     .cell {
         stroke-width: 0.5px;
         stroke: black;
-    }
 
-    .cell--hover {
-        opacity: 0.75;
-    }
+        &--hover {
+            opacity: 0.75;
+        }
 
-    .cell--selected {
-        opacity: 0.60;
+        &--selected {
+            opacity: 0.60;
+        }
     }
 
     .drone {
