@@ -75,7 +75,7 @@
     };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     @import '../node_modules/bootstrap/scss/bootstrap.scss';
 
     .wrapper {
