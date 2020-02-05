@@ -8,8 +8,8 @@ import {PositionMapper} from "@/drawer/PositionMapper";
 
 export default class Drawer {
     private container: any;
-    private mapper: PositionMapper;
     private svgId: number;
+    private mapper: PositionMapper;
 
     private model: Model;
     private time: number;
@@ -28,7 +28,8 @@ export default class Drawer {
         this.model = model;
         this.time = time;
 
-        this.createPositionMapper();
+        // We update the mapper each draw tick because the dimensions of the svg can have changed
+        this.updatePositionMapper();
 
         // Ordering is important here because draw order represents stacking order
         this.drawEdges();
@@ -36,7 +37,7 @@ export default class Drawer {
         this.drawDrones();
     }
 
-    private createPositionMapper() {
+    private updatePositionMapper() {
         const containerWidth = $(this.svgId).width();
         const containerHeight = $(this.svgId).height();
         this.mapper = new PositionMapper(this.model, containerHeight, containerWidth);
@@ -75,34 +76,12 @@ export default class Drawer {
     private drawStorageCells(storageCells: Cell[]) {
         const elements = this.selectOrCreateElements("cell", "rect", storageCells);
 
-        const selection = this.model.selection;
-
         elements
             .attr("x", (cell: Cell) => this.mapper.calculateXCell(cell.x))
             .attr("y", (cell: Cell) => this.mapper.calculateYCell(cell.y))
             .attr("width", this.mapper.cellWidth)
             .attr("height", this.mapper.cellHeight)
-            .classed("cell--selected", (cell: Cell) => cell === selection.cell)
-            .style("fill", (cell: Cell) => this.calculateCellColor(cell))
-            .on("mouseover", this.makeOnMouseOverFunction())
-            .on("mouseleave", this.makeOnMouseLeaveFunction())
-            .on("click", (cell: Cell) => selection.cell = cell);
-    }
-
-    private makeOnMouseOverFunction() {
-        // We have to return a function here instead of doing the stuff ourselves because of this scoping rules
-        return function () {
-            d3.select(this)
-                .classed("cell--hover", true);
-        };
-    }
-
-    private makeOnMouseLeaveFunction() {
-        // We have to return a function here instead of doing the stuff ourselves because of this scoping rules
-        return function () {
-            d3.select(this)
-                .classed("cell--hover", false);
-        };
+            .call(elements => this.addCommonCellModifications(elements));
     }
 
     private drawCellNodes(cells: Cell[]) {
@@ -112,7 +91,20 @@ export default class Drawer {
             .attr("cx", (cell: Cell) => this.mapper.calculateXNode(cell.x))
             .attr("cy", (cell: Cell) => this.mapper.calculateYNode(cell.y))
             .attr("r", this.mapper.nodeR)
-            .style("fill", (cell: Cell) => this.calculateCellColor(cell));
+            .call(elements => this.addCommonCellModifications(elements));
+    }
+
+    private addCommonCellModifications(elements: any): any {
+        const selection = this.model.selection;
+
+        return elements
+            .style("fill", (cell: Cell) => this.calculateCellColor(cell))
+            .filter((cell: Cell) => cell.isActive)
+            .classed("cell--selected", (cell: Cell) => cell === selection.selected)
+            .classed("cell--hovered", (cell: Cell) => cell === selection.hovered)
+            .on("mouseover", (cell: Cell) => selection.hovered = cell)
+            .on("mouseleave", () => selection.hovered = null)
+            .on("click", (cell: Cell) => selection.selected = cell);
     }
 
     private calculateCellColor(cell) {

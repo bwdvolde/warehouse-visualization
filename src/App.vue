@@ -95,7 +95,7 @@
         stroke-width: 0.5px;
         stroke: black;
 
-        &--hover {
+        &--hovered {
             opacity: 0.75;
         }
 

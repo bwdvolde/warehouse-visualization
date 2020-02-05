@@ -68,7 +68,7 @@
                 return this.model.selection;
             },
             selectedCell() {
-                return this.selection.cell;
+                return this.selection.selected;
             }
         },
         watch: {

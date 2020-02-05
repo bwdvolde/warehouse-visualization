@@ -6,22 +6,24 @@ export enum SelectionMode {
 
 export class ModelSelection {
 
-    cell: Cell;
+    selected: Cell;
+    hovered: Cell;
 
     constructor() {
-        this.cell = null;
+        this.selected = null;
+        this.hovered = null;
     }
 
     clearSelection() {
-        this.cell = null;
+        this.selected = null;
     }
 
     hasSelection() {
-        return this.cell !== null;
+        return this.selected !== null;
     }
 
     get mode() {
-        if (this.cell) {
+        if (this.selected) {
             return SelectionMode.CELL;
         }
         return SelectionMode.NONE;
