@@ -40,7 +40,7 @@
 </template>
 
 <script>
-    import { Cell } from "../model/domain/Cell";
+    import { Cell } from "../../model/domain/Cell";
     import { mapState } from "vuex";
     import { NAMESPACE_TIMER, TIME } from "@/store/modules/timer";
 

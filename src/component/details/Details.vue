@@ -44,7 +44,7 @@
 <script>
     import { Model } from "@/model/domain/Model";
     import GeneralDetails from "@/component/GeneralDetails";
-    import CellDetails from "@/component/CellDetails";
+    import CellDetails from "./CellDetails";
 
     const TAB_GENERAL = "TAB_GENERAL";
     const TAB_DETAIL = "TAB_DETAIL";

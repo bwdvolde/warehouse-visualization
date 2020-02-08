@@ -19,7 +19,7 @@
     import Vue from "vue";
 
     import TimeDisplay from "@/component/TimeDisplay.vue";
-    import Details from "@/component/Details.vue";
+    import Details from "@/component/details/Details.vue";
     import Drawer from "@/drawer/Drawer";
 
     import { NAMESPACE_TIMER, SET_MAX_TIME, START_TIMER, TIME, TIME_PER_FRAME } from "@/store/modules/timer";
