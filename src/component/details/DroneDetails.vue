@@ -16,6 +16,26 @@
             </tbody>
         </table>
 
+        <h6 class="mt-4">Visits</h6>
+        <div class="drone-details__visit-table-wrapper">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Cell</th>
+                    <th>On</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr
+                        v-for="visit in drone.visits"
+                        :key="visit.on"
+                >
+                    <td>{{"(" + visit.at.x + " ," + visit.at.y + ")"}}</td>
+                    <td>{{visit.on / 1000}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 

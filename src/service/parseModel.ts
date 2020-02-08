@@ -27,7 +27,7 @@ function parseJsonCell({ x, y, isActive, timeAtLastScan }) {
 }
 
 function parseJsonDrone({ id, startPosition, speed, operations }): Drone {
-    return new Drone(id, parseJsonPosition(startPosition), speed, operations);
+    return new Drone(id, speed, operations, parseJsonPosition(startPosition));
 }
 
 function parseJsonPosition({ x, y }) {

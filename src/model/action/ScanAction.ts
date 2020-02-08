@@ -28,6 +28,7 @@ export class ScanAction extends Action {
 
         this.cell.timeAtLastScan = on;
         this.cell.visits.push(new Visit(at, by, on));
+        this.drone.visits.push(new Visit(at, by, on));
 
         super.finish();
     }
@@ -35,6 +36,7 @@ export class ScanAction extends Action {
     undo() {
         this.cell.timeAtLastScan = this.timeAtPreviousScan;
         this.cell.visits.pop();
+        this.drone.visits.pop();
 
         super.undo();
     }
