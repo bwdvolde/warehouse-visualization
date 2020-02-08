@@ -30,11 +30,14 @@
             </template>
 
             <template v-if="activeTab === TAB_DETAIL">
-                <template v-if="!selectedCell">
-                    <p>Click on a storage cell to see more information about that cell.</p>
+                <template v-if="selectionMode === SelectionMode.NONE">
+                    <p>Click on a storage cell or drone to see more information about that cell.</p>
                 </template>
-                <template v-else>
-                    <CellDetails :cell="selectedCell"/>
+                <template v-else-if="selectionMode === SelectionMode.CELL">
+                    <CellDetails :cell="selection.selectedCell"/>
+                </template>
+                <template v-else-if="selectionMode === SelectionMode.DRONE">
+                    <DroneDetails :drone="selection.selectedDrone"/>
                 </template>
             </template>
         </div>
@@ -45,12 +48,14 @@
     import { Model } from "@/model/domain/Model";
     import GeneralDetails from "@/component/GeneralDetails";
     import CellDetails from "./CellDetails";
+    import { SelectionMode } from "@/model/domain/ModelSelection";
+    import DroneDetails from "@/component/details/DroneDetails";
 
     const TAB_GENERAL = "TAB_GENERAL";
     const TAB_DETAIL = "TAB_DETAIL";
 
     export default {
-        components: { CellDetails, GeneralDetails },
+        components: { DroneDetails, CellDetails, GeneralDetails },
         props: {
             model: {
                 type: Model,
@@ -60,20 +65,21 @@
         data() {
             return {
                 activeTab: TAB_GENERAL,
-                TAB_GENERAL, TAB_DETAIL
+                TAB_GENERAL, TAB_DETAIL,
+                SelectionMode
             };
         },
         computed: {
             selection() {
                 return this.model.selection;
             },
-            selectedCell() {
-                return this.selection.selected;
+            selectionMode() {
+                return this.selection.mode;
             }
         },
         watch: {
-            selectedCell(newCell) {
-                if (newCell) {
+            selectionMode(newMode) {
+                if (newMode !== SelectionMode.NONE) {
                     this.activeTab = TAB_DETAIL;
                 }
             }

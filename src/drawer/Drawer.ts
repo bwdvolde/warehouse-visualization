@@ -45,12 +45,14 @@ export default class Drawer {
 
     private drawDrones() {
         const drones = this.model.drones;
+        const selection = this.model.selection;
         const elements = this.selectOrCreateElements("drone", "circle", drones);
 
         elements
             .attr("cx", (drone: Drone) => this.mapper.calculateXNode((drone.positionAt(this.time).x)))
             .attr("cy", (drone: Drone) => this.mapper.calculateYNode((drone.positionAt(this.time).y)))
-            .attr("r", this.mapper.nodeR);
+            .attr("r", this.mapper.nodeR)
+            .on("click", (drone: Drone) => selection.selectedDrone = drone);
     }
 
     private drawEdges() {
@@ -100,11 +102,11 @@ export default class Drawer {
         return elements
             .style("fill", (cell: Cell) => this.calculateCellColor(cell))
             .filter((cell: Cell) => cell.isActive)
-            .classed("cell--selection", (cell: Cell) => cell === selection.selected)
-            .classed("cell--hover", (cell: Cell) => cell === selection.hovered)
-            .on("mouseover", (cell: Cell) => selection.hovered = cell)
-            .on("mouseleave", () => selection.hovered = null)
-            .on("click", (cell: Cell) => selection.selected = cell);
+            .classed("cell--selection", (cell: Cell) => cell === selection.selectedCell)
+            .classed("cell--hover", (cell: Cell) => cell === selection.hoveredCell)
+            .on("mouseover", (cell: Cell) => selection.hoveredCell = cell)
+            .on("mouseleave", () => selection.hoveredCell = null)
+            .on("click", (cell: Cell) => selection.selectedCell = cell);
     }
 
     private calculateCellColor(cell) {
