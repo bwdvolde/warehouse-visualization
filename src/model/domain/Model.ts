@@ -21,41 +21,41 @@ export class Model {
 
     private buildEdges(grid: Cell[][]) {
         this.edges = [];
-        for (let y = 0; y < grid.length; y++) {
-            for (let x = 0; x < grid[y].length; x++) {
-                this.pushEdgeDownIfExists(x, y);
-                this.pushEdgeRightIfExists(x, y);
+        for (let row = 0; row < grid.length; row++) {
+            for (let col = 0; col < grid[row].length; col++) {
+                this.pushEdgeDownIfExists(row, col);
+                this.pushEdgeRightIfExists(row, col);
             }
         }
     }
 
-    private pushEdgeRightIfExists(x: number, y: number) {
-        const hasRightNeighbor = x < this.nCols - 1 && (x % 2 == 0 || !this.cells[y][x + 1].isStorageCell);
+    private pushEdgeRightIfExists(row: number, col: number) {
+        const hasRightNeighbor = col < this.nCols - 1 && (col % 2 == 0 || !this.cells[row][col + 1].isStorageCell);
         if (!hasRightNeighbor) {
             return;
         }
 
-        this.pushEdgeRight(x, y);
+        this.pushEdgeRight(row, col);
     }
 
-    private pushEdgeRight(x: number, y: number) {
-        const currentPosition = new Position(x, y);
-        const rightPosition = new Position(x + 1, y);
+    private pushEdgeRight(row: number, col: number) {
+        const currentPosition = new Position(col, row);
+        const rightPosition = new Position(col + 1, row);
         const edgeRight = new Edge(currentPosition, rightPosition);
         this.edges.push(edgeRight);
     }
 
-    private pushEdgeDownIfExists(x: number, y: number) {
-        if (y >= this.nRows - 1) {
+    private pushEdgeDownIfExists(row: number, col: number) {
+        if (row >= this.nRows - 1) {
             return;
         }
 
-        this.pushEdgeDown(x, y);
+        this.pushEdgeDown(row, col);
     }
 
-    private pushEdgeDown(x: number, y: number) {
-        const current = new Position(x, y);
-        const down = new Position(x, y + 1);
+    private pushEdgeDown(row: number, col: number) {
+        const current = new Position(col, row);
+        const down = new Position(col, row + 1);
         const edgeDown = new Edge(current, down);
         this.edges.push(edgeDown);
     }

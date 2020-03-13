@@ -27,6 +27,7 @@
     import { mapActions, mapMutations, mapState } from "vuex";
     import { generateActions } from "@/model/action/generateActions";
     import { getModel } from "@/services/modelService";
+    import { generateModel } from "@/generate/generateModel";
 
     export default {
         components: { TimeDisplay, Details },
@@ -41,7 +42,8 @@
             ...mapState(NAMESPACE_TIMER, [TIME])
         },
         async mounted() {
-            this.model = await getModel("default");
+            // this.model = await getModel("default");
+            this.model = generateModel();
 
             // Drawer has to be created in next tick because svg element has not been created in the dom yet
             Vue.nextTick(() => {
