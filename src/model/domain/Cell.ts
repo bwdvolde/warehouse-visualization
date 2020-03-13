@@ -4,16 +4,16 @@ export class Cell {
     // Constant fields
     x: number;
     y: number;
-    isActive: boolean;
+    isStorageCell: boolean;
 
     // Changing fields
     timeAtLastScan: number;
     visits: Visit[];
 
-    constructor(x: number, y: number, isActive: boolean, timeAtLastScan: number) {
+    constructor(x: number, y: number, isStorageCell: boolean, timeAtLastScan: number) {
         this.x = x;
         this.y = y;
-        this.isActive = isActive;
+        this.isStorageCell = isStorageCell;
 
         this.timeAtLastScan = timeAtLastScan;
         this.visits = [];

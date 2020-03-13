@@ -35,7 +35,7 @@
                 return this.model.drones.length;
             },
             nCells() {
-                return this.model.cells.flat().filter(cell => cell.isActive).length;
+                return this.model.cells.flat().filter(cell => cell.isStorageCell).length;
             },
             executionTimeSeconds() {
                 return this.model.calculateExecutionTime() / 1000;

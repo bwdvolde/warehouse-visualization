@@ -69,7 +69,7 @@ export default class Drawer {
     private drawCells() {
         const cells = this.model.cells;
         const flattenedCells = cells.flat();
-        const storageCells = flattenedCells.filter(cell => cell.isActive);
+        const storageCells = flattenedCells.filter(cell => cell.isStorageCell);
 
         this.drawStorageCells(storageCells);
         this.drawCellNodes(flattenedCells);
@@ -101,7 +101,7 @@ export default class Drawer {
 
         return elements
             .style("fill", (cell: Cell) => this.calculateCellColor(cell))
-            .filter((cell: Cell) => cell.isActive)
+            .filter((cell: Cell) => cell.isStorageCell)
             .classed("cell--selection", (cell: Cell) => cell === selection.selectedCell)
             .classed("cell--hover", (cell: Cell) => cell === selection.hoveredCell)
             .on("mouseover", (cell: Cell) => selection.hoveredCell = cell)
@@ -110,7 +110,7 @@ export default class Drawer {
     }
 
     private calculateCellColor(cell) {
-        if (!cell.isActive) {
+        if (!cell.isStorageCell) {
             return "gray";
         }
 

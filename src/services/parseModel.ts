@@ -22,8 +22,8 @@ function parseJsonGrid(settings, cells): Cell[][] {
     return grid;
 }
 
-function parseJsonCell({ x, y, isActive, timeAtLastScan }) {
-    return new Cell(x, y, isActive, timeAtLastScan);
+function parseJsonCell({ x, y, isStorageCell, timeAtLastScan }) {
+    return new Cell(x, y, isStorageCell, timeAtLastScan);
 }
 
 function parseJsonDrone({ id, startPosition, speed, operations }): Drone {

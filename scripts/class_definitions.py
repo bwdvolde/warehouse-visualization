@@ -44,10 +44,10 @@ class Drone:
 
 class Cell:
 
-    def __init__(self, x, y, isActive, timeAtLastScan):
+    def __init__(self, x, y, isStorageCell, timeAtLastScan):
         self.x = x
         self.y = y
-        self.isActive = isActive
+        self.isStorageCell = isStorageCell
         self.timeAtLastScan = timeAtLastScan
 
     def json(self):

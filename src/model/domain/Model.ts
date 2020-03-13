@@ -30,7 +30,7 @@ export class Model {
     }
 
     private pushEdgeRightIfExists(x: number, y: number) {
-        const hasRightNeighbor = x < this.nCols - 1 && (x % 2 == 0 || !this.cells[y][x + 1].isActive);
+        const hasRightNeighbor = x < this.nCols - 1 && (x % 2 == 0 || !this.cells[y][x + 1].isStorageCell);
         if (!hasRightNeighbor) {
             return;
         }
