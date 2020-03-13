@@ -46,10 +46,10 @@
 
 <script>
     import { Model } from "@/model/domain/Model";
-    import GeneralDetails from "@/component/GeneralDetails";
+    import GeneralDetails from "@/components/GeneralDetails";
     import CellDetails from "./CellDetails";
     import { SelectionMode } from "@/model/domain/ModelSelection";
-    import DroneDetails from "@/component/details/DroneDetails";
+    import DroneDetails from "@/components/details/DroneDetails";
 
     const TAB_GENERAL = "TAB_GENERAL";
     const TAB_DETAIL = "TAB_DETAIL";

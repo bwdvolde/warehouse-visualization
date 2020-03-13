@@ -18,15 +18,15 @@
 <script>
     import Vue from "vue";
 
-    import TimeDisplay from "@/component/TimeDisplay.vue";
-    import Details from "@/component/details/Details.vue";
+    import TimeDisplay from "@/components/TimeDisplay.vue";
+    import Details from "@/components/details/Details.vue";
     import Drawer from "@/drawer/Drawer";
 
     import { NAMESPACE_TIMER, SET_MAX_TIME, START_TIMER, TIME, TIME_PER_FRAME } from "@/store/modules/timer";
     import ActionExecutor from "@/model/action/ActionExecutor";
     import { mapActions, mapMutations, mapState } from "vuex";
     import { generateActions } from "@/model/action/generateActions";
-    import { getModel } from "@/service/modelService";
+    import { getModel } from "@/services/modelService";
 
     export default {
         components: { TimeDisplay, Details },
