@@ -112,11 +112,16 @@
     }
 
     .drone-id {
+        display: none;
         font-size: 8px;
         stroke: black;
         text-anchor: middle;
 
         pointer-events: none;
+
+        @include media-breakpoint-up(md) {
+            display: initial;
+        }
     }
 
     .edge {
