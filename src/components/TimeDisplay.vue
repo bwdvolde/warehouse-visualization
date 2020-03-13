@@ -71,6 +71,12 @@
                 return this.maxTime / 1000;
             }
         },
+        mounted(): void {
+            window.addEventListener("keydown", this.onKeyDown);
+        },
+        destroyed(): void {
+            window.removeEventListener("keydown", this.onKeyDown);
+        },
         methods: {
             ...mapMutations(NAMESPACE_TIMER, [STOP, RESUME, SET_TIME, SET_SPEEDUP]),
             togglePause() {
@@ -87,6 +93,11 @@
             onDragEnd() {
                 if (this.wasRunningBeforeDrag) {
                     this.resume();
+                }
+            },
+            onKeyDown(event) {
+                if (event.code === 'Space') {
+                    this.togglePause();
                 }
             }
         }
