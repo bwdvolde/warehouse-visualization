@@ -27,7 +27,7 @@ class Configuration {
 
 
 export function generateModel(): Model {
-    const aisles = 4;
+    const aisles = 5;
     const blocks = 4;
     const cellsPerBlock = 5;
     const configuration = new Configuration(aisles, blocks, cellsPerBlock);
@@ -63,7 +63,8 @@ function getOperations(configuration: Configuration): Operation[] {
         if (!isCrossAisleRow(row, configuration)) {
             operations.push(Operation.SCAN);
         }
-        if (row < configuration.nRows - 1) {
+        const isNotLastRow = row < configuration.nRows - 1;
+        if (isNotLastRow) {
             operations.push(Operation.SOUTH);
         }
     }
