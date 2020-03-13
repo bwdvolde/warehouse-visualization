@@ -3,34 +3,14 @@ import {Cell} from "@/model/domain/Cell";
 import Drone from "@/model/domain/Drone";
 import Position from "@/model/domain/Position";
 import {Operation} from "@/model/domain/Operation";
-
-class Configuration {
-
-    aisles: number;
-    blocks: number;
-    cellsPerBlock: number;
-
-    constructor(aisles: number, blocks: number, cellsPerBlock: number) {
-        this.aisles = aisles;
-        this.blocks = blocks;
-        this.cellsPerBlock = cellsPerBlock;
-    }
-
-    get nRows() {
-        return this.blocks * (this.cellsPerBlock + 1) + 1;
-    }
-
-    get nCols() {
-        return this.aisles * 2;
-    }
-}
+import {Configuration} from "@/generate/Configuration";
 
 
-export function generateModel(): Model {
+export function generateSerial(): Model {
     const aisles = 5;
     const blocks = 4;
     const cellsPerBlock = 5;
-    const configuration = new Configuration(aisles, blocks, cellsPerBlock);
+    const configuration = new Configuration("Serial", aisles, blocks, cellsPerBlock);
 
     const cells = generateCells(configuration);
     const drones = generateDrones(configuration);
@@ -75,7 +55,7 @@ function getOperations(configuration: Configuration): Operation[] {
 function generateDrones(configuration: Configuration) {
     const drones = [];
     for (let col = 0; col < configuration.nCols; col += 2) {
-        const drone = new Drone(col + "", 1, getOperations(configuration), new Position(col, 0));
+        const drone = new Drone(col / 2 + "", 1, getOperations(configuration), new Position(col, 0));
         drones.push(drone);
     }
     return drones;

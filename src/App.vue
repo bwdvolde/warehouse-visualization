@@ -1,15 +1,15 @@
 <template>
-    <div v-if="model" id="app" class="wrapper">
-        <div class="row">
-            <div class="col-12 col-md-8 col-lg-9 mb-2">
-                <svg
-                        id="svg"
-                        class="warehouse"
-                />
-                <TimeDisplay/>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3">
-                <Details :model="model"/>
+    <div>
+        <NavigationBar/>
+        <div v-if="model" id="app" class="wrapper">
+            <div class="row">
+                <div class="col-12 col-md-8 col-lg-9 mb-2">
+                    <svg id="svg" class="warehouse"/>
+                    <TimeDisplay/>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3">
+                    <Details :model="model"/>
+                </div>
             </div>
         </div>
     </div>
@@ -18,6 +18,7 @@
 <script>
     import Vue from "vue";
 
+    import NavigationBar from "@/components/NavigationBar.vue";
     import TimeDisplay from "@/components/TimeDisplay.vue";
     import Details from "@/components/details/Details.vue";
     import Drawer from "@/drawer/Drawer";
@@ -26,11 +27,10 @@
     import ActionExecutor from "@/model/action/ActionExecutor";
     import { mapActions, mapMutations, mapState } from "vuex";
     import { generateActions } from "@/model/action/generateActions";
-    import { getModel } from "@/services/modelService";
-    import { generateModel } from "@/generate/generateModel";
+    import { generateSerial } from "@/generate/generateSerial";
 
     export default {
-        components: { TimeDisplay, Details },
+        components: { NavigationBar, TimeDisplay, Details },
         data() {
             return {
                 model: null,
@@ -42,8 +42,7 @@
             ...mapState(NAMESPACE_TIMER, [TIME])
         },
         async mounted() {
-            // this.model = await getModel("default");
-            this.model = generateModel();
+            this.model = generateSerial();
 
             // Drawer has to be created in next tick because svg element has not been created in the dom yet
             Vue.nextTick(() => {
