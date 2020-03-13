@@ -44,10 +44,15 @@ export default class Drawer {
     }
 
     private drawDrones() {
+        this.drawDroneNodes();
+        this.drawDroneIds();
+    }
+
+    private drawDroneNodes() {
         const drones = this.model.drones;
         const selection = this.model.selection;
-        const elements = this.selectOrCreateElements("drone", "circle", drones);
 
+        const elements = this.selectOrCreateElements("drone", "circle", drones);
         elements
             .attr("cx", (drone: Drone) => this.mapper.calculateXNode((drone.positionAt(this.time).x)))
             .attr("cy", (drone: Drone) => this.mapper.calculateYNode((drone.positionAt(this.time).y)))
@@ -55,10 +60,20 @@ export default class Drawer {
             .on("click", (drone: Drone) => selection.selectedDrone = drone);
     }
 
+    private drawDroneIds() {
+        const drones = this.model.drones;
+
+        const elements = this.selectOrCreateElements("drone-id", "text", drones);
+        elements
+            .attr("x", (drone: Drone) => this.mapper.calculateXNode((drone.positionAt(this.time).x)))
+            .attr("y", (drone: Drone) => this.mapper.calculateYNode((drone.positionAt(this.time).y)) + this.mapper.nodeR / 2)
+            .text((drone: Drone) => drone.id);
+    }
+
     private drawEdges() {
         const edges = this.model.edges;
-        const elements = this.selectOrCreateElements("edge", "line", edges);
 
+        const elements = this.selectOrCreateElements("edge", "line", edges);
         elements
             .attr("x1", (edge: Edge) => this.mapper.calculateXNode(edge.a.x))
             .attr("y1", (edge: Edge) => this.mapper.calculateYNode(edge.a.y))
@@ -77,7 +92,6 @@ export default class Drawer {
 
     private drawStorageCells(storageCells: Cell[]) {
         const elements = this.selectOrCreateElements("cell", "rect", storageCells);
-
         elements
             .attr("x", (cell: Cell) => this.mapper.calculateXCell(cell.x))
             .attr("y", (cell: Cell) => this.mapper.calculateYCell(cell.y))
@@ -88,7 +102,6 @@ export default class Drawer {
 
     private drawCellNodes(cells: Cell[]) {
         const elements = this.selectOrCreateElements("cell-node", "circle", cells);
-
         elements
             .attr("cx", (cell: Cell) => this.mapper.calculateXNode(cell.x))
             .attr("cy", (cell: Cell) => this.mapper.calculateYNode(cell.y))
@@ -98,7 +111,6 @@ export default class Drawer {
 
     private addCommonCellModifications(elements: any): any {
         const selection = this.model.selection;
-
         return elements
             .style("fill", (cell: Cell) => this.calculateCellColor(cell))
             .filter((cell: Cell) => cell.isStorageCell)

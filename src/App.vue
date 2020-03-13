@@ -111,6 +111,14 @@
         stroke: black;
     }
 
+    .drone-id {
+        font-size: 8px;
+        stroke: black;
+        text-anchor: middle;
+
+        pointer-events: none;
+    }
+
     .edge {
         stroke: #999;
         stroke-opacity: 1.0;

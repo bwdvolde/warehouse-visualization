@@ -17,9 +17,13 @@
                 {{speedup}}
             </button>
             <div class="dropdown-menu">
-                <template v-for="speedup in [0.5, 1.0, 2.0, 5.0, 10.0]">
-                    <a class="dropdown-item" @click="setSpeedup(speedup)">{{speedup}}</a>
-                </template>
+                <a v-for="speedup in [0.5, 1.0, 2.0, 5.0, 10.0]"
+                   :key="speedup"
+                   class="dropdown-item"
+                   @click="setSpeedup(speedup)"
+                >
+                    {{speedup}}
+                </a>
             </div>
         </div>
         <span>{{timeSeconds}}</span>
