@@ -1,11 +1,27 @@
 <template>
     <div class="time-display">
-        <button
-                class="time-display__toggle-button btn btn-primary btn-sm"
-                @click="togglePause"
-        >
-            <Icon :icon="running ? 'pause' : 'play'"/>
-        </button>
+        <div class="btn-group time-display__button-group" role="group">
+            <button
+                    class="btn btn-primary btn-sm"
+                    @click="togglePause"
+            >
+                <Icon :icon="running ? 'pause' : 'play'"/>
+            </button>
+            <button
+                    class="btn btn-primary btn-sm dropdown-toggle"
+                    type="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+            >
+                {{speedup}}
+            </button>
+            <div class="dropdown-menu">
+                <template v-for="speedup in [0.5, 1.0, 2.0, 5.0, 10.0]">
+                    <a class="dropdown-item" @click="setSpeedup(speedup)">{{speedup}}</a>
+                </template>
+            </div>
+        </div>
         <span>{{timeSeconds}}</span>
         <VueSlider
                 style="padding-left: 1rem; width:100%"
@@ -20,7 +36,17 @@
     import "vue-slider-component/theme/default.css";
 
     import {mapMutations, mapState} from "vuex";
-    import {NAMESPACE_TIMER, RESUME, STOP, SET_TIME, TIME, RUNNING, MAX_TIME} from "@/store/modules/timer";
+    import {
+        NAMESPACE_TIMER,
+        RESUME,
+        STOP,
+        SET_TIME,
+        TIME,
+        RUNNING,
+        MAX_TIME,
+        SET_SPEEDUP,
+        SPEEDUP
+    } from "@/store/modules/timer";
 
     export default {
         components: { VueSlider },
@@ -30,7 +56,7 @@
             };
         },
         computed: {
-            ...mapState(NAMESPACE_TIMER, [TIME, MAX_TIME, RUNNING]),
+            ...mapState(NAMESPACE_TIMER, [TIME, MAX_TIME, RUNNING, SPEEDUP]),
             timeSeconds: {
                 get(): Number {
                     const timeMilliseconds = this.time;
@@ -46,7 +72,7 @@
             }
         },
         methods: {
-            ...mapMutations(NAMESPACE_TIMER, [STOP, RESUME, SET_TIME]),
+            ...mapMutations(NAMESPACE_TIMER, [STOP, RESUME, SET_TIME, SET_SPEEDUP]),
             togglePause() {
                 if (this.running) {
                     this.stop();
@@ -75,7 +101,7 @@
         padding-top: 1.5rem;
     }
 
-    .time-display__toggle-button {
+    .time-display__button-group {
         margin-right: 0.5rem;
     }
 </style>
