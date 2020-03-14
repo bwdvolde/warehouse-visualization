@@ -17,11 +17,18 @@ export default class Drawer {
     constructor(svgId) {
         this.svgId = svgId;
         this.initContainer(svgId);
+        this.removeAllElementsInContainer();
     }
 
     private initContainer(svgId) {
         this.container = d3
             .selectAll(svgId);
+    }
+
+    private removeAllElementsInContainer() {
+        this.container
+            .selectAll("*")
+            .remove();
     }
 
     draw(model: Model, time: number) {
@@ -144,6 +151,11 @@ export default class Drawer {
             .enter()
             .append(elementToAppend)
             .classed(classToSelect, true);
+
+        elements
+            .exit()
+            .remove();
+
         return elements;
     }
 }

@@ -1,5 +1,5 @@
 import {Configuration} from "@/generate/Configuration";
-import {generateSerial} from "@/generate/generateSerial";
+import {generate} from "@/generate/generate";
 
 export const NAMESPACE_MODEL = "model";
 
@@ -11,7 +11,7 @@ const state = {
 const mutations = {
     generateModel(state: any, configuration: Configuration) {
         state.selectedConfiguration = configuration;
-        state.model = generateSerial();
+        state.model = generate(configuration);
     }
 };
 
