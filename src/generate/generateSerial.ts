@@ -3,14 +3,14 @@ import {Cell} from "@/model/domain/Cell";
 import Drone from "@/model/domain/Drone";
 import Position from "@/model/domain/Position";
 import {Operation} from "@/model/domain/Operation";
-import {Configuration} from "@/generate/Configuration";
+import {Configuration, Strategy} from "@/generate/Configuration";
 
 
 export function generateSerial(): Model {
     const aisles = 5;
     const blocks = 4;
     const cellsPerBlock = 5;
-    const configuration = new Configuration("Serial", aisles, blocks, cellsPerBlock);
+    const configuration = new Configuration("Serial", Strategy.SERIAL, aisles, blocks, cellsPerBlock);
 
     const cells = generateCells(configuration);
     const drones = generateDrones(configuration);

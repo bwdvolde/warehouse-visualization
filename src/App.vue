@@ -18,7 +18,7 @@
 <script>
     import Vue from "vue";
 
-    import NavigationBar from "@/components/NavigationBar.vue";
+    import NavigationBar from "@/components/ConfigurationSelector.vue";
     import TimeDisplay from "@/components/TimeDisplay.vue";
     import Details from "@/components/details/Details.vue";
     import Drawer from "@/drawer/Drawer";

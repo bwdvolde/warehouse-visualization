@@ -18,16 +18,17 @@
     </nav>
 </template>
 
+
 <script>
-    import { Configuration } from "@/generate/Configuration";
+    import { Configuration, Strategy } from "@/generate/Configuration";
 
     export default {
         data() {
             return {
                 configurations: [
-                    new Configuration("Random", 5, 4, 5),
-                    new Configuration("Serial", 5, 4, 5),
-                    new Configuration("Custom", 5, 4, 5),
+                    new Configuration("Serial", Strategy.SERIAL, 5, 4, 5),
+                    new Configuration("Random", Strategy.SERIAL, 5, 4, 5),
+                    new Configuration("Custom", Strategy.SERIAL, 5, 4, 5),
                 ]
             };
         }
