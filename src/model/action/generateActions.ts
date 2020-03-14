@@ -1,10 +1,4 @@
-import {
-    Direction,
-    DIRECTION_EAST,
-    DIRECTION_NORTH,
-    DIRECTION_SOUTH,
-    DIRECTION_WEST
-} from "@/model/domain/Direction";
+import {Direction} from "@/model/domain/Direction";
 import {MoveAction} from "@/model/action/MoveAction";
 import Drone from "@/model/domain/Drone";
 import {Action} from "@/model/action/Action";
@@ -33,17 +27,17 @@ export function generateActions(drone: Drone, cells: Cell[][]): Action[] {
 
     for (let operation of drone.operations) {
         switch (operation) {
-            case Operation.NORTH:
-                pushMoveAction(DIRECTION_NORTH);
+            case Operation.UP:
+                pushMoveAction(Direction.UP);
                 break;
-            case Operation.SOUTH:
-                pushMoveAction(DIRECTION_SOUTH);
+            case Operation.DOWN:
+                pushMoveAction(Direction.DOWN);
                 break;
-            case Operation.WEST:
-                pushMoveAction(DIRECTION_WEST);
+            case Operation.LEFT:
+                pushMoveAction(Direction.LEFT);
                 break;
-            case Operation.EAST:
-                pushMoveAction(DIRECTION_EAST);
+            case Operation.RIGHT:
+                pushMoveAction(Direction.RIGHT);
                 break;
             case Operation.SCAN:
                 pushScanAction();

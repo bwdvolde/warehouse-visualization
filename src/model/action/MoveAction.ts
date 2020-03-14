@@ -1,6 +1,6 @@
 import {Action} from "@/model/action/Action";
 import Drone from "@/model/domain/Drone";
-import {Direction, DIRECTION_NONE} from "@/model/domain/Direction";
+import {Direction} from "@/model/domain/Direction";
 
 export class MoveAction extends Action {
 
@@ -34,7 +34,7 @@ export class MoveAction extends Action {
 
     finish() {
         this.drone.origin = this.drone.origin.plus(this.direction);
-        this.drone.direction = DIRECTION_NONE;
+        this.drone.direction = Direction.NONE;
         super.finish();
     }
 

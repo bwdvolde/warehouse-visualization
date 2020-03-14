@@ -3,7 +3,9 @@ import {Cell} from "@/model/domain/Cell";
 import Drone from "@/model/domain/Drone";
 import Position from "@/model/domain/Position";
 import {Operation} from "@/model/domain/Operation";
-import {Configuration} from "@/generate/Configuration";
+import {Configuration, Strategy} from "@/generate/Configuration";
+import {isCrossAisleRow} from "@/generate/generateUtil";
+import {makeSerialOperations} from "@/generate/makeSerialOperations";
 
 
 export function generate(configuration: Configuration): Model {
@@ -31,33 +33,25 @@ function generateCells(configuration: Configuration): Cell[][] {
     return cells;
 }
 
-function getOperations(configuration: Configuration): Operation[] {
-    const operations = [];
-
-    for (let row = 0; row < configuration.nRows; row++) {
-        if (!isCrossAisleRow(row, configuration)) {
-            operations.push(Operation.SCAN);
-        }
-        const isNotLastRow = row < configuration.nRows - 1;
-        if (isNotLastRow) {
-            operations.push(Operation.SOUTH);
-        }
-    }
-
-    return operations;
-}
-
 function generateDrones(configuration: Configuration) {
     const drones = [];
     for (let col = 0; col < configuration.nCols; col += 2) {
-        const drone = new Drone(col / 2 + "", 1, getOperations(configuration), new Position(col, 0));
+        const id = col / 2 + "";
+        const startPosition = new Position(col, 0);
+        const drone = new Drone(id, 1, makeOperations(startPosition, configuration), startPosition);
         drones.push(drone);
     }
     return drones;
 }
 
-function isCrossAisleRow(row: number, configuration: Configuration) {
-    return row % (configuration.cellsPerBlock + 1) === 0;
+function makeOperations(startPosition: Position, configuration: Configuration): Operation[] {
+    switch (configuration.strategy) {
+        case Strategy.SERIAL:
+            return makeSerialOperations(startPosition, configuration);
+        case Strategy.RANDOM:
+            throw new Error("Strategy not implemented!");
+    }
+
 }
 
 

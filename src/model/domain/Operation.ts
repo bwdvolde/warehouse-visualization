@@ -1,7 +1,18 @@
-export enum Operation {
-    NORTH = "NORTH",
-    SOUTH = "SOUTH",
-    WEST = "WEST",
-    EAST = "EAST",
-    SCAN = "SCAN"
+import {Direction} from "@/model/domain/Direction";
+
+export class Operation {
+
+    static readonly UP = new Operation("UP", Direction.UP);
+    static readonly DOWN = new Operation("DOWN", Direction.DOWN);
+    static readonly LEFT = new Operation("LEFT", Direction.LEFT);
+    static readonly RIGHT = new Operation("RIGHT", Direction.RIGHT);
+    static readonly SCAN = new Operation("SCAN", Direction.NONE);
+
+    name: string;
+    direction: Direction;
+
+    private constructor(name: string, direction: Direction) {
+        this.name = name;
+        this.direction = direction;
+    }
 }

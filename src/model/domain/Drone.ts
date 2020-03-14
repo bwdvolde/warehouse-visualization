@@ -1,5 +1,5 @@
 import Position from "@/model/domain/Position";
-import {Direction, DIRECTION_NONE} from "@/model/domain/Direction";
+import {Direction} from "@/model/domain/Direction";
 import {Operation} from "@/model/domain/Operation";
 import {Visit} from "@/model/domain/Visit";
 
@@ -22,7 +22,7 @@ export default class Drone {
 
         this.timeOnArrivalAtOrigin = 0;
         this.origin = startPosition;
-        this.direction = DIRECTION_NONE;
+        this.direction = Direction.NONE;
         this.visits = [];
     }
 
