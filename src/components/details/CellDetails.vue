@@ -42,7 +42,7 @@
 <script>
     import { Cell } from "../../model/domain/Cell";
     import { mapState } from "vuex";
-    import { NAMESPACE_TIMER, TIME } from "@/store/modules/timer";
+    import { NAMESPACE_TIMER } from "@/store/modules/timerModule";
 
 
     export default {
@@ -53,7 +53,7 @@
             }
         },
         computed: {
-            ...mapState(NAMESPACE_TIMER, [TIME]),
+            ...mapState(NAMESPACE_TIMER, ["time"]),
             lastTimeScannedSeconds() {
                 return Math.round((this.time - this.cell.timeAtLastScan) / 1000);
             }

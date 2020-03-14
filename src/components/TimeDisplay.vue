@@ -40,17 +40,7 @@
     import "vue-slider-component/theme/default.css";
 
     import {mapMutations, mapState} from "vuex";
-    import {
-        NAMESPACE_TIMER,
-        RESUME,
-        STOP,
-        SET_TIME,
-        TIME,
-        RUNNING,
-        MAX_TIME,
-        SET_SPEEDUP,
-        SPEEDUP
-    } from "@/store/modules/timer";
+    import {NAMESPACE_TIMER} from "@/store/modules/timerModule";
 
     export default {
         components: { VueSlider },
@@ -60,7 +50,7 @@
             };
         },
         computed: {
-            ...mapState(NAMESPACE_TIMER, [TIME, MAX_TIME, RUNNING, SPEEDUP]),
+            ...mapState(NAMESPACE_TIMER, ["time", "maxTime", "running", "speedup"]),
             timeSeconds: {
                 get(): Number {
                     const timeMilliseconds = this.time;
@@ -82,17 +72,17 @@
             window.removeEventListener("keydown", this.onKeyDown);
         },
         methods: {
-            ...mapMutations(NAMESPACE_TIMER, [STOP, RESUME, SET_TIME, SET_SPEEDUP]),
+            ...mapMutations(NAMESPACE_TIMER, ["pause", "resume", "setTime", "setSpeedup"]),
             togglePause() {
                 if (this.running) {
-                    this.stop();
+                    this.pause();
                 } else {
                     this.resume();
                 }
             },
             onDragStart() {
                 this.wasRunningBeforeDrag = this.running;
-                this.stop();
+                this.pause();
             },
             onDragEnd() {
                 if (this.wasRunningBeforeDrag) {
@@ -100,7 +90,7 @@
                 }
             },
             onKeyDown(event) {
-                if (event.code === 'Space') {
+                if (event.code === "Space") {
                     this.togglePause();
                 }
             }

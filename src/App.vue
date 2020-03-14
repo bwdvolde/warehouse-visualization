@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NavigationBar/>
+        <ConfigurationSelector/>
         <div v-if="model" id="app" class="wrapper">
             <div class="row">
                 <div class="col-12 col-md-8 col-lg-9 mb-2">
@@ -18,58 +18,63 @@
 <script>
     import Vue from "vue";
 
-    import NavigationBar from "@/components/ConfigurationSelector.vue";
+    import ConfigurationSelector from "@/components/ConfigurationSelector.vue";
     import TimeDisplay from "@/components/TimeDisplay.vue";
     import Details from "@/components/details/Details.vue";
     import Drawer from "@/drawer/Drawer";
 
-    import { NAMESPACE_TIMER, SET_MAX_TIME, START_TIMER, TIME, TIME_PER_FRAME } from "@/store/modules/timer";
+    import { NAMESPACE_TIMER, TIME_PER_FRAME } from "@/store/modules/timerModule";
     import ActionExecutor from "@/model/action/ActionExecutor";
     import { mapActions, mapMutations, mapState } from "vuex";
     import { generateActions } from "@/model/action/generateActions";
-    import { generateSerial } from "@/generate/generateSerial";
+    import { NAMESPACE_MODEL } from "@/store/modules/modelModule";
 
     export default {
-        components: { NavigationBar, TimeDisplay, Details },
+        components: { ConfigurationSelector, TimeDisplay, Details },
         data() {
             return {
-                model: null,
                 executors: null,
                 drawer: null
             };
         },
         computed: {
-            ...mapState(NAMESPACE_TIMER, [TIME])
+            ...mapState(NAMESPACE_TIMER, ["time"]),
+            ...mapState(NAMESPACE_MODEL, ["model"])
         },
-        async mounted() {
-            this.model = generateSerial();
+        watch: {
+            model() {
+                // Drawer has to be created in next tick because svg element has not been created in the dom yet
+                Vue.nextTick(() => {
+                    this.createExecutors();
+                    this.updateTimerSettings();
 
-            // Drawer has to be created in next tick because svg element has not been created in the dom yet
-            Vue.nextTick(() => {
-                this.createExecutors();
-                this.setupAndStartTimer();
-
-                this.drawer = new Drawer("#svg");
-                this.startRenderLoop();
-            });
+                    this.drawer = new Drawer("#svg");
+                });
+            }
+        },
+        mounted() {
+            this.startRenderLoop();
+            this.startTimerLoop();
         },
         methods: {
-            ...mapMutations(NAMESPACE_TIMER, [SET_MAX_TIME]),
-            ...mapActions(NAMESPACE_TIMER, [START_TIMER]),
+            ...mapMutations(NAMESPACE_TIMER, ["resume", "setMaxTime", "reset"]),
+            ...mapActions(NAMESPACE_TIMER, ["startTimerLoop"]),
             createExecutors: function () {
                 this.executors = this.model.drones
                     .map(drone => generateActions(drone, this.model.cells))
                     .map(actions => new ActionExecutor(actions));
             },
-            setupAndStartTimer() {
+            updateTimerSettings() {
                 const maxTime = this.model.calculateExecutionTime();
                 this.setMaxTime(maxTime);
-                this.startTimer();
+                this.reset();
             },
             startRenderLoop() {
                 setInterval(() => {
-                    this.executors.forEach(executor => executor.moveStateTo(this.time));
-                    this.drawer.draw(this.model, this.time);
+                    if (this.model) {
+                        this.executors.forEach(executor => executor.moveStateTo(this.time));
+                        this.drawer.draw(this.model, this.time);
+                    }
                 }, TIME_PER_FRAME);
             }
         }

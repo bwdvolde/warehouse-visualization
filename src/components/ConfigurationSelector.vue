@@ -9,7 +9,9 @@
             <ul class="navbar-nav">
                 <li v-for="configuration in configurations"
                     :key="configuration.name"
-                    class="nav-item active"
+                    class="nav-item"
+                    :class="{'active': configuration === selectedConfiguration}"
+                    @click="generateModel(configuration)"
                 >
                     <a class="nav-link" href="#">{{configuration.name}}</a>
                 </li>
@@ -21,16 +23,27 @@
 
 <script>
     import { Configuration, Strategy } from "@/generate/Configuration";
+    import { mapMutations, mapState } from "vuex";
+    import { NAMESPACE_MODEL } from "@/store/modules/modelModule";
 
     export default {
         data() {
             return {
                 configurations: [
-                    new Configuration("Serial", Strategy.SERIAL, 5, 4, 5),
+                    new Configuration("Serial", Strategy.SERIAL, 5, 5, 5),
                     new Configuration("Random", Strategy.SERIAL, 5, 4, 5),
-                    new Configuration("Custom", Strategy.SERIAL, 5, 4, 5),
+                    new Configuration("Custom", Strategy.SERIAL, 5, 3, 5),
                 ]
             };
+        },
+        computed: {
+            ...mapState(NAMESPACE_MODEL, ["selectedConfiguration"])
+        },
+        mounted() {
+            this.generateModel(this.configurations[0]);
+        },
+        methods: {
+            ...mapMutations(NAMESPACE_MODEL, ["generateModel"]),
         }
     };
 </script>
