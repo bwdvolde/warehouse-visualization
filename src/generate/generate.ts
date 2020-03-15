@@ -5,7 +5,7 @@ import Position from "@/model/domain/Position";
 import {Operation} from "@/model/domain/Operation";
 import {Configuration, Strategy} from "@/generate/Configuration";
 import {isCrossAisleRow} from "@/generate/generateUtil";
-import {makeSerialOperations} from "@/generate/makeSerialOperations";
+import {generateSerialOperations} from "@/generate/generateSerialOperations";
 
 
 export function generate(configuration: Configuration): Model {
@@ -47,7 +47,7 @@ function generateDrones(configuration: Configuration) {
 function makeOperations(startPosition: Position, configuration: Configuration): Operation[] {
     switch (configuration.strategy) {
         case Strategy.SERIAL:
-            return makeSerialOperations(startPosition, configuration);
+            return generateSerialOperations(startPosition, configuration);
         case Strategy.RANDOM:
             throw new Error("Strategy not implemented!");
     }

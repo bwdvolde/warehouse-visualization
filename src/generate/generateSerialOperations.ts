@@ -3,7 +3,7 @@ import {isCrossAisleRow} from "@/generate/generateUtil";
 import {Operation} from "@/model/domain/Operation";
 import Position from "@/model/domain/Position";
 
-export function makeSerialOperations(startPosition: Position, configuration: Configuration) {
+export function generateSerialOperations(startPosition: Position, configuration: Configuration) {
     const operations = [];
 
     let timeLeft = configuration.duration;
