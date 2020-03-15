@@ -17,25 +17,7 @@
         </table>
 
         <h6 class="mt-4">Visited by</h6>
-        <div class="cell-details__visit-table-wrapper">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Drone</th>
-                    <th>On</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr
-                        v-for="visit in cell.visits"
-                        :key="visit.on"
-                >
-                    <td>{{visit.by.id}}</td>
-                    <td>{{visit.on / 1000}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <VisitsTable :visits="cell.visits" showDroneColumn/>
     </div>
 </template>
 
@@ -43,9 +25,11 @@
     import { Cell } from "../../model/domain/Cell";
     import { mapState } from "vuex";
     import { NAMESPACE_TIMER } from "@/store/modules/timerModule";
+    import VisitsTable from "@/components/details/VisitsTable";
 
 
     export default {
+        components: { VisitsTable },
         props: {
             cell: {
                 type: Cell,
@@ -60,10 +44,3 @@
         }
     };
 </script>
-
-<style scoped>
-    .cell-details__visit-table-wrapper {
-        overflow: auto;
-        max-height: 300px;
-    }
-</style>
