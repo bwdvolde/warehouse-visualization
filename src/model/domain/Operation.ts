@@ -8,6 +8,8 @@ export class Operation {
     static readonly RIGHT = new Operation("RIGHT", Direction.RIGHT);
     static readonly SCAN = new Operation("SCAN", Direction.NONE);
 
+    static readonly moveOperations = [Operation.UP, Operation.DOWN, Operation.LEFT, Operation.RIGHT];
+
     name: string;
     direction: Direction;
 

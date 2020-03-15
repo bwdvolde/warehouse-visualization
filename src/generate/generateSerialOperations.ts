@@ -10,7 +10,7 @@ export function generateSerialOperations(startPosition: Position, configuration:
     let position = startPosition;
     let goingDown = true;
 
-    function pushIfTimeLeft(operation: Operation, operations: Operation[]) {
+    function pushIfTimeLeft(operation: Operation) {
         if (timeLeft > 0) {
             operations.push(operation);
             position = position.plus(operation.direction);
@@ -20,7 +20,7 @@ export function generateSerialOperations(startPosition: Position, configuration:
 
     function goBackToStart() {
         for (let i = 0; i < configuration.nCols - 1; i++) {
-            pushIfTimeLeft(Operation.LEFT, operations);
+            pushIfTimeLeft(Operation.LEFT);
         }
     }
 
@@ -29,20 +29,20 @@ export function generateSerialOperations(startPosition: Position, configuration:
         const isFirstRow = position.y === 0;
         const isLastCol = position.x === configuration.nCols - 1;
         if (isLastRow && goingDown) {
-            pushIfTimeLeft(Operation.RIGHT, operations);
+            pushIfTimeLeft(Operation.RIGHT);
             goingDown = false;
         } else if (isFirstRow && !goingDown) {
             if (isLastCol) {
                 goBackToStart();
             } else {
-                pushIfTimeLeft(Operation.RIGHT, operations);
+                pushIfTimeLeft(Operation.RIGHT);
             }
             goingDown = true;
         } else {
             if (!isCrossAisleRow(position.y, configuration)) {
-                pushIfTimeLeft(Operation.SCAN, operations);
+                pushIfTimeLeft(Operation.SCAN);
             }
-            pushIfTimeLeft(goingDown ? Operation.DOWN : Operation.UP, operations);
+            pushIfTimeLeft(goingDown ? Operation.DOWN : Operation.UP);
         }
     }
 

@@ -31,8 +31,8 @@
             return {
                 configurations: [
                     new Configuration("Serial", 5, 5, 5, Strategy.SERIAL, 1000),
-                    new Configuration("Random", 4, 4, 5, Strategy.SERIAL, 100),
-                    new Configuration("Custom", 3, 3, 5, Strategy.SERIAL, 10),
+                    new Configuration("Random", 4, 4, 5, Strategy.RANDOM, 1000),
+                    new Configuration("Custom", 3, 3, 5, Strategy.SERIAL, 100),
                 ]
             };
         },

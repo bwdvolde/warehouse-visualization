@@ -6,6 +6,7 @@ import {Operation} from "@/model/domain/Operation";
 import {Configuration, Strategy} from "@/generate/Configuration";
 import {isCrossAisleRow} from "@/generate/generateUtil";
 import {generateSerialOperations} from "@/generate/generateSerialOperations";
+import {generateRandomOperations} from "@/generate/generateRandomOperations";
 
 
 export function generate(configuration: Configuration): Model {
@@ -49,7 +50,7 @@ function makeOperations(startPosition: Position, configuration: Configuration): 
         case Strategy.SERIAL:
             return generateSerialOperations(startPosition, configuration);
         case Strategy.RANDOM:
-            throw new Error("Strategy not implemented!");
+            return generateRandomOperations(startPosition, configuration);
     }
 
 }
