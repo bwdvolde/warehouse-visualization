@@ -2,17 +2,22 @@ export class Configuration {
 
     name: string;
 
-    strategy: Strategy;
     aisles: number;
     blocks: number;
     cellsPerBlock: number;
 
-    constructor(name: string, strategy: Strategy, aisles: number, blocks: number, cellsPerBlock: number) {
+    strategy: Strategy;
+    duration: number;
+
+    constructor(name: string, aisles: number, blocks: number, cellsPerBlock: number, strategy: Strategy, duration: number) {
         this.name = name;
-        this.strategy = strategy;
+
         this.aisles = aisles;
         this.blocks = blocks;
         this.cellsPerBlock = cellsPerBlock;
+
+        this.strategy = strategy;
+        this.duration = duration;
     }
 
     get nRows() {
@@ -24,7 +29,14 @@ export class Configuration {
     }
 }
 
-export enum Strategy {
-    SERIAL,
-    RANDOM
+export class Strategy {
+
+    static readonly SERIAL = new Strategy("Serial");
+    static readonly RANDOM = new Strategy("Random");
+
+    name: String;
+
+    private constructor(name: String) {
+        this.name = name;
+    }
 }

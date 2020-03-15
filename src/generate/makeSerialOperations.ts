@@ -6,12 +6,11 @@ import Position from "@/model/domain/Position";
 export function makeSerialOperations(startPosition: Position, configuration: Configuration) {
     const operations = [];
 
-    // TODO put timeLeft in configuration
-    let timeLeft = 1000;
+    let timeLeft = configuration.duration;
     let position = startPosition;
     let goingDown = true;
 
-    function pushIfTimeLeft(operation: Operation) {
+    function pushIfTimeLeft(operation: Operation, operations: Operation[]) {
         if (timeLeft > 0) {
             operations.push(operation);
             position = position.plus(operation.direction);
@@ -21,7 +20,7 @@ export function makeSerialOperations(startPosition: Position, configuration: Con
 
     function goBackToStart() {
         for (let i = 0; i < configuration.nCols - 1; i++) {
-            pushIfTimeLeft(Operation.LEFT);
+            pushIfTimeLeft(Operation.LEFT, operations);
         }
     }
 
@@ -30,20 +29,20 @@ export function makeSerialOperations(startPosition: Position, configuration: Con
         const isFirstRow = position.y === 0;
         const isLastCol = position.x === configuration.nCols - 1;
         if (isLastRow && goingDown) {
-            pushIfTimeLeft(Operation.RIGHT);
+            pushIfTimeLeft(Operation.RIGHT, operations);
             goingDown = false;
         } else if (isFirstRow && !goingDown) {
             if (isLastCol) {
                 goBackToStart();
             } else {
-                pushIfTimeLeft(Operation.RIGHT);
+                pushIfTimeLeft(Operation.RIGHT, operations);
             }
             goingDown = true;
         } else {
             if (!isCrossAisleRow(position.y, configuration)) {
-                pushIfTimeLeft(Operation.SCAN);
+                pushIfTimeLeft(Operation.SCAN, operations);
             }
-            pushIfTimeLeft(goingDown ? Operation.DOWN : Operation.UP);
+            pushIfTimeLeft(goingDown ? Operation.DOWN : Operation.UP, operations);
         }
     }
 

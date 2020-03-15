@@ -30,9 +30,9 @@
         data() {
             return {
                 configurations: [
-                    new Configuration("Serial", Strategy.SERIAL, 5, 5, 5),
-                    new Configuration("Random", Strategy.SERIAL, 4, 4, 5),
-                    new Configuration("Custom", Strategy.SERIAL, 3, 3, 5),
+                    new Configuration("Serial", 5, 5, 5, Strategy.SERIAL, 1000),
+                    new Configuration("Random", 4, 4, 5, Strategy.SERIAL, 100),
+                    new Configuration("Custom", 3, 3, 5, Strategy.SERIAL, 10),
                 ]
             };
         },

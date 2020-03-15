@@ -26,7 +26,7 @@
         </div>
         <div class="card-body">
             <template v-if="activeTab === TAB_GENERAL">
-                <GeneralDetails :model="model"/>
+                <ConfigurationDetails :model="model"/>
             </template>
 
             <template v-if="activeTab === TAB_DETAIL">
@@ -46,7 +46,7 @@
 
 <script>
     import { Model } from "@/model/domain/Model";
-    import GeneralDetails from "@/components/GeneralDetails";
+    import ConfigurationDetails from "@/components/ConfigurationDetails";
     import CellDetails from "./CellDetails";
     import { SelectionMode } from "@/model/domain/ModelSelection";
     import DroneDetails from "@/components/details/DroneDetails";
@@ -55,7 +55,7 @@
     const TAB_DETAIL = "TAB_DETAIL";
 
     export default {
-        components: { DroneDetails, CellDetails, GeneralDetails },
+        components: { DroneDetails, CellDetails, ConfigurationDetails },
         props: {
             model: {
                 type: Model,
