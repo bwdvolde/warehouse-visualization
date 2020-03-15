@@ -7,7 +7,7 @@
             <tbody>
             <tr>
                 <td>Position</td>
-                <td>{{"(" + cell.x + ", " + cell.y + ")"}}</td>
+                <td>{{cell.toString()}}</td>
             </tr>
             <tr>
                 <td>Time since last scan</td>

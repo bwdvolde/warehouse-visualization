@@ -22,4 +22,8 @@ export class Cell {
     timeSinceLastScanAt(time: number): number {
         return time - this.timeAtLastScan;
     }
+
+    toString() {
+        return `(${this.x}, ${this.y})`;
+    }
 }

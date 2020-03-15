@@ -15,7 +15,7 @@
                     class="drone-details__tr"
             >
                 <td v-if="showDroneColumn">{{visit.by.id}}</td>
-                <td v-if="showCellColumn">{{"(" + visit.at.x + " ," + visit.at.y + ")"}}</td>
+                <td v-if="showCellColumn">{{visit.at.toString()}}</td>
                 <td>{{visit.on / 1000}}</td>
             </tr>
             </tbody>
