@@ -15,6 +15,15 @@
                 >
                     <a class="nav-link" href="#">{{configuration.name}}</a>
                 </li>
+
+                <li class="nav-item"
+                    :class="{'active': !configurations.includes(selectedConfiguration)}"
+                    @click="showCustomConfigurationModal()"
+                >
+                    <a class="nav-link" href="#">Custom</a>
+                </li>
+                <CustomConfigurationModal ref="custom-configuration-modal"
+                                          @configurationCreated="generateModel($event)"/>
             </ul>
         </div>
     </nav>
@@ -25,14 +34,15 @@
     import { Configuration, Strategy } from "@/generate/Configuration";
     import { mapMutations, mapState } from "vuex";
     import { NAMESPACE_MODEL } from "@/store/modules/modelModule";
+    import CustomConfigurationModal from "@/components/CustomConfigurationModal";
 
     export default {
+        components: { CustomConfigurationModal },
         data() {
             return {
                 configurations: [
                     new Configuration("Serial", 5, 5, 5, Strategy.SERIAL, 1000),
                     new Configuration("Random", 4, 4, 5, Strategy.RANDOM, 1000),
-                    new Configuration("Custom", 3, 3, 5, Strategy.SERIAL, 100),
                 ]
             };
         },
@@ -44,6 +54,9 @@
         },
         methods: {
             ...mapMutations(NAMESPACE_MODEL, ["generateModel"]),
+            showCustomConfigurationModal() {
+                this.$refs["custom-configuration-modal"].show();
+            }
         }
     };
 </script>

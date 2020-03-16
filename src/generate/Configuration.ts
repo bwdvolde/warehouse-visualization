@@ -20,6 +20,17 @@ export class Configuration {
         this.duration = duration;
     }
 
+    static custom(): Configuration {
+        return new Configuration(
+            "Custom",
+            3,
+            3,
+            3,
+            Strategy.SERIAL,
+            100
+        );
+    }
+
     get nRows() {
         return this.blocks * (this.cellsPerBlock + 1) + 1;
     }
@@ -33,6 +44,8 @@ export class Strategy {
 
     static readonly SERIAL = new Strategy("Serial");
     static readonly RANDOM = new Strategy("Random");
+
+    static readonly values = [Strategy.SERIAL, Strategy.RANDOM];
 
     name: String;
 
