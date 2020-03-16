@@ -16,14 +16,15 @@
                     <a class="nav-link" href="#">{{configuration.name}}</a>
                 </li>
 
-                <li class="nav-item"
-                    :class="{'active': !configurations.includes(selectedConfiguration)}"
-                    @click="showCustomConfigurationModal()"
+                <li class="nav-item active"
+                    @click="showCreateConfigurationModal()"
                 >
-                    <a class="nav-link" href="#">Custom</a>
+                    <a class="nav-link" href="#">
+                        <Icon class="ml-1" icon="plus"/>
+                    </a>
                 </li>
-                <CustomConfigurationModal ref="custom-configuration-modal"
-                                          @configurationCreated="generateModel($event)"/>
+                <CreateConfigurationModal ref="create-configuration-modal"
+                                          @configurationCreated="addAndSelectConfiguration($event)"/>
             </ul>
         </div>
     </nav>
@@ -34,15 +35,15 @@
     import { Configuration, Strategy } from "@/generate/Configuration";
     import { mapMutations, mapState } from "vuex";
     import { NAMESPACE_MODEL } from "@/store/modules/modelModule";
-    import CustomConfigurationModal from "@/components/CustomConfigurationModal";
+    import CreateConfigurationModal from "@/components/CreateConfigurationModal";
 
     export default {
-        components: { CustomConfigurationModal },
+        components: { CreateConfigurationModal },
         data() {
             return {
                 configurations: [
-                    new Configuration("Serial", 5, 5, 5, Strategy.SERIAL, 1000),
-                    new Configuration("Random", 4, 4, 5, Strategy.RANDOM, 1000),
+                    new Configuration("Serial 5x5", 5, 5, 5, Strategy.SERIAL, 1000),
+                    new Configuration("Random 4x4", 4, 4, 5, Strategy.RANDOM, 1000),
                 ]
             };
         },
@@ -54,8 +55,12 @@
         },
         methods: {
             ...mapMutations(NAMESPACE_MODEL, ["generateModel"]),
-            showCustomConfigurationModal() {
-                this.$refs["custom-configuration-modal"].show();
+            showCreateConfigurationModal() {
+                this.$refs["create-configuration-modal"].show();
+            },
+            addAndSelectConfiguration(configuration) {
+                this.generateModel(configuration);
+                this.configurations.push(configuration);
             }
         }
     };

@@ -20,9 +20,9 @@ export class Configuration {
         this.duration = duration;
     }
 
-    static custom(): Configuration {
+    static createEmpty(): Configuration {
         return new Configuration(
-            "Custom",
+            "New configuration",
             3,
             3,
             3,

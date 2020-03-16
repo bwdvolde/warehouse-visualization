@@ -1,8 +1,15 @@
 <template>
     <Modal ref="modal"
-           title="Create custom configuration"
+           title="Create configuration"
            @ok="onModalOk"
     >
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="name">Name</label>
+                <Input id="name" v-model="model.name"/>
+            </div>
+        </div>
+
         <h6>Dimensions</h6>
 
         <div class="form-row">
@@ -48,7 +55,7 @@
         components: { StrategySelect, Modal, Input, Select },
         data() {
             return {
-                model: Configuration.custom()
+                model: Configuration.createEmpty()
             };
         },
         methods: {
@@ -57,6 +64,7 @@
             },
             onModalOk() {
                 this.$emit("configurationCreated", this.model);
+                this.model = Configuration.createEmpty();
             }
         }
     };
