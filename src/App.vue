@@ -26,14 +26,14 @@
     import { NAMESPACE_TIMER, TIME_PER_FRAME } from "@/store/modules/timerModule";
     import ActionExecutor from "@/model/action/ActionExecutor";
     import { mapActions, mapMutations, mapState } from "vuex";
-    import { generateActions } from "@/model/action/generateActions";
+    import { generateActionsForDrone } from "@/model/action/generateActions";
     import { NAMESPACE_MODEL } from "@/store/modules/modelModule";
 
     export default {
         components: { ConfigurationSelector, TimeDisplay, Details },
         data() {
             return {
-                executors: null,
+                executor: null,
                 drawer: null
             };
         },
@@ -60,9 +60,11 @@
             ...mapMutations(NAMESPACE_TIMER, ["resume", "setMaxTime", "reset"]),
             ...mapActions(NAMESPACE_TIMER, ["startTimerLoop"]),
             createExecutors: function () {
-                this.executors = this.model.drones
-                    .map(drone => generateActions(drone, this.model.cells))
-                    .map(actions => new ActionExecutor(actions));
+                const actions = this.model.drones
+                    .flatMap(drone => generateActionsForDrone(drone, this.model.cells))
+                    .sort((a, b) => a.executionTime - b.executionTime);
+
+                this.executor = new ActionExecutor(actions);
             },
             updateTimerSettings() {
                 const maxTime = this.model.calculateExecutionTime();
@@ -72,7 +74,7 @@
             startRenderLoop() {
                 setInterval(() => {
                     if (this.model) {
-                        this.executors.forEach(executor => executor.moveStateTo(this.time));
+                        this.executor.moveStateTo(this.time);
                         this.drawer.draw(this.model, this.time);
                     }
                 }, TIME_PER_FRAME);

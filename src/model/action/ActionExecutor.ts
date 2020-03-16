@@ -5,13 +5,12 @@ export default class ActionExecutor {
 
     public actions: Action[];
 
-    private index: number;
+    private indexOfNextAction: number;
     private currentTime: number;
 
     constructor(actions: Action[]) {
         this.currentTime = 0;
-        this.index = 0;
-
+        this.indexOfNextAction = 0;
         this.actions = actions;
     }
 
@@ -25,56 +24,40 @@ export default class ActionExecutor {
     }
 
     private forwardTo(time: number) {
-        if (this.currentAction.shouldHaveStartedAt(time) && !this.currentAction.hasStarted()) {
-            this.currentAction.start();
+        while (this.hasNextAction() && this.shouldExecuteNextAction(time)) {
+            this.nextAction.execute();
+            this.indexOfNextAction++;
         }
+    }
 
-        while (this.hasNextAction() && this.currentAction.shouldBeFinishedAt(time) && !this.currentAction.isFinished()) {
-            this.currentAction.finish();
-            this.selectNextAction();
-            this.currentAction.start();
-        }
+    private shouldExecuteNextAction(time: number) {
+        return this.nextAction.executionTime <= time;
+    }
 
-        const isLastAction = !this.hasNextAction();
-        const shouldFinish = this.currentAction.shouldBeFinishedAt(time) && !this.currentAction.isFinished();
-        if (isLastAction && shouldFinish) {
-            this.currentAction.finish();
-        }
+    private hasNextAction() {
+        return this.indexOfNextAction < this.actions.length;
+    }
+
+    get nextAction() {
+        return this.actions[this.indexOfNextAction];
     }
 
     private rewindTo(time: number) {
-        while (!this.currentAction.shouldBeFinishedAt(time)) {
-            this.currentAction.undo();
-
-            if (!this.hasPreviousAction() || this.previousAction.shouldBeFinishedAt(time)) {
-                break;
-            }
-
-            this.selectPreviousAction();
+        while (this.hasPreviousAction() && this.shouldUndoPreviousAction(time)) {
+            this.previousAction.undo();
+            this.indexOfNextAction--;
         }
     }
 
-    private get currentAction() {
-        return this.actions[this.index];
+    private shouldUndoPreviousAction(time: number) {
+        return this.previousAction.executionTime >= time;
     }
 
-    private get previousAction(): Action {
-        return this.actions[this.index - 1];
+    private hasPreviousAction() {
+        return this.indexOfNextAction > 0;
     }
 
-    private selectNextAction() {
-        this.index++;
-    }
-
-    private selectPreviousAction() {
-        this.index--;
-    }
-
-    private hasNextAction(): boolean {
-        return this.index + 1 < this.actions.length;
-    }
-
-    private hasPreviousAction(): boolean {
-        return this.index > 0;
+    get previousAction() {
+        return this.actions[this.indexOfNextAction - 1];
     }
 }

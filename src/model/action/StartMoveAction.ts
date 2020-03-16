@@ -2,29 +2,29 @@ import {Action} from "@/model/action/Action";
 import Drone from "@/model/domain/Drone";
 import {Direction} from "@/model/domain/Direction";
 
-export class MoveAction extends Action {
+export class StartMoveAction implements Action {
 
+    executionTime: number;
     private drone: Drone;
     private direction: Direction;
 
     private previousDirection: Direction;
     private previousTimeOnArrivalAtOrigin: number;
 
-    constructor(startTime: number, drone: Drone, direction: Direction) {
-        super(startTime, 1000 / drone.speed);
-        this.direction = direction;
+    constructor(executionTime: number, drone: Drone, direction: Direction) {
+        this.executionTime = executionTime;
         this.drone = drone;
+        this.direction = direction;
     }
 
-    start() {
+    execute() {
         this.saveCurrentDroneState();
-        this.setNewStateOfDrone();
-        super.start();
+        this.startMovingDroneInNewDirection();
     }
 
-    private setNewStateOfDrone() {
+    private startMovingDroneInNewDirection() {
         this.drone.direction = this.direction;
-        this.drone.timeOnArrivalAtOrigin = this.startTime;
+        this.drone.timeOnArrivalAtOrigin = this.executionTime;
     }
 
     private saveCurrentDroneState() {
@@ -32,18 +32,10 @@ export class MoveAction extends Action {
         this.previousTimeOnArrivalAtOrigin = this.drone.timeOnArrivalAtOrigin;
     }
 
-    finish() {
-        this.drone.origin = this.drone.origin.plus(this.direction);
-        this.drone.direction = Direction.NONE;
-        super.finish();
-    }
-
     undo() {
         this.drone.direction = this.previousDirection;
         this.drone.timeOnArrivalAtOrigin = this.previousTimeOnArrivalAtOrigin;
-        if (this.isFinished()) {
-            this.drone.origin = this.drone.origin.minus(this.direction);
-        }
-        super.undo();
     }
+
+
 }
