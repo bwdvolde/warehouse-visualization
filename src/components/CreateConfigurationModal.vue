@@ -37,7 +37,7 @@
             <div class="form-group col">
                 <label for="duration">Duration</label>
                 <Input :state="isValidDuration()" id="duration" v-model="model.duration"/>
-                <InvalidFeedback>Duration is required and should be larger than 0</InvalidFeedback>
+                <InvalidFeedback>Duration is required and must be larger than 0</InvalidFeedback>
             </div>
 
             <div class="form-group col">
@@ -80,7 +80,7 @@
                 this.model = Configuration.createEmpty();
             },
             isValid() {
-                return this.isValidName() && this.isValidName();
+                return this.isValidName() && this.isValidDuration();
             },
             isValidName() {
                 const takenNames = this.configurations.map(configuration => configuration.name);
