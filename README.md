@@ -1,19 +1,11 @@
-# warehouse-visualization
+# Warehouse routing visualization tool
 
-## Project setup
-```
-npm install
-```
+![](image.png)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## About
 
-### Compiles and minifies for production
-```
-npm run build
-```
+TODO
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Installation
+
+TODO
