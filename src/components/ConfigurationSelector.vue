@@ -39,28 +39,20 @@
 
     export default {
         components: { CreateConfigurationModal },
-        data() {
-            return {
-                configurations: [
-                    new Configuration("Serial 5x5", 5, 5, 5, Strategy.SERIAL, 1000),
-                    new Configuration("Random 4x4", 4, 4, 5, Strategy.RANDOM, 1000),
-                ]
-            };
-        },
         computed: {
-            ...mapState(NAMESPACE_MODEL, ["selectedConfiguration"])
+            ...mapState(NAMESPACE_MODEL, ["configurations", "selectedConfiguration"])
         },
         mounted() {
             this.generateModel(this.configurations[0]);
         },
         methods: {
-            ...mapMutations(NAMESPACE_MODEL, ["generateModel"]),
+            ...mapMutations(NAMESPACE_MODEL, ["generateModel", "addConfiguration"]),
             showCreateConfigurationModal() {
                 this.$refs["create-configuration-modal"].show();
             },
             addAndSelectConfiguration(configuration) {
+                this.addConfiguration(configuration);
                 this.generateModel(configuration);
-                this.configurations.push(configuration);
             }
         }
     };
