@@ -15,17 +15,17 @@
         <h6>Dimensions</h6>
 
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-12 col-sm-4">
                 <label for="aisles">Aisles</label>
                 <Select id="aisles" v-model="model.aisles" :options="[1, 2, 3, 4, 5]"/>
             </div>
 
-            <div class="form-group col">
+            <div class="form-group col-12 col-sm-4">
                 <label for="blocks">Blocks</label>
                 <Select id="blocks" v-model="model.blocks" :options="[1, 2, 3, 4, 5]"/>
             </div>
 
-            <div class="form-group col">
+            <div class="form-group col-12 col-sm-4">
                 <label for="cells-per-block">Cells per block</label>
                 <Select id="cells-per-block" v-model="model.cellsPerBlock" :options="[1, 2, 3, 4, 5]"/>
             </div>
@@ -34,13 +34,13 @@
         <h6>Other</h6>
 
         <div class="form-row">
-            <div class="form-group col">
+            <div class="form-group col-12 col-sm-6">
                 <label for="duration">Duration</label>
                 <Input :state="isValidDuration()" id="duration" v-model="model.duration"/>
                 <InvalidFeedback>Duration is required and must be larger than 0</InvalidFeedback>
             </div>
 
-            <div class="form-group col">
+            <div class="form-group col-12 col-sm-6">
                 <label for="strategy">Strategy</label>
                 <StrategySelect id="strategy" v-model="model.strategy"/>
             </div>

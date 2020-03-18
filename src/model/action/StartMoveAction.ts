@@ -22,14 +22,14 @@ export class StartMoveAction implements Action {
         this.startMovingDroneInNewDirection();
     }
 
-    private startMovingDroneInNewDirection() {
-        this.drone.direction = this.direction;
-        this.drone.timeOnArrivalAtOrigin = this.executionTime;
-    }
-
     private saveCurrentDroneState() {
         this.previousDirection = this.drone.direction;
         this.previousTimeOnArrivalAtOrigin = this.drone.timeOnArrivalAtOrigin;
+    }
+
+    private startMovingDroneInNewDirection() {
+        this.drone.direction = this.direction;
+        this.drone.timeOnArrivalAtOrigin = this.executionTime;
     }
 
     undo() {
