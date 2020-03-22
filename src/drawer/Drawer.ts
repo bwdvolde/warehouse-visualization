@@ -74,6 +74,7 @@ export default class Drawer {
         elements
             .attr("x", (drone: Drone) => this.mapper.calculateXNode((drone.positionAt(this.time).x)))
             .attr("y", (drone: Drone) => this.mapper.calculateYNode((drone.positionAt(this.time).y)) + this.mapper.nodeR / 2)
+            .style("font-size", `${this.mapper.nodeR*1.5}px`)
             .text((drone: Drone) => drone.id);
     }
 

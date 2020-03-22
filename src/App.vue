@@ -123,7 +123,6 @@
         @include media-breakpoint-up(md) {
             display: initial;
 
-            font-size: 8px;
             stroke: black;
             text-anchor: middle;
 
