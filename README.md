@@ -13,10 +13,9 @@ Each rectangle represents a storage cell in the warehouse.
 Each storage cell has a color that indicates how urgently it has to be scanned. 
 The white circles that are moving in the graph represent drones that scan the storage cells.
 After a storage cell has been scanned, its color wil reset to green. 
-There are various possible algorithms that can calculate how the storage cells should be scanned. 
-I've implemented some simple algorithms to illustrate how the tool can be used. These algorithm are briefly described below. 
 
-### Scan algorithms 
+There are various possible algorithms that can calculate how the storage cells should be scanned. 
+I've implemented some simple algorithms to illustrate how the tool can be used. These algorithms are briefly described below. 
 
 * **Serial**: Scan the storage cells in warehouse column per column.
 * **Random**: Move to a random direction in the graph and scan the storage cell there.
