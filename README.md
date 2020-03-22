@@ -1,6 +1,6 @@
 # Warehouse routing visualization tool
 
-![](test2.png)
+![](header.png)
 
 ## About
 
