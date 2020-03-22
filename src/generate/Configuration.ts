@@ -22,7 +22,7 @@ export class Configuration {
 
     static createEmpty(): Configuration {
         return new Configuration(
-            "New configuration",
+            "",
             3,
             3,
             3,
