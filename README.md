@@ -26,6 +26,7 @@ I've implemented some simple algorithms to illustrate how the tool can be used. 
 * The simulation can essentially be viewed as a video. This means that it is possible to speedup the simulation speed, 
 move to an arbitrary moment in the simulation, etc.
 * Custom configurations can easily be created with different warehouse dimensions, different durations etc.
+* The warehouse automatically (re)scales to fit the screen size.
 
 ## Getting started
 
