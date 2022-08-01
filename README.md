@@ -48,10 +48,4 @@ npm install
 npm start
 ```
 
-3\. Go to localhost:8080 to see the application in action
-
-## Lessons learned
-
-### Performance issues
-
-TODO
+3\. Go to `localhost:8080` to see the application in action
