@@ -31,21 +31,20 @@ move to an arbitrary moment in the simulation, etc.
 
 ### Requirements
 
-* npm
-* node
+* node 13 
 
 ## Installation
 
-1\. Install required dependencies
+1. Install required dependencies
 
 ```
 npm install
 ```
 
-2\. Run application
+2. Run application
 
 ```
 npm start
 ```
 
-3\. Go to `localhost:8080` to see the application in action
+3. Go to `localhost:8080` to see the application in action
