@@ -35,18 +35,18 @@ move to an arbitrary moment in the simulation, etc.
 
 * Node 13 
 
-## Installation
+### Installation
 
 1. Install required dependencies
 
-```
-npm install
-```
+   ```
+   npm install
+   ```
 
 2. Run application
+    
+   ```
+   npm start
+   ```
 
-```
-npm start
-```
-
-3. Go to `localhost:8080` to see the application in action
+3. Open `http://localhost:8080` in your browser
