@@ -33,7 +33,7 @@ move to an arbitrary moment in the simulation, etc.
 
 ### Requirements
 
-* Node 13 
+* Node 13 (unverified on other versions)
 
 ### Installation
 
