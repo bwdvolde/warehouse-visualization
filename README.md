@@ -3,6 +3,8 @@
 
 ![](header.png)
 
+[Demo](https://bwdvolde.github.io/warehouse-visualization/)
+
 ## About
 
 This is a rewrite of a warehouse routing visualisation tool I built for my master's thesis. 
